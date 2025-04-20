@@ -1,4 +1,3 @@
-/* Menu Navigation Styles - Improved */
 nav {
     background: rgba(11, 197, 27, 0.5);
     backdrop-filter: blur(8px);
@@ -73,7 +72,6 @@ nav {
     transition: all 0.3s ease;
 }
 
-/* Language selector next to brand name */
 .language-menu-header {
     margin-left: 20px;
     position: relative;
@@ -96,7 +94,6 @@ nav {
     transform: translateX(0) translateY(0);
 }
 
-/* Main menu styles */
 .main-menu {
     float: right;
     margin-right: 70px;
@@ -110,18 +107,18 @@ nav {
 .main-menu li {
     display: inline-block;
     line-height: 50px;
-    margin: 0 15px; /* Aumentado de 10px a 15px para mayor espacio entre botones */
+    margin: 0 15px; 
     position: relative;
 }
 
 .main-menu li:last-child {
-    margin-right: 30px; /* Add extra right margin to the last menu item */
+    margin-right: 30px;
 }
 
 .menu-link {
     color: #fff;
     font-size: 18px;
-    padding: 5px 10px; /* Reducido de 7px 13px para que el fondo esté más cerca del texto */
+    padding: 5px 10px; 
     border-radius: 3px;
     text-decoration: none;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -129,17 +126,17 @@ nav {
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 6px; /* Reducido de 8px */
+    gap: 6px; 
 }
 
 .menu-link i {
-    margin-right: 4px; /* Reducido de 5px */
+    margin-right: 4px;
     font-size: 16px;
 }
 
 .fa-chevron-down {
     font-size: 12px;
-    margin-left: 3px; /* Reducido de 5px */
+    margin-left: 3px; 
     transition: transform 0.3s ease;
 }
 
@@ -155,15 +152,15 @@ nav {
     text-decoration: none;
 }
 
-/* Submenu styles */
+
 .submenu {
     background: rgba(11, 197, 27, 0.5);
     border-radius: 8px;
     padding: 3px 0;
     position: absolute;
     top: 100%;
-    left: 50%; /* Change from 0 to 50% */
-    transform: translateX(-50%); /* Center the submenu */
+    left: 50%; 
+    transform: translateX(-50%); 
     opacity: 0;
     visibility: hidden;
     list-style: none;
@@ -180,7 +177,7 @@ nav {
 }
 
 .submenu li {
-    padding: 0; /* Reducido de 2px 6px */
+    padding: 0; 
     text-align: center;
     display: block;
     margin: 0;
@@ -191,10 +188,10 @@ nav {
 .submenu-link {
     text-decoration: none;
     color: #fff;
-    font-size: 16px; /* Reducido de 18px */
+    font-size: 16px; 
     font-weight: bold;
     display: block;
-    padding: 6px 10px; /* Reducido de 8px 15px */
+    padding: 6px 10px;
     transition: background-color 0.3s ease;
     width: 100%;
     text-align: center;
@@ -206,72 +203,68 @@ nav {
 }
 
 .submenu-link i {
-    margin-right: 8px; /* Reducido de 10px */
-    width: 18px; /* Reducido de 20px */
+    margin-right: 8px; 
+    width: 18px; 
     text-align: center;
 }
 
-/* Colores para iconos específicos del menú principal */
 .menu-link i.fa-home {
-    color: #020202; /* Naranja para el icono de casa */
+    color: #020202; 
 }
 
 .menu-link i.fa-envelope {
-    color: #33CCFF; /* Azul claro para el icono de correo */
+    color: #33CCFF; 
 }
 
 .menu-link i.fa-paw {
-    color: #ff1717; /* Rojo claro para el icono de huella */
+    color: #ff1717; 
 }
 
 .menu-link i.fa-user {
-    color: #99FF99; /* Verde claro para el icono de usuario */
+    color: #99FF99;
 }
 
 .menu-link i.fa-sign-out {
-    color: #FFCC66; /* Amarillo para el icono de cerrar sesión */
+    color: #FFCC66; 
 }
 
-/* Colores para iconos específicos del submenú */
 .submenu-link i.fa-info-circle {
-    color: #FF99CC; /* Rosa para el icono de información */
+    color: #FF99CC; 
 }
 
 .submenu-link i.fa-shield {
-    color: #9966FF; /* Púrpura para el icono de escudo/seguridad */
+    color: #9966FF; 
 }
 
 .submenu-link i.fa-history {
-    color: #66FFCC; /* Verde azulado para el icono de historial */
+    color: #66FFCC; 
 }
 
 .submenu-link i.fa-cog {
-    color: #C0C0C0; /* Plateado para el icono de configuración */
+    color: #C0C0C0; 
 }
 
 .submenu-link i.fa-bell {
-    color: #FFFF33; /* Amarillo brillante para el icono de notificaciones */
+    color: #FFFF33; 
 }
 
 .submenu-link i.fa-star {
-    color: #FFD700; /* Dorado para el icono de favoritos */
+    color: #FFD700; 
 }
 
 .submenu-link i.fa-question-circle {
-    color: #00FFFF; /* Cian para el icono de ayuda */
+    color: #00FFFF; 
 }
 
-/* Efecto al pasar el cursor */
 .menu-link:hover i,
 .submenu-link:hover i {
-    filter: brightness(1.2); /* Hace los iconos ligeramente más brillantes al pasar el cursor */
+    filter: brightness(1.2); 
 }
 
-/* User profile specific styles */
 .user-profile-link {
     display: flex;
     align-items: center;
-    gap: 6px; /* Reducido de 8px */
+    gap: 6px;
 }
 
 .profile-photo-container {
@@ -296,7 +289,6 @@ nav {
     text-overflow: ellipsis;
 }
 
-/* Language menu specific */
 .language-menu .submenu {
     min-width: 150px;
 }
@@ -311,10 +303,9 @@ nav {
 }
 
 .flag-icon {
-    margin-right: 6px; /* Reducido de 8px */
+    margin-right: 6px;
 }
 
-/* Hamburger menu button */
 .checkbtn {
     font-size: 30px;
     color: #fff;
@@ -334,7 +325,6 @@ nav {
     display: none;
 }
 
-/* Photo Modal styles - actualizado para coincidir con el HTML */
 #photoModal {
     display: none;
     position: fixed;
@@ -504,26 +494,6 @@ input[type="file"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive design */
-@media (max-width: 960px) {
-    .enlace {
-        left: 30px;
-    }
-    
-    .nombre_1,
-    .nombre_2 {
-        font-size: 28px;
-    }
-    
-    .main-menu {
-        margin-right: 30px;
-    }
-    
-    .language-menu-header {
-        display: none; /* Hide the header language menu on smaller screens */
-    }
-}
-
 @media (max-width: 768px) {
     .checkbtn {
         display: block;
@@ -547,8 +517,9 @@ input[type="file"] {
     
     .main-menu li {
         display: block;
-        margin: 12px 0; /* Reducido de 15px para móviles */
+        margin: 12px 0;
         line-height: 30px;
+        position: relative; 
     }
     
     .menu-link {
@@ -561,30 +532,41 @@ input[type="file"] {
     }
     
     .submenu {
-        position: static;
-        left: auto;
+        position: absolute;
+        left: 100%;
+        top: 0; 
         transform: none;
-        opacity: 1;
-        visibility: visible;
-        display: none;
-        width: 80%;
-        margin: 0 auto;
-        box-shadow: none;
-        background: rgba(16, 134, 6, 0.8);
+        opacity: 0;
+        visibility: hidden;
+        width: 200px;
+        margin: 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background: rgba(16, 134, 6, 0.9);
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .main-menu li:nth-last-child(-n+2) .submenu {
+        left: auto;
+        right: 100%;
+        border-radius: 8px 0 0 8px;
     }
     
     .has-submenu:hover .submenu {
         display: block;
-        transform: none;
+        opacity: 1;
+        visibility: visible;
     }
     
     .submenu-link {
-        padding: 8px; /* Reducido de 10px */
+        padding: 8px;
+        text-align: left; 
     }
 
     .nombre_1,
     .nombre_2 {
         font-size: 22px;
+        line-height: 22px;
+        font-family: "Alfa Slab One", cursive; 
     }
 
     .enlace img.logo {
@@ -600,7 +582,8 @@ input[type="file"] {
     .nombre_1,
     .nombre_2 {
         font-size: 18px;
-        line-height: 24px;
+        line-height: 18px;
+        font-family: "Alfa Slab One", cursive; 
     }
     
     .huella img {
