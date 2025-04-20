@@ -501,7 +501,7 @@ input[type="file"] {
     
     .main-menu {
         position: fixed;
-        width: 100%;
+        width: 80%; 
         height: calc(100vh - 80px);
         background: rgba(11, 197, 27, 0.9);
         backdrop-filter: blur(10px);
@@ -525,6 +525,7 @@ input[type="file"] {
     .menu-link {
         font-size: 20px;
         display: inline-flex;
+        padding: 8px 16px;
     }
     
     #check:checked ~ .main-menu {
@@ -532,36 +533,61 @@ input[type="file"] {
     }
     
     .submenu {
-        position: absolute;
-        left: 100%;
-        top: 0; 
+        position: fixed;
+        left: 80%; 
+        top: 80px;
         transform: none;
         opacity: 0;
         visibility: hidden;
-        width: 200px;
-        margin: 0;
+        width: 60%;
+        max-width: 220px;
+        height: 0;
+        transition: all 0.3s ease;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         background: rgba(16, 134, 6, 0.9);
         border-radius: 0 8px 8px 0;
+        overflow: hidden;
+        padding: 0;
     }
     
+    .has-submenu {
+        position: static;
+    }
+    
+    .has-submenu:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    .main-menu li.has-submenu:hover {
+        background: rgba(16, 134, 6, 0.7);
+    }
+    
+    .submenu-link {
+        padding: 10px 15px;
+        text-align: left;
+        display: block;
+        font-size: 18px;
+    }
+
     .main-menu li:nth-last-child(-n+2) .submenu {
         left: auto;
         right: 100%;
         border-radius: 8px 0 0 8px;
     }
     
-    .has-submenu:hover .submenu {
-        display: block;
-        opacity: 1;
-        visibility: visible;
+    .language-menu-header .submenu {
+        left: auto;
+        right: 0;
+        transform: none;
     }
     
-    .submenu-link {
-        padding: 8px;
-        text-align: left; 
+    .language-menu-header:hover .submenu {
+        transform: none;
     }
-
+    
     .nombre_1,
     .nombre_2 {
         font-size: 22px;
@@ -572,9 +598,26 @@ input[type="file"] {
     .enlace img.logo {
         width: 60px;
     }
+    
+    .menu-link .fa-chevron-down {
+        transition: transform 0.3s ease;
+    }
+    
+    .has-submenu:hover .fa-chevron-down {
+        transform: rotate(-90deg);
+    }
 }
 
 @media (max-width: 480px) {
+    .main-menu {
+        width: 75%;
+    }
+    
+    .submenu {
+        left: 75%;
+        width: 70%;
+    }
+    
     .enlace {
         left: 20px;
     }
