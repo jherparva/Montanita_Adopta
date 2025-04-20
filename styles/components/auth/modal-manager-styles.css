@@ -1,0 +1,55 @@
+/* Estilos específicos para ModalManager */
+.modal-manager {
+    position: relative;
+    z-index: 1000;
+  }
+  
+  /* Estilos para eventos de autenticación */
+  .auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1040;
+  }
+  
+  /* Asegurarse de que el ModalManager gestione correctamente múltiples modales */
+  body.modal-manager-active {
+    overflow: hidden;
+    padding-right: 0 !important;
+  }
+  
+  /* Estilos específicos para modales de autenticación */
+  #loginModal,
+  #registerModal,
+  #resetPasswordModal,
+  #verifyCodeModal,
+  #settingsModal,
+  #photoModal {
+    z-index: 1050;
+  }
+  
+  /* Transiciones para modales gestionados */
+  .modal-transition-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  .modal-transition-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .modal-transition-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .modal-transition-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }

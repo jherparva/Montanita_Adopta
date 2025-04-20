@@ -1,0 +1,99 @@
+.admin-form {
+  padding: 2.5rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.animal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.animal-form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.animal-form input,
+.animal-form select,
+.animal-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #f9f9f9;
+}
+
+.animal-form input:focus,
+.animal-form select:focus,
+.animal-form textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.form-actions button:first-child {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.form-actions button:first-child:hover {
+  background-color: #3d8b40;
+  transform: translateY(-2px);
+}
+
+.form-actions button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+.form-actions button:last-child:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+}
+
+/* Estilo para grupos de formulario */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Estilo para etiquetas opcionales */
+.optional-label {
+  color: #777;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-left: 5px;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}

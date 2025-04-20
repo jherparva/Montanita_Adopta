@@ -1,0 +1,488 @@
+/* Estilos específicos para PhotoModal, PrivacyPolicyModal y ThankYouModal */
+
+/* PhotoModal Específico */
+.photo-modal {
+  display: none;
+  position: fixed !important;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.photo-modal-content {
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+  margin: 5% auto;
+  position: relative;
+  text-align: center;
+}
+
+.photo-modal-header h2 {
+  font-family: "Blueberry";
+  text-align: center;
+  color: #cf0707;
+  margin: 0 auto 20px auto;
+  padding: 0;
+  font-size: 40px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: block;
+  line-height: 1.2;
+  transition: transform 0.3s ease;
+}
+
+.photo-modal-header h2:hover {
+  transform: scale(1.05);
+}
+
+.photo-modal-close {
+  color: white;
+  background-color: #4fd95a;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1060;
+}
+
+.photo-modal-close:hover {
+  background-color: #f10707;
+  transform: scale(1.1);
+}
+
+.photo-modal-close:active {
+  transform: scale(0.95);
+}
+
+.photo-upload-container {
+  width: 100%;
+}
+
+.photo-preview-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.current-photo, .new-photo {
+  flex: 1;
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  margin: 0 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.current-photo h4, .new-photo h4 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.current-photo img, .new-photo img {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.empty-preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.empty-preview-placeholder i {
+  font-size: 40px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.drag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(79, 217, 90, 0.7);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 8px;
+}
+
+.new-photo.drag-over .drag-overlay {
+  display: flex;
+}
+
+.file-input-container {
+  margin: 20px 0;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.file-upload-button {
+  width: auto;
+  padding: 12px 20px;
+  background-color: #27b80b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.file-upload-button:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}
+
+.file-upload-button:active {
+  transform: translateY(1px);
+}
+
+.upload-btn-wrapper input[type=file] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.drag-drop-info {
+  margin-top: 10px;
+  color: #777;
+}
+
+.file-requirements {
+  font-size: 12px;
+  color: #999;
+}
+
+.error-message {
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: red;
+  display: block;
+}
+
+.photo-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-cancel, .btn-save {
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-left: 10px;
+}
+
+.btn-cancel {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.btn-save {
+  background-color: #27b80b;
+  border: none;
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  transform: translateY(-2px);
+  background-color: #e2e6ea;
+}
+
+.btn-save:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}
+
+.btn-save:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.btn-save.loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn-save.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* PrivacyPolicyModal específico */
+#privacyPolicyModal .modal-dialog {
+  max-width: 600px;
+}
+
+#privacyPolicyModal .modal-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+  border: none;
+}
+
+#privacyPolicyModal .modal-header {
+  border-bottom: none;
+  padding: 20px 20px 10px;
+}
+
+#privacyPolicyModal .modal-header .modal-title {
+  font-family: "Blueberry";
+  color: #cf0707;
+  font-size: 32px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+#privacyPolicyModal .modal-header .modal-title:hover {
+  transform: scale(1.05);
+}
+
+#privacyPolicyModal .modal-header .btn-close {
+  color: white;
+  background-color: #4fd95a;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 1;
+}
+
+#privacyPolicyModal .modal-header .btn-close:hover {
+  background-color: #f10707;
+  transform: scale(1.1);
+}
+
+#privacyPolicyModal .modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#privacyPolicyModal .modal-body h4 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#privacyPolicyModal .modal-body p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+#privacyPolicyModal .modal-footer {
+  border-top: none;
+  padding: 10px 20px 20px;
+  justify-content: center;
+}
+
+#privacyPolicyModal .modal-footer button {
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#privacyPolicyModal .btn-secondary {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+#privacyPolicyModal .btn-primary {
+  background-color: #27b80b;
+  border: none;
+  color: #fff;
+}
+
+#privacyPolicyModal .btn-secondary:hover {
+  transform: translateY(-2px);
+  background-color: #e2e6ea;
+}
+
+#privacyPolicyModal .btn-primary:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}
+
+/* ThankYouModal específico */
+#thankYouModal .modal-dialog {
+  max-width: 500px;
+}
+
+#thankYouModal .modal-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+  border: none;
+  padding: 20px;
+}
+
+#thankYouModal .modal-header {
+  border-bottom: none;
+  padding: 20px 20px 10px;
+  justify-content: center;
+}
+
+#thankYouModal .modal-header .modal-title {
+  font-family: "Blueberry";
+  color: #cf0707;
+  font-size: 28px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#thankYouModal .modal-header .btn-close {
+  color: white;
+  background-color: #4fd95a;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 1;
+}
+
+#thankYouModal .modal-header .btn-close:hover {
+  background-color: #f10707;
+  transform: scale(1.1);
+}
+
+#thankYouModal .modal-body {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+#thankYouModal .thank-you-icon {
+  font-size: 60px;
+  color: #27b80b;
+  margin-bottom: 20px;
+}
+
+#thankYouModal .modal-body h4 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+#thankYouModal .modal-body p {
+  color: #666;
+  margin-bottom: 0;
+}
+
+#thankYouModal .modal-footer {
+  border-top: none;
+  padding: 10px 20px 20px;
+  justify-content: center;
+}
+
+#thankYouModal .modal-footer .btn {
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin: 0 10px;
+}
+
+#thankYouModal .btn-secondary {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+#thankYouModal .btn-primary {
+  background-color: #27b80b;
+  border: none;
+  color: #fff;
+}
+
+#thankYouModal .btn-secondary:hover {
+  transform: translateY(-2px);
+  background-color: #e2e6ea;
+}
+
+#thankYouModal .btn-primary:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}

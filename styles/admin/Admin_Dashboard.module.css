@@ -1,0 +1,715 @@
+/*C:\Users\jhon\Videos\montanita-adopta\styles\admin\Admin_Dashboard.module.css*/
+/* Encapsulación de estilos para el panel admin */
+
+/* --------- Global Variables --------- */
+.adminRoot {
+  --primary-color: #28a745;       /* Green from public site */
+  --secondary-color: #06810c;     /* Orange accent from public site */
+  --accent-color: #17a2b8;        /* Complementary blue */
+  --danger-color: #dc3545;
+  --dark-color: #343a40;
+  --light-color: #f8f9fa;
+  --text-color: #333;
+  --sidebar-width: 250px;
+  --sidebar-collapsed-width: 70px;
+  --header-height: 70px;
+  --transition-speed: 0.3s;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --------- Admin Layout --------- */
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  transition: all var(--transition-speed);
+}
+
+.sidebarOpen .adminMain {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+}
+
+.sidebarClosed .adminMain {
+  margin-left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
+}
+
+.adminMain {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transition: margin var(--transition-speed), width var(--transition-speed);
+}
+
+.adminContent {
+  padding: 20px;
+  margin-top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+}
+
+/* --------- Sidebar Styles --------- */
+.adminSidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: var(--primary-color);
+  color: white;
+  transition: width var(--transition-speed);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.open {
+  width: var(--sidebar-width);
+}
+
+.closed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.sidebarHeader {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #218838; /* Darker green */
+}
+
+.sidebarLogo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.closed .sidebarHeader h2 {
+  display: none;
+}
+
+.sidebarHeader h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+}
+
+.sidebarNav {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebarNav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebarNav li {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarNav a {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  font-weight: 500;
+}
+
+.sidebarNav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.sidebarNav a i {
+  width: 20px;
+  margin-right: 12px;
+  text-align: center;
+}
+
+.closed .sidebarNav a span {
+  display: none;
+}
+
+.notificationBadge {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.closed .notificationBadge {
+  right: 5px;
+  top: 5px;
+}
+
+.sidebarFooter {
+  padding: 15px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #218838; /* Darker green */
+}
+
+.closed .sidebarFooter {
+  display: none;
+}
+
+/* --------- Header Styles --------- */
+.adminHeader {
+  height: var(--header-height);
+  background-color: white;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--sidebar-width);
+  z-index: 900;
+  transition: left var(--transition-speed);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sidebarClosed .adminHeader {
+  left: var(--sidebar-collapsed-width);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.headerLeft h2 {
+  margin: 0 0 0 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.sidebarToggle {
+  background: none;
+  border: none;
+  color: var(--dark-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.notifications {
+  margin-right: 20px;
+  position: relative;
+}
+
+.notificationBtn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--dark-color);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.notificationCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 0.7rem;
+  padding: 1px 5px;
+  border-radius: 50%;
+  min-width: 16px;
+  text-align: center;
+}
+
+.userMenuContainer {
+  position: relative;
+}
+
+.userMenuBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}
+
+.userName {
+  margin-right: 8px;
+  font-weight: 500;
+  color: var(--dark-color);
+}
+
+.userDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  min-width: 200px;
+  z-index: 1000;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.userDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userDropdown li {
+  padding: 0;
+}
+
+.userDropdown a,
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: var(--text-color);
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.userDropdown a:hover,
+.dropdownItem:hover {
+  background-color: #f5f7fa;
+  color: var(--primary-color);
+}
+
+.userDropdown i {
+  width: 20px;
+  margin-right: 8px;
+  text-align: center;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 5px 0;
+}
+
+/* Notificaciones */
+.notificationsContainer {
+  position: relative;
+}
+
+.notificationsDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  min-width: 300px;
+  z-index: 1000;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.notificationsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.notificationsHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.notificationsActions {
+  display: flex;
+  align-items: center;
+}
+
+.refreshNotifications,
+.markAllRead {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  padding: 5px;
+}
+
+.refreshNotifications {
+  margin-right: 8px;
+}
+
+.notificationsList {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notificationItem {
+  display: flex;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notificationItem:hover {
+  background-color: #f9f9f9;
+}
+
+.unread {
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.notificationIcon {
+  margin-right: 12px;
+  color: var(--primary-color);
+}
+
+.notificationContent {
+  flex: 1;
+}
+
+.notificationContent p {
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+}
+
+.notificationTime {
+  font-size: 0.75rem;
+  color: #95a5a6;
+}
+
+.noNotifications,
+.notificationsLoading {
+  padding: 15px;
+  text-align: center;
+  color: #95a5a6;
+}
+
+.notificationsFooter {
+  padding: 10px 15px;
+  text-align: center;
+  border-top: 1px solid #e9ecef;
+}
+
+.notificationsFooter a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* --------- Admin Login Styles --------- */
+.adminPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+  background-image: linear-gradient(45deg, rgba(40, 167, 69, 0.1), rgba(248, 100, 44, 0.1));
+}
+
+.adminContainer {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+.adminLoginContainer {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 30px;
+  width: 100%;
+  border-top: 4px solid var(--primary-color);
+}
+
+.adminLoginLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.adminLoginLogo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.adminLoginLogo h1 {
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  margin: 0 0 5px 0;
+}
+
+.adminLoginLogo h2 {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: 500;
+}
+
+.adminLoginForm {
+  width: 100%;
+}
+
+.loginError {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.inputWithIcon input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.inputWithIcon input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.loginButton:hover {
+  background-color: #218838;
+}
+
+.loginButton:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.loginButton i {
+  margin-right: 8px;
+}
+
+.adminLoginFooter {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #95a5a6;
+}
+
+/* --------- Loading Spinner --------- */
+.adminLoading {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+}
+
+.spinner {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.adminLoading p {
+  color: var(--dark-color);
+  font-size: 1rem;
+}
+
+/* --------- Responsive Styles --------- */
+@media (max-width: 768px) {
+  .adminRoot {
+    --sidebar-width: 240px;
+  }
+  
+  .sidebarOpen {
+    position: relative;
+  }
+  
+  .sidebarOpen::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+  }
+  
+  .adminSidebar {
+    z-index: 1001;
+  }
+  
+  .sidebarOpen .adminMain,
+  .sidebarClosed .adminMain {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .adminHeader {
+    left: 0 !important;
+  }
+  
+  .headerLeft h2 {
+    font-size: 1rem;
+  }
+  
+  .userName {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminContainer {
+    padding: 10px;
+  }
+  
+  .adminLoginContainer {
+    padding: 20px;
+  }
+}
+
+/* Estos estilos se deberían agregar al archivo Admin_Dashboard.module.css */
+
+/* Estilos para el componente de búsqueda */
+.headerSearch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.headerSearch input {
+  width: 250px;
+  padding: 8px 12px;
+  border: 1px solid #e9ecef;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.headerSearch input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.headerSearch button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.headerSearch button:hover {
+  color: var(--primary-color);
+}
+
+/* Estilos responsivos para el buscador */
+@media (max-width: 768px) {
+  .headerSearch {
+    display: none;
+  }
+}

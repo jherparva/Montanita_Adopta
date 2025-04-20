@@ -1,0 +1,255 @@
+/* Estilos para la página de administración de patrocinios */
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+.filtros-patrocinios {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filtros-patrocinios select {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+.refresh-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.refresh-btn:hover {
+  background-color: #3d8b40;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 30px;
+}
+
+.loading-spinner i {
+  font-size: 40px;
+  color: #0066cc;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  text-align: center;
+  padding: 30px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.error-message button {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+.patrocinios-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.patrocinio-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.patrocinio-item h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.patrocinio-item p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.enlace-animal {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.enlace-animal:hover {
+  text-decoration: underline;
+}
+
+.estado {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.estado.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.estado.paused {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.estado.ended {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.acciones-patrocinio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.acciones-patrocinio button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-active:hover {
+  background-color: #3d8b40;
+}
+
+.btn-paused {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-paused:hover {
+  background-color: #e0a800;
+}
+
+.btn-ended {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-ended:hover {
+  background-color: #5a6268;
+}
+
+.eliminar-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.eliminar-btn:hover {
+  background-color: #d32f2f;
+}
+
+.paginacion-patrocinios {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.paginacion-patrocinios button {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.paginacion-patrocinios button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.paginacion-patrocinios button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginacion-patrocinios span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filtros-patrocinios {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filtros-patrocinios select {
+    width: 100%;
+  }
+
+  .acciones-patrocinio {
+    flex-direction: column;
+  }
+
+  .paginacion-patrocinios {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

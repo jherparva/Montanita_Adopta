@@ -1,0 +1,107 @@
+/* Este archivo debe importarse ANTES de los otros archivos CSS de administración */
+
+/* Resetear estilos globales para el área de administración */
+.admin-root {
+  /* Estilos de reset que antes estaban en .admin-html, .admin-body */
+  all: revert;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  
+  /* Anula las propiedades de Tailwind */
+  all: revert;
+}
+
+/* Contenedor principal que aísla todos los estilos de administración */
+.admin-layout {
+  /* Asegurarse de que este contenedor tenga su propio contexto de estilo */
+  all: revert;
+  box-sizing: border-box;
+  
+  /* Estas propiedades se heredan de Admin_Dashboard.css */
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  transition: all 0.3s;
+}
+
+/* Anular específicamente las clases de Tailwind que causan problemas */
+.admin-layout *,
+.admin-sidebar *,
+.admin-header *,
+.admin-main *,
+.admin-content * {
+  /* Eliminar los efectos de Tailwind */
+  all: revert;
+  box-sizing: border-box;
+}
+
+/* Encapsular los estilos para los componentes específicos de administración */
+.admin-layout .container,
+.admin-layout .row,
+.admin-layout .col,
+.admin-layout .btn,
+.admin-layout .card,
+.admin-layout .table {
+  /* Asegurarse de que estos elementos usen los estilos de Bootstrap/propios y no Tailwind */
+  all: revert;
+  box-sizing: border-box;
+}
+
+/* Reiniciar estilos para formularios dentro del admin */
+.admin-layout input,
+.admin-layout select,
+.admin-layout button,
+.admin-layout textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Añadir importaciones específicas para sobrescribir con las variables propias de admin */
+.admin-layout {
+  /* Variables de colores y estilos específicos del dashboard admin */
+  --primary-color: #2E8B57; /* Verde montañita más oscuro */
+  --secondary-color: #4CAF50; /* Verde estándar */
+  --accent-color: #8BC34A; /* Verde claro */
+  --danger-color: #e74c3c;
+  --dark-color: #2c3e50;
+  --light-color: #f8f9fa;
+  --text-color: #333;
+  --sidebar-width: 250px;
+  --sidebar-collapsed-width: 70px;
+  --header-height: 70px;
+  --transition-speed: 0.3s;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Asegurarse de que los íconos se muestren correctamente */
+.admin-layout .fas,
+.admin-layout .far,
+.admin-layout .fab,
+.admin-layout .fa {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/* Para asegurar que la barra lateral tenga sus propios estilos */
+.admin-sidebar {
+  all: revert;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #2E8B57; /* Verde oscuro para consistencia con la página */
+  color: white;
+  transition: width var(--transition-speed);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}

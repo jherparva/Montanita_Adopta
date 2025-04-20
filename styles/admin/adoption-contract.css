@@ -1,0 +1,267 @@
+/* Estilos para el modal del contrato de adopción */
+.adoption-contract-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.contract-modal-content {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+
+.contract-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e9e9e9;
+}
+
+.contract-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-print {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-print:hover {
+  background-color: #3d8b40;
+  transform: translateY(-2px);
+}
+
+.btn-close {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-close:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+}
+
+/* Estilos para el formulario de edición */
+.contract-edit-form {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.contract-edit-form h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Estilos para el documento imprimible */
+.contract-document {
+  padding: 25px;
+  font-family: "Nunito", "Segoe UI", serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.contract-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contract-logo img {
+  max-height: 90px;
+  max-width: 200px;
+}
+
+.contract-document h1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+  color: #2e8b57;
+}
+
+.contract-section {
+  margin-bottom: 25px;
+}
+
+.contract-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e9e9e9;
+  padding-bottom: 8px;
+  color: #2e8b57;
+}
+
+.animal-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.animal-details td {
+  padding: 12px;
+  border: 1px solid #e9e9e9;
+}
+
+.animal-details td:first-child {
+  width: 30%;
+  background-color: #f9f9f9;
+  font-weight: 600;
+}
+
+.contract-clauses {
+  padding-left: 20px;
+}
+
+.contract-clauses li {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.contract-signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.signature-block {
+  width: 45%;
+  text-align: center;
+}
+
+.signature-line {
+  border-bottom: 1px solid #000;
+  margin: 60px 0 15px;
+}
+
+.contract-date {
+  text-align: center;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+/* Estilos para impresión */
+@media print {
+  .contract-header,
+  .contract-actions,
+  .contract-edit-form {
+    display: none;
+  }
+
+  .contract-document {
+    padding: 0;
+    font-size: 12pt;
+  }
+
+  .contract-document h1 {
+    font-size: 18pt;
+  }
+
+  .contract-section h2 {
+    font-size: 14pt;
+  }
+
+  .contract-modal-content {
+    box-shadow: none;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .adoption-contract-modal {
+    position: absolute;
+    background: none;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contract-signatures {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .signature-block {
+    width: 80%;
+  }
+}

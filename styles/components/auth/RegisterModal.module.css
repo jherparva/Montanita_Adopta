@@ -1,0 +1,294 @@
+/* RegisterModal.module.css */
+/* Estilos encapsulados para el componente modal de registro */
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  position: relative;
+  margin: auto;
+  max-width: 650px;
+  width: 95%;
+  padding: 30px;
+  border: 1px solid #888;
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Modificado para coincidir con el estilo del botón de cerrar de UserSettingsModal */
+.close {
+  color: white;
+  background-color: #4fd95a;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1060;
+}
+
+.close:hover {
+  background-color: #f10707;
+  transform: scale(1.1);
+}
+
+.close:active {
+  transform: scale(0.95);
+}
+
+.registroContainer {
+  max-width: 550px !important;
+  width: 100% !important;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 25px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6) !important;
+  margin: 0 auto;
+  position: relative !important;
+  text-align: center !important;
+}
+
+.title {
+  font-family: "Blueberry" !important;
+  text-align: center !important;
+  color: #cf0707 !important;
+  margin: 0 auto 15px auto !important;
+  padding: 0 !important;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  display: block !important;
+  line-height: 1.2 !important;
+  transition: transform 0.3s ease !important;
+}
+
+.title:hover {
+  transform: scale(1.05) !important;
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.formCol {
+  flex: 1;
+  max-width: 48%;
+}
+
+.formGroup {
+  margin-bottom: 10px;
+}
+
+.formGroup label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input, 
+.select, 
+.dateInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.dateInput {
+  background-color: white;
+  cursor: pointer;
+}
+
+.dateInput:focus {
+  border-color: #cf0707;
+  box-shadow: 0 0 5px rgba(207, 7, 7, 0.5);
+}
+
+.botonesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #27b80b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 10px;
+}
+
+.submitButton:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}
+
+.submitButton:active {
+  transform: translateY(1px);
+}
+
+.googleContainer {
+  width: 100%;
+  margin-top: 10px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.gidSignin {
+  width: 100% !important;
+  margin-top: 10px !important;
+  display: flex !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.gidSignin div[role="button"] {
+  width: 100% !important;
+  border-radius: 6px !important;
+  transition: transform 0.3s !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.gidSignin div[role="button"]:hover {
+  transform: translateY(-2px) !important;
+}
+
+.gidSignin div[role="button"]:active {
+  transform: translateY(1px) !important;
+}
+
+.socialLogin {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.socialLogin.google {
+  background-color: #db4437;
+  color: #fff;
+}
+
+.socialLogin.facebook {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.socialLogin:hover {
+  transform: translateY(-2px);
+}
+
+.socialLogin.google:hover {
+  background-color: #c1351d;
+}
+
+.socialLogin.facebook:hover {
+  background-color: #0d2455;
+}
+
+.socialLogin:active {
+  transform: translateY(1px);
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Estilos para el calendario de flatpickr - usando un selector local para globales */
+.flatpickrContainer :global(.flatpickr-calendar) {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+}
+
+.flatpickrContainer :global(.flatpickr-day.selected) {
+  background: #27b80b !important;
+  border-color: #27b80b !important;
+}
+
+.flatpickrContainer :global(.flatpickr-day:hover) {
+  background: #e6f7e6;
+}
+
+.flatpickrContainer :global(.flatpickr-months .flatpickr-month) {
+  background: #27b80b;
+  color: white;
+}
+
+.flatpickrContainer :global(.flatpickr-current-month .flatpickr-monthDropdown-months),
+.flatpickrContainer :global(.flatpickr-current-month input.cur-year) {
+  color: white;
+}
+
+.flatpickrContainer :global(.flatpickr-weekday) {
+  color: #27b80b;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+  }
+  
+  .formCol {
+    max-width: 100%;
+  }
+}

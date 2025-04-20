@@ -1,0 +1,194 @@
+/* Estilos específicos para el modal de configuración de usuario */
+.user-settings-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+  }
+  
+  .user-settings-modal-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 95%;
+    max-width: 650px;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+    position: relative;
+  }
+  
+  .user-settings-close {
+    color: white;
+    background-color: #4fd95a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1060;
+  }
+  
+  .user-settings-close:hover {
+    background-color: #f10707;
+    transform: scale(1.1);
+  }
+  
+  .user-settings-close:active {
+    transform: scale(0.95);
+  }
+  
+  .user-settings-container {
+    max-width: 550px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 255, 0, 0.6);
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+  }
+  
+  .user-settings-container h2 {
+    font-family: "Blueberry";
+    text-align: center;
+    color: #cf0707;
+    margin: 0 auto 15px auto;
+    padding: 0;
+    font-size: 40px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: block;
+    line-height: 1.2;
+    transition: transform 0.3s ease;
+  }
+  
+  .user-settings-container h2:hover {
+    transform: scale(1.05);
+  }
+  
+  .user-settings-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .user-settings-form-col {
+    flex: 1;
+    max-width: 48%;
+  }
+  
+  .user-settings-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .user-settings-form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .user-settings-form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .user-settings-botones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .user-settings-update-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #27b80b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .user-settings-update-btn:hover {
+    background-color: #126102;
+    transform: translateY(-2px);
+  }
+  
+  .user-settings-update-btn:active {
+    transform: translateY(1px);
+  }
+  
+  .user-settings-delete-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-settings-delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .user-settings-delete-btn:active {
+    background-color: #e74c3c;
+    transform: translateY(1px);
+  }
+  
+  .user-settings-error-message {
+    color: #d9534f;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+  }
+  
+  .user-settings-success-message {
+    color: #28a745;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+  }

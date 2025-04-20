@@ -1,0 +1,463 @@
+/* Estilos para la página de notificaciones */
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-title h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1f2937;
+}
+
+.header-badge {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn i {
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-secondary {
+  background-color: #e5e7eb;
+  color: #4b5563;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  background-color: transparent;
+  color: #4b5563;
+}
+
+.btn-outline:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-icon {
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  background-color: transparent;
+}
+
+.btn-icon:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Filtros */
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.875rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 0.375rem 2rem 0.375rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  color: #1f2937;
+  font-size: 0.875rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Estado de carga */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: #6b7280;
+}
+
+.loading-container i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Alertas */
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.alert-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Estado vacío */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: #6b7280;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Acciones de notificaciones */
+.notifications-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.select-all {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select-all input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.select-all label {
+  font-size: 0.875rem;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bulk-actions span {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+/* Tabla de notificaciones */
+.notifications-table-container {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.notifications-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.notifications-table th,
+.notifications-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.notifications-table th {
+  font-weight: 600;
+  color: #4b5563;
+  background-color: #f9fafb;
+  white-space: nowrap;
+}
+
+.notifications-table th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.notifications-table th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.notifications-table tr:last-child td {
+  border-bottom: none;
+}
+
+.notifications-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.unread-row {
+  font-weight: bold;
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.unread-row:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.select-column {
+  width: 3rem;
+}
+
+.icon-column {
+  width: 3rem;
+}
+
+.actions-column {
+  width: 10rem;
+}
+
+/* Icono de notificación */
+.notification-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-icon i {
+  color: #4b5563;
+}
+
+/* Mensaje de notificación */
+.notification-message {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.notification-message:hover {
+  color: #3b82f6;
+}
+
+/* Acciones de tabla */
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Iconos personalizados para tipos de notificaciones */
+tr[data-type="info"] .notification-icon {
+  background-color: #e0f2fe;
+}
+
+tr[data-type="info"] .notification-icon i {
+  color: #0ea5e9;
+}
+
+tr[data-type="success"] .notification-icon {
+  background-color: #dcfce7;
+}
+
+tr[data-type="success"] .notification-icon i {
+  color: #10b981;
+}
+
+tr[data-type="warning"] .notification-icon {
+  background-color: #fef3c7;
+}
+
+tr[data-type="warning"] .notification-icon i {
+  color: #f59e0b;
+}
+
+tr[data-type="error"] .notification-icon {
+  background-color: #fee2e2;
+}
+
+tr[data-type="error"] .notification-icon i {
+  color: #ef4444;
+}
+
+tr[data-type="adoption"] .notification-icon {
+  background-color: #f3e8ff;
+}
+
+tr[data-type="adoption"] .notification-icon i {
+  color: #8b5cf6;
+}
+
+tr[data-type="message"] .notification-icon {
+  background-color: #dbeafe;
+}
+
+tr[data-type="message"] .notification-icon i {
+  color: #3b82f6;
+}
+
+tr[data-type="user"] .notification-icon {
+  background-color: #ffedd5;
+}
+
+tr[data-type="user"] .notification-icon i {
+  color: #f97316;
+}
+
+tr[data-type="animal"] .notification-icon {
+  background-color: #d1fae5;
+}
+
+tr[data-type="animal"] .notification-icon i {
+  color: #10b981;
+}
+
+tr[data-type="donation"] .notification-icon {
+  background-color: #fce7f3;
+}
+
+tr[data-type="donation"] .notification-icon i {
+  color: #ec4899;
+}
+
+tr[data-type="volunteer"] .notification-icon {
+  background-color: #e0e7ff;
+}
+
+tr[data-type="volunteer"] .notification-icon i {
+  color: #6366f1;
+}
+
+/* Animación de actualización */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .notifications-table th:nth-child(4),
+  .notifications-table td:nth-child(4) {
+    display: none;
+  }
+  
+  .admin-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .notifications-table th:nth-child(3),
+  .notifications-table td:nth-child(3) {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .notifications-table th:nth-child(5),
+  .notifications-table td:nth-child(5) {
+    display: none;
+  }
+  
+  .table-actions {
+    flex-direction: column;
+  }
+}

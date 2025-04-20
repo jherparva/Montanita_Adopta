@@ -1,0 +1,1685 @@
+/* Estilos específicos para la sección de adopción */
+.adoptions-section {
+    padding: 50px 0;
+    background-color: #ffffff;
+  }
+  
+  .adoptions-section h2 {
+    font-family: 'Blueberry', sans-serif;
+    text-align: center;
+    color: #cf0707;
+    margin-bottom: 30px;
+    font-size: 55px;
+    font-weight: 600;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 7%;
+    animation: titleFloatAdoption 3s ease-in-out infinite;
+  }
+  
+  @keyframes titleFloatAdoption {
+    0%, 100% {
+      transform: translateY(0) translateX(-50%);
+    }
+    50% {
+      transform: translateY(-5px) translateX(-50%);
+    }
+  }
+  
+  .adoptions-section h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #13a840, #cf0707, transparent);
+    margin: 10px auto 0;
+    border-radius: 4px;
+    animation: gradientMoveAdoption 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  
+  @keyframes gradientMoveAdoption {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .adoptions-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Contenedor de categorías */
+  .adoptions-section .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  /* Estilos de las categorías (perros/gatos) */
+  .adoptions-section .category {
+    background: #ffffff;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    margin: 0 0 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* En pantallas grandes, cada categoría ocupa el 48% del ancho */
+  @media (min-width: 1025px) {
+    .adoptions-section .categories-container .category {
+      width: 48%;
+    }
+  }
+  
+  /* En tablets y móviles, ocupan el 100% */
+  @media (max-width: 1024px) {
+    .adoptions-section .categories-container .category {
+      width: 100%;
+    }
+  }
+  
+  .adoptions-section .category:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  .adoptions-section .category h3 {
+    font-family: 'Blueberry', sans-serif;
+    text-align: center;
+    color: #056e0d;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 600;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: inline-block;
+    left: 12%;
+    transform: translateX(-50%);
+    padding-top: 7%;
+  }
+  
+  /* Estilos del carrusel de adopción */
+  .adoptions-section .adoption-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+  
+  .adoptions-section .adoption-carousel-container {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease;
+    position: relative;
+    justify-content: center;
+  }
+  
+  .adoptions-section .adoption-carousel-item {
+    width: 100%;
+    min-height: 350px;
+    display: none;
+    position: relative;
+  }
+  
+  .adoptions-section .adoption-carousel-item.active {
+    display: block;
+  }
+  
+  .adoptions-section .adoption-carousel-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.5s ease;
+  }
+  
+  .adoptions-section .adoption-carousel-caption {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .adoptions-section .adoption-carousel-caption h4 {
+    font-family: 'Blueberry', sans-serif;
+    margin: 0 0 15px;
+    font-size: 30px;
+    color: #cf0707;
+    font-weight: 600;
+  }
+  .adoptions-section .adoption-carousel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .adoptions-section .adoption-carousel-buttons button {
+    background-color: #00cc33;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(1, 53, 14, 0.11);
+  }
+  
+  .adoptions-section .adoption-carousel-buttons button:hover {
+    background-color: #065e19;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 204, 78, 0.3);
+  }
+  
+  .adoptions-section .adoption-carousel-buttons button:active {
+    transform: translateY(0);
+  }
+  
+  /* Estilo para el spinner de carga */
+  .adoptions-section .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+  }
+  
+  .adoptions-section .loading-spinner i {
+    font-size: 36px;
+    color: #00cc44;
+    margin-bottom: 10px;
+  }
+  
+  .adoptions-section .loading-spinner p {
+    color: #666;
+    font-size: 16px;
+  }
+  
+  /* Controles del carrusel */
+  .adoptions-section .adoption-carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .adoptions-section .adoption-carousel-control:hover {
+    background-color: rgba(0, 204, 10, 0.8);
+    color: white;
+  }
+  
+  .adoptions-section .adoption-carousel-control.prev {
+    left: 10px;
+  }
+  
+  .adoptions-section .adoption-carousel-control.next {
+    right: 10px;
+  }
+  
+  /* Indicadores del carrusel */
+  .adoptions-section .adoption-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 8px;
+  }
+  
+  .adoptions-section .adoption-carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .adoptions-section .adoption-carousel-indicator.active {
+    background-color: #026b19;
+  }
+  
+  /* Media queries */
+  @media (max-width: 768px) {
+    .adoptions-section h2 {
+      font-size: 40px;
+    }
+    
+    .adoptions-section .adoption-carousel-item {
+      min-height: 320px;
+    }
+    
+    .adoptions-section .adoption-carousel-item img {
+      height: 220px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .adoptions-section h2 {
+      font-size: 32px;
+    }
+    
+    .adoptions-section .adoption-carousel-item {
+      min-height: 300px;
+    }
+    
+    .adoptions-section .adoption-carousel-item img {
+      height: 200px;
+    }
+    
+    .adoptions-section .adoption-carousel-caption h4 {
+      font-size: 18px;
+    }
+    
+    .adoptions-section .adoption-carousel-buttons button {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+  }
+
+/* Estilo para el formulario de búsqueda */
+.search-form {
+    max-width: 350px;
+    margin: 0 auto 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.search {
+    max-width: 350px;
+    margin: 0 auto 40px;
+}
+
+select, input[type="text"] {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    width: 100%;
+    font-size: 15px;
+    background-color: #ffffff;
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #a5d6a7;
+    background-color: #f1f8f1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(10, 167, 31, 0.2);
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #2c8c30 0%, #1d5e20 100%);
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    height: 45px;
+    box-shadow: 0 4px 8px rgba(29, 94, 32, 0.2);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #3dbd42 0%, #2c8c30 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(29, 94, 32, 0.3);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+select {
+    appearance: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"%3E%3Cpath fill="none" d="M0 0h24v24H0z"/%3E%3Cpath d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z" fill="%232c8c30"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+select:disabled, input[type="text"]:disabled {
+    background-color: #f5f5f5;
+    color: #bbb;
+    border-color: #e5e5e5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Media Query para pantallas de tabletas */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .adoptions-section h2 {
+        font-size: 40px;
+    }
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .adoptions-section h2 {
+        font-size: 36px;
+    }
+    
+    .carousel-control {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .carousel-item {
+        min-width: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+    
+    .category h3 {
+        font-size: 20px;
+    }
+    
+    button[type="submit"] {
+        height: 42px;
+    }
+    
+    select, input[type="text"] {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+}
+
+/* Estilos para la sección de animales */
+
+.animals-section {
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+
+.animals-section h2 {
+    font-family: 'Blueberry', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1f8b09;
+    font-size: 40px;
+}
+
+/* Estilos para los tabs */
+.animal-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #fff;
+    border: 2px solid #24c03b;
+    border-radius: 30px;
+    color: #355e3b;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active, .tab-button:hover {
+    background-color: #24c03b;
+    color: #fff;
+}
+
+/* Estilos para los filtros */
+.animal-filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.animal-filters select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#filter-button {
+    padding: 8px 15px;
+    background-color: #24c03b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#filter-button:hover {
+    background-color: #2a4a30;
+}
+
+/* Contenedor de animales - MODIFICADO PARA 4 COLUMNAS */
+.animals-container {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta de animal */
+.animal-card {
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.animal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.animal-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.animal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.animal-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.animal-info h3 {
+  font-family: 'Blueberry', sans-serif;
+  text-align: center;
+  color: #cf0707;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 600;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 7%;
+ 
+}
+
+.animal-breed {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.animal-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.animal-details span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.animal-metadata {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.animal-tag {
+    background-color: #f0f0f0;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #555;
+}
+
+.animal-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.animal-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 0.875rem;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-primary {
+    background-color: #355e3b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: #2a4a30;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #355e3b;
+    border: 1px solid #355e3b;
+    border-radius: 4px;
+}
+
+.btn-secondary:hover {
+    background-color: #f0f8f0;
+}
+
+.favorite-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-toggle i {
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.favorite-toggle.active i {
+    color: #e74c3c;
+}
+
+.favorite-button {
+    background-color: #fff;
+    color: #355e3b;
+    border: 1px solid #355e3b;
+}
+
+.favorite-button:hover {
+    background-color: #f0f8f0;
+}
+
+.favorite-button.favorited, .secondary-btn.favorited {
+    background-color: #ffecb3;
+    color: #e6a70b;
+    border-color: #e6a70b;
+}
+
+/* Paginación */
+.animals-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.pagination-btn {
+    padding: 8px 15px;
+    background-color: #24c03b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #2a4a30;
+}
+
+#page-indicator {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Estilos para el spinner de carga */
+.loading-spinner {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 30px;
+}
+
+.loading-spinner i {
+    font-size: 40px;
+    color: #355e3b;
+    margin-bottom: 10px;
+}
+
+/* Modal de animales */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding-top: 130px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.animal-modal {
+    max-width: 800px;
+    width: 90%;
+}
+
+.animal-detail-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .animal-detail-container {
+        flex-direction: row;
+    }
+}
+
+.animal-image-container {
+    flex: 1;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .animal-image-container {
+        max-width: 50%;
+    }
+}
+
+.animal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.animal-info-container {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.animal-info-container h2 {
+    font-family: 'Blueberry', sans-serif;
+    text-align: center;
+    color: #cf0707;
+    margin-bottom: 30px;
+    font-size: 55px;
+    font-weight: 600;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 7%;
+    animation: titleFloatAdoption 3s ease-in-out infinite;
+  }
+  
+  @keyframes titleFloatAdoption {
+    0%, 100% {
+      transform: translateY(0) translateX(-50%);
+    }
+    50% {
+      transform: translateY(-5px) translateX(-50%);
+    }
+  }
+  
+  .animal-info-container h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #13a840, #cf0707, transparent);
+    margin: 10px auto 0;
+    border-radius: 4px;
+    animation: gradientMoveAdoption 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  
+  @keyframes gradientMoveAdoption {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+
+.animal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.animal-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.primary-btn {
+    padding: 10px 20px;
+    background-color: #355e3b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #2a4a30;
+}
+
+.secondary-btn {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #355e3b;
+    border: 1px solid #355e3b;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+    background-color: #f0f8f0;
+}
+
+.error-message {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 30px;
+}
+
+.error-message i {
+    font-size: 40px;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 30px;
+}
+
+.no-results i {
+    font-size: 40px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+/* Ajustes responsivos para la cuadrícula de animales */
+
+@media (max-width: 1200px) {
+    .animals-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .animals-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .animal-tabs, .animal-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-button, .animal-filters select, #filter-button {
+        width: 100%;
+        max-width: 250px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .animals-container {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* Estilos para la sección de servicios veterinarios con prefijo 'vet-' */
+.vet-services-section {
+  padding: 40px 0;
+  background-color: #f9f9f9;
+}
+
+.vet-services-section h2 {
+  font-family: 'Blueberry', sans-serif;
+  text-align: center;
+  color: #1f8b09;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  position: relative;
+}
+
+.vet-services-section h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #13a840, #cf0707, transparent);
+    margin: 10px auto 0;
+    border-radius: 4px;
+    animation: gradientMoveAdoption 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  
+  @keyframes gradientMoveAdoption {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+.vet-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.vet-service-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.vet-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.vet-service-icon {
+  font-size: 40px;
+  color: #ff3e00;
+  margin-bottom: 15px;
+}
+
+.vet-service-card h3 {
+  color: #333;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.vet-service-short-description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  height: 60px;
+  overflow: hidden;
+}
+
+.vet-service-price {
+  color: #e01e1e;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.vet-service-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.vet-info-btn {
+  background-color: #f2f2f2;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.vet-info-btn:hover {
+  background-color: #37d344;
+}
+
+.vet-reserve-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.vet-reserve-btn:hover {
+  background-color: #016405;
+}
+
+/* Estilos para el modal de información del servicio */
+.vet-service-modal h2 {
+  font-family: 'Blueberry', sans-serif;
+  color: #4caf50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.vet-service-details {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.vet-service-details h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.vet-service-details p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.vet-service-details ul {
+  padding-left: 20px;
+}
+
+.vet-service-details li {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.vet-service-pricing {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vet-service-pricing h3 {
+  color: #e01e1e;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.vet-service-pricing p {
+  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.vet-service-modal button {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 12px 0;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.vet-service-modal button:hover {
+  background-color: #3d8b40;
+}
+
+/* Estilos para la sección de ubicación */
+.vet-location-container {
+  margin-top: 50px;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.vet-location-container h3 {
+  text-align: left;
+  color: #1f8b09;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-family: 'Blueberry', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.vet-location-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.vet-card-header {
+  padding: 15px 20px;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: #138105 !important;
+}
+
+.vet-card-body {
+  padding: 25px;
+}
+
+.vet-location-container p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.vet-map-container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 300px;
+}
+
+.vet-location-container iframe {
+  border-radius: 8px;
+}
+
+.vet-location-container .btn-outline-secondary {
+  color: #1e52e0;
+  border-color: #481ee0;
+  transition: all 0.3s ease;
+}
+
+.vet-location-container .btn-outline-secondary:hover {
+  background-color: #2b1ee0;
+  color: white;
+}
+
+/* Estilos para estados de carga y error */
+.vet-loading-spinner,
+.vet-error-message,
+.vet-no-results {
+  text-align: center;
+  padding: 40px 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.vet-loading-spinner i,
+.vet-error-message i,
+.vet-no-results i {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.vet-loading-spinner i {
+  color: #4caf50;
+  animation: vet-spin 1s linear infinite;
+}
+
+@keyframes vet-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.vet-loading-spinner p {
+  color: #666;
+  font-size: 16px;
+}
+
+.vet-error-message {
+  background-color: #fff8f8;
+}
+
+.vet-error-message i {
+  color: #e01e1e;
+}
+
+.vet-error-message p {
+  color: #e01e1e;
+  font-size: 16px;
+}
+
+.vet-no-results i {
+  color: #4caf50;
+}
+
+.vet-no-results p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .vet-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .vet-modal-content {
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+  }
+
+  .vet-services-section h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .vet-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vet-service-card {
+    max-width: 100%;
+  }
+
+  .vet-modal-content {
+    margin: 15% auto;
+    padding: 15px;
+  }
+
+  .vet-service-modal button {
+    width: 100%;
+  }
+}
+
+/* Estilos para el modal general */
+.vet-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: vet-fadeIn 0.3s;
+}
+
+@keyframes vet-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.vet-modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  position: relative;
+  animation: vet-slideIn 0.3s;
+}
+
+@keyframes vet-slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.vet-close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.vet-close:hover {
+  color: #333;
+}
+
+/* Estilos específicos para el modal de reserva veterinaria */
+.vet-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  padding-top: 90px;
+}
+
+.vet-modal-content {
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding: 40px 35px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  border-left: 5px solid #4caf50;
+  overflow: hidden;
+}
+
+.vet-reservation-modal {
+  max-width: 550px;
+}
+
+.vet-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.vet-close:hover {
+  color: #4caf50;
+}
+
+.vet-reservation-modal h2 {
+  font-family: 'Blueberry', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  color: #cf0707;
+  font-size: 32px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.vet-reservation-modal h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #13a840, #cf0707, transparent);
+    margin: 10px auto 0;
+    border-radius: 4px;
+    animation: gradientMoveAdoption 3s linear infinite;
+    background-size: 200% 100%;
+  }
+  
+  @keyframes gradientMoveAdoption {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+.vet-auth-message {
+  background-color: #f8f9fa;
+  border-left: 4px solid #4caf50;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.vet-auth-message i {
+  color: #4caf50;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.vet-auth-message span {
+  flex-grow: 1;
+  font-size: 14px;
+  color: #555;
+}
+
+.vet-form-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.vet-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.vet-form-group:focus-within label {
+  color: #4caf50;
+}
+
+.vet-form-group input,
+.vet-form-group select,
+.vet-form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #333;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.vet-form-group input:focus,
+.vet-form-group select:focus,
+.vet-form-group textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.vet-form-group input:disabled,
+.vet-form-group select:disabled,
+.vet-form-group textarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.vet-form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.vet-reservation-message {
+  padding: 12px 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.vet-reservation-message i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.vet-reservation-message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 3px solid #2e7d32;
+}
+
+.vet-reservation-message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 3px solid #c62828;
+}
+
+.vet-form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 15px;
+}
+
+.vet-primary-btn,
+.vet-secondary-btn {
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  flex: 1;
+}
+
+.vet-primary-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.vet-primary-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.8s ease;
+}
+
+.vet-primary-btn:hover {
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.vet-primary-btn:hover::before {
+  left: 100%;
+}
+
+.vet-primary-btn:disabled {
+  background: linear-gradient(135deg, #a5d6a7 0%, #81c784 100%);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.vet-secondary-btn {
+  background-color: #f2f2f2;
+  color: #555;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.vet-secondary-btn:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+/* Elementos decorativos */
+.vet-paw-prints {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%234caf50' fill-opacity='0.15' d='M256,33.2c-11.6,0-21.5,5.8-27.4,14.5c-5.9,8.7-7.8,19.6-5.2,29.8c2.6,10.2,9.1,19.2,18.2,25.2c9.1,6,20.2,8.4,31.2,6.6 c11-1.8,20.9-7.8,27.7-16.9c6.8-9.1,9.9-20.5,8.5-31.8c-1.4-11.3-7.2-21.6-16.2-28.8C283.9,24.6,270.2,33.2,256,33.2z M157.3,95.3 c-11.6,0-21.5,5.8-27.4,14.5c-5.9,8.7-7.8,19.6-5.2,29.8c2.6,10.2,9.1,19.2,18.2,25.2c9.1,6,20.2,8.4,31.2,6.6c11-1.8,20.9-7.8,27.7-16.9 c6.8-9.1,9.9-20.5,8.5-31.8c-1.4-11.3-7.2-21.6-16.2-28.8C185.2,86.6,171.5,95.3,157.3,95.3z M354.7,95.3c-11.6,0-21.5,5.8-27.4,14.5 c-5.9,8.7-7.8,19.6-5.2,29.8c2.6,10.2,9.1,19.2,18.2,25.2c9.1,6,20.2,8.4,31.2,6.6c11-1.8,20.9-7.8,27.7-16.9c6.8-9.1,9.9-20.5,8.5-31.8 c-1.4-11.3-7.2-21.6-16.2-28.8C382.6,86.6,368.9,95.3,354.7,95.3z M132.7,193.7c-9.1,0-17.6,3.5-23.8,9.7c-6.2,6.2-9.7,14.7-9.7,23.8 c0,9.1,3.5,17.6,9.7,23.8c6.2,6.2,14.7,9.7,23.8,9.7c9.1,0,17.6-3.5,23.8-9.7c6.2-6.2,9.7-14.7,9.7-23.8c0-9.1-3.5-17.6-9.7-23.8 C150.3,197.2,141.8,193.7,132.7,193.7z M256,193.7c-9.1,0-17.6,3.5-23.8,9.7c-6.2,6.2-9.7,14.7-9.7,23.8c0,9.1,3.5,17.6,9.7,23.8 c6.2,6.2,14.7,9.7,23.8,9.7c9.1,0,17.6-3.5,23.8-9.7c6.2,6.2,9.7-14.7,9.7-23.8c0-9.1-3.5-17.6-9.7-23.8C273.6,197.2,265.1,193.7,256,193.7z M379.3,193.7c-9.1,0-17.6,3.5-23.8,9.7c-6.2,6.2-9.7,14.7-9.7,23.8c0,9.1,3.5,17.6,9.7,23.8c6.2,6.2,14.7,9.7,23.8,9.7c9.1,0,17.6-3.5,23.8-9.7 c6.2-6.2,9.7-14.7,9.7-23.8c0-9.1-3.5-17.6-9.7-23.8C396.9,197.2,388.4,193.7,379.3,193.7z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vet-paw-1 {
+  top: 15px;
+  right: 50px;
+  transform: rotate(15deg);
+}
+
+.vet-paw-2 {
+  bottom: 30px;
+  left: 30px;
+  transform: rotate(-20deg);
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .vet-modal-content {
+    padding: 25px 20px;
+    margin: 15px;
+  }
+
+  .vet-reservation-modal h2 {
+    font-size: 24px;
+  }
+
+  .vet-form-actions {
+    flex-direction: column;
+  }
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 480px) {
+  .vet-reservation-modal h2 {
+    font-size: 22px;
+  }
+
+  .vet-modal-content {
+    padding: 20px 15px;
+  }
+}

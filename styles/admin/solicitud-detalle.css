@@ -1,0 +1,188 @@
+  .solicitud-detalle {
+    padding: 20px;
+  }
+  
+  .detalle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .btn-back {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .btn-back:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .detalle-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .detalle-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .detalle-section h2 {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+  }
+  
+  .animal-card {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .animal-image {
+    flex: 0 0 200px;
+  }
+  
+  .animal-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .animal-details h3 {
+    margin-bottom: 10px;
+    color: #4caf50;
+  }
+  
+  .animal-details p {
+    margin: 5px 0;
+  }
+  
+  .adopter-details p {
+    margin: 10px 0;
+  }
+  
+  .request-notes {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+  
+  .request-notes h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .request-notes pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+  }
+  
+  .status-badge.pending {
+    background-color: #ff9800;
+  }
+  
+  .status-badge.approved {
+    background-color: #4caf50;
+  }
+  
+  .status-badge.rejected {
+    background-color: #f44336;
+  }
+  
+  .detalle-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .btn-approve {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    color: #2e7d32;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-approve:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .btn-reject {
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    color: #c62828;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-reject:hover {
+    background-color: #ffcdd2;
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .loading-container,
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .spinner {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #4caf50;
+  }
+  
+  .error-container h2 {
+    color: #f44336;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .animal-card {
+      flex-direction: column;
+    }
+  
+    .animal-image {
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+  }
+  

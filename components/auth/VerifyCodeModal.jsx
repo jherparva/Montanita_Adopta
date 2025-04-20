@@ -1,0 +1,220 @@
+"use client"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import "@/styles/components/auth/verify-code-modal.css" 
+
+const VerifyCodeModal = ({ isOpen, onClose, email }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    code: "",
+    newPassword: "",
+    confirmPassword: "",
+  })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const router = useRouter()
+
+  useEffect(() => {
+    if (email && isOpen) {
+      setFormData((prev) => ({ ...prev, email }))
+    }
+  }, [email, isOpen])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const validateForm = () => {
+    if (formData.newPassword !== formData.confirmPassword) {
+      window.Swal.fire({
+        title: "Error de validación",
+        text: "Las contraseñas no coinciden",
+        icon: "error",
+        confirmButtonColor: "#d33",
+      })
+      setError("Las contraseñas no coinciden")
+      return false
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
+    if (!passwordRegex.test(formData.newPassword)) {
+      window.Swal.fire({
+        title: "Error de validación",
+        html: `
+          <p>La contraseña debe tener al menos:</p>
+          <ul style="text-align: left; display: inline-block;">
+            <li>8 caracteres</li>
+            <li>Una letra mayúscula</li>
+            <li>Una letra minúscula</li>
+            <li>Un número</li>
+          </ul>
+        `,
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+      })
+      setError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número")
+      return false
+    }
+
+    return true
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!validateForm()) {
+      return
+    }
+
+    window.Swal.fire({
+      title: "Procesando...",
+      text: "Verificando código y restableciendo contraseña",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        window.Swal.showLoading()
+      }
+    })
+
+    setLoading(true)
+    setError("")
+    setSuccess("")
+
+    try {
+      const response = await fetch("/api/auth/verify-reset-code", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          code: formData.code,
+          newPassword: formData.newPassword,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSuccess("Contraseña restablecida correctamente")
+        window.Swal.close()
+
+        window.Swal.fire({
+          title: "¡Éxito!",
+          text: "Contraseña restablecida correctamente. Has iniciado sesión automáticamente.",
+          icon: "success",
+          confirmButtonText: "Continuar",
+          confirmButtonColor: "#27b80b",
+        }).then(() => {
+          window.dispatchEvent(new Event("auth-changed"))
+          onClose()
+          window.location.reload()
+        })
+      } else {
+        window.Swal.close()
+        
+        window.Swal.fire({
+          title: "Error",
+          text: data.message || "Error al verificar el código",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        })
+        setError(data.message || "Error al verificar el código")
+      }
+    } catch (error) {
+      window.Swal.close()
+      
+      window.Swal.fire({
+        title: "Error",
+        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        icon: "error",
+        confirmButtonColor: "#d33",
+      })
+      setError("Error al conectar con el servidor")
+      console.error("Error al verificar código:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (!isOpen) return null
+
+  return (
+    <div className="vcm-modal" style={{ display: "block" }}>
+      <div className="vcm-modal-content">
+        <span className="vcm-close" onClick={onClose}>&times;</span>
+        <h2 className="vcm-title">Verificar Código de Recuperación</h2>
+        <form className="vcm-form" onSubmit={handleSubmit}>
+          <div className="vcm-form-group">
+            <label htmlFor="vcm-email">Correo Electrónico:</label>
+            <input
+              type="email"
+              id="vcm-email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="vcm-form-group">
+            <label htmlFor="vcm-recovery-code">Código de Recuperación:</label>
+            <input 
+              type="text" 
+              id="vcm-recovery-code" 
+              name="code" 
+              value={formData.code} 
+              onChange={handleChange} 
+              required 
+            />
+          </div>
+
+          <div className="vcm-form-group">
+            <label htmlFor="vcm-new-password">Nueva Contraseña:</label>
+            <input
+              type="password"
+              id="vcm-new-password"
+              name="newPassword"
+              value={formData.newPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="vcm-form-group">
+            <label htmlFor="vcm-confirm-password">Confirmar Nueva Contraseña:</label>
+            <input
+              type="password"
+              id="vcm-confirm-password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="vcm-password-requirements">
+            <p>La contraseña debe contener:</p>
+            <ul>
+              <li>Al menos 8 caracteres</li>
+              <li>Una letra mayúscula</li>
+              <li>Una letra minúscula</li>
+              <li>Un número</li>
+            </ul>
+          </div>
+
+          <button className="vcm-button" type="submit" disabled={loading}>
+            {loading ? "Procesando..." : "Restablecer Contraseña"}
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default VerifyCodeModal
