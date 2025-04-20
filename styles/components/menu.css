@@ -497,6 +497,9 @@ input[type="file"] {
 @media (max-width: 768px) {
     .checkbtn {
         display: block;
+        float: left;
+        margin-left: 40px;
+        margin-right: 0;
     }
     
     .main-menu {
@@ -506,7 +509,8 @@ input[type="file"] {
         background: rgba(11, 197, 27, 0.9);
         backdrop-filter: blur(10px);
         top: 80px;
-        left: -100%;
+        right: -100%;  /* Changed from left: -100% to right: -100% */
+        left: auto;    /* Added to ensure left doesn't override */
         text-align: center;
         transition: all 0.5s;
         overflow-y: auto;
@@ -524,44 +528,58 @@ input[type="file"] {
     
     .menu-link {
         font-size: 20px;
-        display: inline-flex;
+        display: flex;
         padding: 8px 16px;
+        align-items: center;
         justify-content: space-between;
         width: 80%;
+        margin: 0 auto;
     }
     
     #check:checked ~ .main-menu {
-        left: 0;
+        right: 0;  /* Changed from left: 0 to right: 0 */
+        left: auto;
     }
     
-    /* Modified submenu positioning to match Android drawer style */
+    /* Modified submenu positioning to open to the left */
     .submenu {
-        position: static;
+        position: absolute;
+        left: auto;
+        right: 100%;  /* Position to the left of parent */
+        top: 0;
         transform: none;
-        opacity: 1;
-        visibility: visible;
-        width: 80%;
-        max-width: none;
-        background: rgba(16, 134, 6, 0.7);
-        border-radius: 8px;
-        margin: 5px auto;
-        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        width: 70%; 
+        max-width: 220px;
+        background: rgba(16, 134, 6, 0.9);
+        border-radius: 8px 0 0 8px;  /* Rounded corners on left side */
         overflow: hidden;
         padding: 0;
-        transition: height 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);  /* Shadow on left side */
+        height: auto;
     }
     
     .has-submenu {
         position: relative;
     }
     
+    /* Fix for submenu visibility when hovering */
     .has-submenu:hover .submenu {
-        height: auto;
+        opacity: 1;
+        visibility: visible;
         padding: 10px 0;
     }
     
+    /* Strengthen the hover selector to ensure submenu displays */
+    .main-menu li.has-submenu:hover > .submenu {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
     .main-menu li.has-submenu:hover {
-        background: rgba(16, 134, 6, 0.5);
+        background: rgba(16, 134, 6, 0.7);
     }
     
     .submenu-link {
@@ -571,12 +589,14 @@ input[type="file"] {
         align-items: center;
         font-size: 18px;
     }
-    
+
+    /* Fix for language submenu */
     .language-menu-header .submenu {
-        position: static;
-        transform: none;
+        position: absolute;
+        right: 100%;
         left: auto;
-        right: auto;
+        top: 0;
+        transform: none;
     }
     
     .language-menu-header:hover .submenu {
@@ -594,19 +614,23 @@ input[type="file"] {
         width: 60px;
     }
     
-    /* Change chevron rotation direction */
+    /* Change chevron rotation direction for right-to-left */
     .menu-link .fa-chevron-down {
         transition: transform 0.3s ease;
     }
     
-    .has-submenu:hover .fa-chevron-down {
-        transform: rotate(180deg);
+    /* Rotate chevron to point left */
+    .has-submenu .fa-chevron-down {
+        transform: rotate(-90deg);
     }
     
-    /* Add this to make submenus fully visible when clicked */
-    .submenu.show {
-        height: auto;
-        padding: 10px 0;
+    .has-submenu:hover .fa-chevron-down {
+        transform: rotate(-90deg);
+    }
+    
+    /* Make sure z-index is high enough */
+    .submenu {
+        z-index: 1000;
     }
 }
 
@@ -616,7 +640,8 @@ input[type="file"] {
     }
     
     .submenu {
-        width: 85%;
+        width: 75%;
+        right: 95%;  /* Push further left on small screens */
     }
     
     .enlace {
@@ -641,5 +666,9 @@ input[type="file"] {
     .photo-modal-content {
         width: 95%;
         margin: 15% auto;
+    }
+    
+    .checkbtn {
+        margin-left: 20px;
     }
 }
