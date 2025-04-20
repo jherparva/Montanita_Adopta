@@ -1,7 +1,7 @@
 {
     "buildCommand": "next build",
     "devCommand": "next dev",
-    "installCommand": "npm install",
+    "installCommand": "npm install --legacy-peer-deps",
     "framework": "nextjs",
     "outputDirectory": ".next",
     "env": {
@@ -9,3 +9,4 @@
       "NEXT_PUBLIC_VERCEL_URL": "${VERCEL_URL}"
     }
   }
+  
