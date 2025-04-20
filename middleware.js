@@ -26,6 +26,12 @@ export function middleware(request) {
   return NextResponse.next()
 }
 
+// Update the matcher to be more specific
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: [
+    "/admin/:path*", 
+    "/api/admin/:path*",
+    // Exclude specific paths that don't need authentication
+    "/((?!_next/static|_next/image|favicon.ico).*)"
+  ]
 }

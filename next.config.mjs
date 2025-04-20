@@ -1,5 +1,3 @@
-//C:\Users\jhon\Videos\montanita-adopta\next.config.mjs
-
 let userConfig = undefined
 try {
   // try to import ESM first
@@ -23,7 +21,23 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: [
+      // Add your image domains here if needed
+      "res.cloudinary.com", 
+      "localhost"
+    ]
   },
+  // Adding this to fix the cookies static rendering issue
+  // This tells Next.js to generate these routes at runtime (not build time)
+  generateEtags: false,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  swcMinify: true,
+  trailingSlash: false,
+  
+  // Important: Set this to affect dynamic route behavior
+  output: 'standalone',
+  
   async headers() {
     return [
       {
@@ -44,6 +58,9 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
     authInterrupts: true, // Añadimos esta configuración para habilitar unauthorized() y forbidden()
+    // New experimental features to handle dynamic routes better
+    isrMemoryCacheSize: 0, // Disable ISR cache for dynamic routes
+    instrumentationHook: true,
   },
 }
 

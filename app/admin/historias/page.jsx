@@ -1,12 +1,13 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import AdminLayout from "@/components/admin/AdminLayout"
 import StoriesList from "@/components/admin/stories/StoriesList"
 import StoryFilters from "@/components/admin/stories/StoryFilters"
 import "@/styles/admin/historias.css"
 
-export default function AdminStoriesPage() {
+// Create a client component that uses searchParams
+function StoriesContent() {
   const [stories, setStories] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -218,39 +219,58 @@ export default function AdminStoriesPage() {
   }
 
   return (
-    <AdminLayout>
-      <div className="admin-stories">
-        <div className="page-header">
-          <h1>Gestión de Historias de Éxito</h1>
-          <button className="add-button" onClick={() => router.push("/admin/historias/nuevo")}>
-            <i className="fas fa-plus"></i> Nueva Historia
-          </button>
-        </div>
-
-        <StoryFilters 
-          initialFilters={{ approved, featured, search }} 
-          onFilterChange={handleFilterChange} 
-        />
-        
-        {error && (
-          <div className="error-message">
-            <i className="fas fa-exclamation-triangle"></i> {error}
-          </div>
-        )}
-
-        <StoriesList
-          stories={stories}
-          loading={loading}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          totalStories={totalStories}
-          onPageChange={handlePageChange}
-          onDeleteStory={handleDeleteStory}
-          onApproveStory={handleApproveStory}
-          onFeatureStory={handleFeatureStory}
-          onTestimonyStory={handleTestimonyStory}
-        />
+    <div className="admin-stories">
+      <div className="page-header">
+        <h1>Gestión de Historias de Éxito</h1>
+        <button className="add-button" onClick={() => router.push("/admin/historias/nuevo")}>
+          <i className="fas fa-plus"></i> Nueva Historia
+        </button>
       </div>
+
+      <StoryFilters 
+        initialFilters={{ approved, featured, search }} 
+        onFilterChange={handleFilterChange} 
+      />
+      
+      {error && (
+        <div className="error-message">
+          <i className="fas fa-exclamation-triangle"></i> {error}
+        </div>
+      )}
+
+      <StoriesList
+        stories={stories}
+        loading={loading}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalStories={totalStories}
+        onPageChange={handlePageChange}
+        onDeleteStory={handleDeleteStory}
+        onApproveStory={handleApproveStory}
+        onFeatureStory={handleFeatureStory}
+        onTestimonyStory={handleTestimonyStory}
+      />
+    </div>
+  )
+}
+
+// Loading component
+function StoriesLoading() {
+  return (
+    <div className="loading-spinner">
+      <i className="fas fa-spinner fa-spin"></i>
+      <p>Cargando historias...</p>
+    </div>
+  )
+}
+
+// Main component with Suspense boundary
+export default function AdminStoriesPage() {
+  return (
+    <AdminLayout>
+      <Suspense fallback={<StoriesLoading />}>
+        <StoriesContent />
+      </Suspense>
     </AdminLayout>
   )
 }

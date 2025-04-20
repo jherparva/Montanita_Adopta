@@ -1,3 +1,5 @@
+//C:\Users\jhon\Videos\montanita-adopta\app\admin\historias\[id]\page.jsx
+
 "use client"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
