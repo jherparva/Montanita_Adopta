@@ -526,62 +526,57 @@ input[type="file"] {
         font-size: 20px;
         display: inline-flex;
         padding: 8px 16px;
+        justify-content: space-between;
+        width: 80%;
     }
     
     #check:checked ~ .main-menu {
         left: 0;
     }
     
+    /* Modified submenu positioning to match Android drawer style */
     .submenu {
-        position: fixed;
-        left: 80%; 
-        top: 80px;
+        position: static;
         transform: none;
-        opacity: 0;
-        visibility: hidden;
-        width: 60%;
-        max-width: 220px;
+        opacity: 1;
+        visibility: visible;
+        width: 80%;
+        max-width: none;
+        background: rgba(16, 134, 6, 0.7);
+        border-radius: 8px;
+        margin: 5px auto;
         height: 0;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        background: rgba(16, 134, 6, 0.9);
-        border-radius: 0 8px 8px 0;
         overflow: hidden;
         padding: 0;
+        transition: height 0.3s ease;
     }
     
     .has-submenu {
-        position: static;
+        position: relative;
     }
     
     .has-submenu:hover .submenu {
-        opacity: 1;
-        visibility: visible;
         height: auto;
         padding: 10px 0;
     }
     
     .main-menu li.has-submenu:hover {
-        background: rgba(16, 134, 6, 0.7);
+        background: rgba(16, 134, 6, 0.5);
     }
     
     .submenu-link {
         padding: 10px 15px;
         text-align: left;
-        display: block;
+        display: flex;
+        align-items: center;
         font-size: 18px;
-    }
-
-    .main-menu li:nth-last-child(-n+2) .submenu {
-        left: auto;
-        right: 100%;
-        border-radius: 8px 0 0 8px;
     }
     
     .language-menu-header .submenu {
-        left: auto;
-        right: 0;
+        position: static;
         transform: none;
+        left: auto;
+        right: auto;
     }
     
     .language-menu-header:hover .submenu {
@@ -599,23 +594,29 @@ input[type="file"] {
         width: 60px;
     }
     
+    /* Change chevron rotation direction */
     .menu-link .fa-chevron-down {
         transition: transform 0.3s ease;
     }
     
     .has-submenu:hover .fa-chevron-down {
-        transform: rotate(-90deg);
+        transform: rotate(180deg);
+    }
+    
+    /* Add this to make submenus fully visible when clicked */
+    .submenu.show {
+        height: auto;
+        padding: 10px 0;
     }
 }
 
 @media (max-width: 480px) {
     .main-menu {
-        width: 75%;
+        width: 85%;
     }
     
     .submenu {
-        left: 75%;
-        width: 70%;
+        width: 85%;
     }
     
     .enlace {
