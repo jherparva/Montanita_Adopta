@@ -93,12 +93,13 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Blueberry', sans-serif;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
   }
-  
 
   html {
     height: 100%;
