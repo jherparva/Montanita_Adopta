@@ -302,12 +302,6 @@
   font-weight: bold;
 }
 
-@font-face {
-  font-family: 'Blueberry';
-  src: url('/imagenes/Blueberry.ttf') format('truetype');
-  font-display: swap;
-}
-
 .cuadros aside h2 {
   color: #ff3e00;
   font-family: 'Blueberry';
