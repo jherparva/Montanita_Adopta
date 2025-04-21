@@ -1,3 +1,4 @@
+/* CSS del menú con correcciones para dispositivos táctiles */
 nav {
     background: rgba(11, 197, 27, 0.5);
     backdrop-filter: blur(8px);
@@ -90,6 +91,7 @@ nav {
     transform: translateX(0) translateY(10px);
 }
 
+.language-menu-header.active .submenu,
 .language-menu-header:hover .submenu {
     transform: translateX(0) translateY(0);
 }
@@ -140,7 +142,8 @@ nav {
     transition: transform 0.3s ease;
 }
 
-.has-submenu:hover .fa-chevron-down {
+.has-submenu:hover .fa-chevron-down,
+.has-submenu.active .fa-chevron-down {
     transform: rotate(180deg);
 }
 
@@ -151,7 +154,6 @@ nav {
     transition: 0.1s;
     text-decoration: none;
 }
-
 
 .submenu {
     background: rgba(11, 197, 27, 0.5);
@@ -171,7 +173,8 @@ nav {
     overflow: hidden;
 }
 
-.has-submenu:hover .submenu {
+.has-submenu:hover .submenu,
+.has-submenu.active .submenu {
     opacity: 1;
     visibility: visible;
 }
@@ -298,7 +301,8 @@ nav {
     transform: translateX(0) translateY(10px);
 }
 
-.language-menu-header:hover .submenu {
+.language-menu-header:hover .submenu,
+.language-menu-header.active .submenu {
     transform: translateX(0) translateY(0);
 }
 
@@ -494,6 +498,7 @@ input[type="file"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Estilos para dispositivos móviles mejorados con soporte táctil */
 @media (max-width: 768px) {
     .checkbtn {
         display: block;
@@ -503,7 +508,8 @@ input[type="file"] {
         transition: color 0.3s ease;
     }
     
-    .checkbtn:hover {
+    .checkbtn:hover,
+    .checkbtn:active {
         color: #ffffff;
         transform: scale(1.1);
     }
@@ -525,6 +531,7 @@ input[type="file"] {
         display: block;
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
         border-radius: 0 0 0 15px;
+        -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
     }
     
     .main-menu li {
@@ -541,7 +548,8 @@ input[type="file"] {
         border-bottom: none;
         margin-bottom: 30px;
     }
-
+    
+    /* Estilos mejorados para menú-link con soporte táctil */
     .menu-link {
         font-size: 16px;
         display: flex;
@@ -553,13 +561,17 @@ input[type="file"] {
         margin: 0 auto;
         border-radius: 8px;
         transition: background 0.3s ease, transform 0.2s ease;
+        -webkit-tap-highlight-color: rgba(0,0,0,0); /* Elimina el resaltado táctil en Safari */
+        touch-action: manipulation; /* Mejora la interacción táctil */
     }
-
+    
+    /* Contenedor para el contenido del menú */
     .menu-link-content {
         display: flex;
         align-items: center;
     }
-
+    
+    /* Estilo para el texto del menú */
     .menu-text {
         margin-left: 10px;
     }
@@ -572,7 +584,8 @@ input[type="file"] {
         right: 0;
         left: auto;
     }
-
+    
+    /* Submenús mejorados para soporte táctil */
     .submenu {
         position: static;
         left: auto;
@@ -595,21 +608,22 @@ input[type="file"] {
     .has-submenu {
         position: relative;
     }
-
-    .has-submenu:hover .submenu,
+    
+    /* Solo mostrar submenús cuando la clase active está presente */
     .has-submenu.active .submenu {
         opacity: 1;
         visibility: visible;
         padding: 5px 0;
-        max-height: 300px; 
+        max-height: 300px; /* Altura máxima ajustable */
     }
-
-    .has-submenu:hover,
+    
+    /* Estilo mejorado para las opciones activas */
     .has-submenu.active {
         background: rgba(9, 166, 23, 0.95);
         border-radius: 8px;
     }
-
+    
+    /* Enlace del submenú con mejor soporte táctil */
     .submenu-link {
         padding: 10px 12px;
         text-align: center;
@@ -621,13 +635,16 @@ input[type="file"] {
         font-weight: bold;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
     
     .submenu-link:last-child {
         border-bottom: none;
     }
     
-    .submenu-link:hover {
+    .submenu-link:hover,
+    .submenu-link:active {
         background: rgba(255, 255, 255, 0.15);
         color: #ffffff;
         transform: translateX(3px);
@@ -639,6 +656,7 @@ input[type="file"] {
         margin-right: 8px;
     }
 
+    /* Mejora para los submenús de idiomas */
     .language-menu-header .submenu {
         position: static;
         right: auto;
@@ -646,7 +664,8 @@ input[type="file"] {
         top: auto;
         transform: none;
     }
-
+    
+    /* Logo y nombre más compactos */
     .nombre_1,
     .nombre_2 {
         font-size: 20px;
@@ -657,7 +676,8 @@ input[type="file"] {
         width: 55px;
         margin-right: 8px;
     }
-
+    
+    /* Rotación de chevron mejorada */
     .menu-link .fa-chevron-down {
         transition: transform 0.4s ease;
         font-size: 12px;
@@ -667,29 +687,33 @@ input[type="file"] {
         transform: rotate(0deg);
     }
     
-    .has-submenu.active .fa-chevron-down,
-    .has-submenu:hover .fa-chevron-down {
+    .has-submenu.active .fa-chevron-down {
         transform: rotate(180deg);
     }
     
+    /* Z-index para superposición */
     .submenu {
         z-index: 1000;
     }
     
+    /* Mejorar indicación visual para items con submenú */
     .has-submenu > .menu-link {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
     
-    .has-submenu > .menu-link:hover {
+    .has-submenu > .menu-link:hover,
+    .has-submenu > .menu-link:active {
         background: rgba(255, 255, 255, 0.2);
     }
     
+    /* Iconos centrados */
     .menu-link i:not(.fa-chevron-down) {
         font-size: 16px;
     }
     
+    /* Animación suave de entrada del menú */
     #check:checked ~ .main-menu {
         animation: slideIn 0.4s forwards;
     }
@@ -705,23 +729,27 @@ input[type="file"] {
         }
     }
     
+    /* Marcador visual para ítem de menú activo */
     .menu-link.active {
         background: rgba(255, 255, 255, 0.25);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-
+    
+    /* Perfil de usuario */
     .profile-photo-container {
         width: 32px;
         height: 32px;
         border: 2px solid rgba(255, 255, 255, 0.8);
         margin-right: 0;
     }
-
+    
+    /* Submenú de usuario */
     .user-submenu {
         background: rgba(255, 255, 255, 0.95);
     }
 }
 
+/* Ajustes adicionales para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .main-menu {
         width: 90%;
@@ -753,7 +781,8 @@ input[type="file"] {
     .checkbtn {
         margin-right: 20px;
     }
-
+    
+    /* Ajustes para pantallas muy pequeñas */
     .menu-link {
         font-size: 15px;
         padding: 7px 10px;
@@ -770,6 +799,7 @@ input[type="file"] {
         padding: 8px 10px;
     }
     
+    /* Indicador de deslizamiento */
     .main-menu::after {
         content: "";
         display: block;
@@ -780,16 +810,19 @@ input[type="file"] {
         border-radius: 4px;
     }
     
+    /* Mejora visual para el botón hamburguesa */
     .checkbtn {
         color: #fff;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
     
+    /* Icono de perfil más pequeño */
     .profile-photo-container {
         width: 28px;
         height: 28px;
     }
     
+    /* Texto de nombre de usuario */
     #username-text {
         max-width: 80px;
         font-size: 14px;

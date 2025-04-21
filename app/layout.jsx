@@ -32,7 +32,8 @@ export default function RootLayout({ children }) {
         />
 
         {/* Google Fonts */}
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600&family=Alfa+Slab+One&display=swap" rel="stylesheet" />
+
         
         {/* Flatpickr */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
