@@ -339,17 +339,17 @@
 
 @media screen and (max-width: 576px) {
     .footer-mejorado {
-        padding: 3px 0 2px;
+        padding: 4px 0 4px;
     }
     
     .footer-grid {
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 6px; 
-        margin-bottom: 6px; 
+        grid-template-columns: ( 3fr); 
+        gap: 8px; 
+        margin-bottom: 4px; 
     }
     
     .footer-logo {
-        max-width: 0px; 
+        max-width: 80px; 
     }
     
     .footer-info {
@@ -380,7 +380,7 @@
     }
     
     .footer-contact p {
-        justify-content: center;
+        justify-content: left;
         font-size: 11px;
         margin-bottom: 2px; 
     }

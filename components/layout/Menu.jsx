@@ -1,7 +1,9 @@
+//C:\Users\jhon\Videos\montanita-adopta\components\layout\Menu.jsx
+
 "use client"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import "@/styles/components/menu.css"
 
 const Menu = () => {
@@ -9,13 +11,6 @@ const Menu = () => {
   const [username, setUsername] = useState("")
   const [profilePhoto, setProfilePhoto] = useState("/imagenes/perfil/default-profile.webp")
   const router = useRouter()
-  const pathname = usePathname()
-  
-  // Ref para el checkbox del menú hamburguesa
-  const checkRef = useRef(null)
-  
-  // Estado para controlar qué submenú está activo en móvil
-  const [activeSubmenu, setActiveSubmenu] = useState(null)
 
   // Variable para almacenar el ID del temporizador de inactividad
   const [inactivityTimer, setInactivityTimer] = useState(null)
@@ -98,33 +93,6 @@ const Menu = () => {
     }
   }
 
-  // Función mejorada para manejar clics en los enlaces del menú con submenús
-  const handleSubmenuToggle = (e, menuName) => {
-    e.preventDefault();
-    e.stopPropagation(); // Evitar que el evento se propague
-    // Si el menú ya está activo, lo cerramos
-    if (activeSubmenu === menuName) {
-      setActiveSubmenu(null);
-    } else {
-      // Si no está activo, primero cerramos cualquier submenú abierto
-      setActiveSubmenu(null);
-      
-      // Pequeño tiempo de espera para evitar conflictos de renderizado
-      setTimeout(() => {
-        // Y luego activamos el nuevo
-        setActiveSubmenu(menuName);
-      }, 10);
-    }
-  }
-
-  // Función para cerrar el menú al navegar
-  const closeMenu = () => {
-    if (checkRef.current) {
-      checkRef.current.checked = false
-    }
-    setActiveSubmenu(null)
-  }
-
   useEffect(() => {
     // Verificar autenticación al cargar el componente
     checkAuth()
@@ -162,27 +130,6 @@ const Menu = () => {
     // Escuchar eventos personalizados de autenticación
     window.addEventListener("auth-changed", handleAuthEvent)
 
-    // Cerrar el menú cuando cambia la ruta
-    const handleRouteChange = () => {
-      closeMenu()
-    }
-
-    // Observar cambios en la ruta
-    if (pathname) {
-      handleRouteChange()
-    }
-
-    // Añade esta función para cerrar submenús al hacer clic fuera
-    const handleClickOutside = (event) => {
-      // Si se hace clic fuera de un submenú, cerrar todos los submenús
-      if (activeSubmenu && !event.target.closest('.has-submenu')) {
-        setActiveSubmenu(null);
-      }
-    };
-    // Agregar evento al montar
-    document.addEventListener('click', handleClickOutside);
-    document.addEventListener('touchend', handleClickOutside);
-
     // Limpiar al desmontar
     return () => {
       clearInterval(authCheckInterval)
@@ -191,15 +138,13 @@ const Menu = () => {
       window.removeEventListener("keydown", handleUserActivity)
       window.removeEventListener("click", handleUserActivity)
       window.removeEventListener("scroll", handleUserActivity)
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('touchend', handleClickOutside);
 
       // Limpiar el temporizador de inactividad
       if (inactivityTimer) {
         clearTimeout(inactivityTimer)
       }
     }
-  }, [isLoggedIn, inactivityTimer, pathname, activeSubmenu])
+  }, [isLoggedIn, inactivityTimer])
 
   const openModal = (modalId) => {
     window.dispatchEvent(new CustomEvent("openModal", { detail: { modalId } }))
@@ -228,9 +173,6 @@ const Menu = () => {
 
         // Disparar evento de cambio de autenticación
         window.dispatchEvent(new Event("auth-changed"))
-
-        // Cerrar el menú
-        closeMenu()
 
         // Mostrar mensaje de éxito
         if (window.Swal && !isAutoLogout) {
@@ -265,11 +207,11 @@ const Menu = () => {
     <>
       <div className="content">
         <nav>
-          <input type="checkbox" id="check" ref={checkRef} />
+          <input type="checkbox" id="check" />
           <label htmlFor="check" className="checkbtn">
             <i className="fa-solid fa-bars"></i>
           </label>
-          <Link href="/" className="enlace" onClick={closeMenu}>
+          <Link href="/" className="enlace">
             <div className="logo-container">
               <img src="/imagenes/logo.webp" alt="Logo Montañita" className="logo" />
               <div className="brand-name">
@@ -283,102 +225,86 @@ const Menu = () => {
           </Link>
           <ul className="main-menu">
             {/* Selector de idiomas mejorado */}
-            <li className={`has-submenu language-menu ${activeSubmenu === 'language' ? 'active' : ''}`}>
-              <a href="#" className="menu-link language-selector" onClick={(e) => handleSubmenuToggle(e, 'language')}>
-                <div className="menu-link-content">
-                  <i className="fa-solid fa-globe"></i>
-                  <span className="menu-text">ES</span>
-                </div>
-                <i className="fa-solid fa-chevron-down"></i>
+            <li className="has-submenu language-menu">
+              <a href="#" className="menu-link language-selector">
+                <i className="fa-solid fa-globe"></i> ES <i className="fa-solid fa-chevron-down"></i>
               </a>
               <ul className="submenu language-submenu">
                 <li>
-                  <a href="?lang=es" className="submenu-link" onClick={closeMenu}>
+                  <a href="?lang=es" className="submenu-link">
                     <i className="flag-icon flag-icon-es"></i> Español
                   </a>
                 </li>
                 <li>
-                  <a href="?lang=en" className="submenu-link" onClick={closeMenu}>
+                  <a href="?lang=en" className="submenu-link">
                     <i className="flag-icon flag-icon-gb"></i> English
                   </a>
                 </li>
                 <li>
-                  <a href="?lang=fr" className="submenu-link" onClick={closeMenu}>
+                  <a href="?lang=fr" className="submenu-link">
                     <i className="flag-icon flag-icon-fr"></i> Français
                   </a>
                 </li>
               </ul>
             </li>
             <li>
-              <Link href="/" className="menu-link" onClick={closeMenu}>
-                <div className="menu-link-content">
-                  <i className="fa-solid fa-home"></i>
-                  <span className="menu-text">INICIO</span>
-                </div>
+              <Link href="/" className="menu-link">
+                <i className="fa-solid fa-home"></i> INICIO
               </Link>
             </li>
             <li>
-              <Link href="/contacto" className="menu-link" onClick={closeMenu}>
-                <div className="menu-link-content">
-                  <i className="fa-solid fa-envelope"></i>
-                  <span className="menu-text">CONTACTO</span>
-                </div>
+              <Link href="/contacto" className="menu-link">
+                <i className="fa-solid fa-envelope"></i> CONTACTO
               </Link>
             </li>
-            <li className={`has-submenu ${activeSubmenu === 'adopta' ? 'active' : ''}`}>
-              <a href="#" className="menu-link" onClick={(e) => handleSubmenuToggle(e, 'adopta')}>
-                <div className="menu-link-content">
-                  <i className="fa-solid fa-paw"></i>
-                  <span className="menu-text">ADOPTA</span>
-                </div>
-                <i className="fa-solid fa-chevron-down"></i>
+            <li className="has-submenu">
+              <a href="#" className="menu-link">
+                <i className="fa-solid fa-paw"></i> ADOPTA <i className="fa-solid fa-chevron-down"></i>
               </a>
               <ul className="submenu">
                 <li>
-                  <Link href="/adopcion" className="submenu-link" onClick={closeMenu}>
+                  <Link href="/adopcion" className="submenu-link">
                     Adopciones
                   </Link>
                 </li>
                 <li>
-                  <Link href="/historias-exito" className="submenu-link" onClick={closeMenu}>
+                  <Link href="/historias-exito" className="submenu-link">
                     Historias felices
                   </Link>
                 </li>
                 <li>
-                  <Link href="/donaciones" className="submenu-link" onClick={closeMenu}>
+                  <Link href="/donaciones" className="submenu-link">
                     Donaciones
                   </Link>
                 </li>
                 <li>
-                  <Link href="/voluntario" className="submenu-link" onClick={closeMenu}>
+                  <Link href="/voluntario" className="submenu-link">
                     Voluntario
                   </Link>
                 </li>
               </ul>
             </li>
             {isLoggedIn ? (
-              <li id="user-menu" className={`has-submenu ${activeSubmenu === 'user' ? 'active' : ''}`}>
-                <a href="#" id="user-name" className="menu-link user-profile-link" onClick={(e) => handleSubmenuToggle(e, 'user')}>
-                  <div className="menu-link-content">
-                    <div className="profile-photo-container">
-                      <img
-                        id="profile-photo"
-                        src={profilePhoto || "/imagenes/default-profile.webp"}
-                        alt="Foto de perfil"
-                      />
-                    </div>
-                    <span id="username-text" className="menu-text">{username}</span>
+              <li id="user-menu" className="has-submenu">
+                <a href="#" id="user-name" className="menu-link user-profile-link">
+                  <div className="profile-photo-container">
+                    <img
+                      id="profile-photo"
+                      src={profilePhoto || "/imagenes/default-profile.webp"}
+                      alt="Foto de perfil"
+                    />
                   </div>
+                  <span id="username-text">{username}</span>
                   <i className="fa-solid fa-chevron-down"></i>
                 </a>
                 <ul className="submenu user-submenu">
                   <li>
-                    <a href="#" onClick={() => {openModal("settingsModal"); closeMenu();}} className="submenu-link">
+                    <a href="#" onClick={() => openModal("settingsModal")} className="submenu-link">
                       <i className="fa-solid fa-gear"></i> Configuración
                     </a>
                   </li>
                   <li>
-                    <a href="#" onClick={() => {openModal("photoModal"); closeMenu();}} className="submenu-link">
+                    <a href="#" onClick={() => openModal("photoModal")} className="submenu-link">
                       <i className="fa-solid fa-camera"></i> Cambiar foto
                     </a>
                   </li>
@@ -390,22 +316,18 @@ const Menu = () => {
                 </ul>
               </li>
             ) : (
-              <li id="login-menu" className={`has-submenu ${activeSubmenu === 'login' ? 'active' : ''}`}>
-                <a href="#" className="menu-link login-link" onClick={(e) => handleSubmenuToggle(e, 'login')}>
-                  <div className="menu-link-content">
-                    <i className="fa-solid fa-user"></i>
-                    <span className="menu-text">LOGIN</span>
-                  </div>
-                  <i className="fa-solid fa-chevron-down"></i>
+              <li id="login-menu" className="has-submenu">
+                <a href="#" className="menu-link login-link">
+                  <i className="fa-solid fa-user"></i> LOGIN <i className="fa-solid fa-chevron-down"></i>
                 </a>
                 <ul className="submenu login-submenu">
                   <li>
-                    <a href="#" onClick={() => {openModal("loginModal"); closeMenu();}} className="submenu-link">
+                    <a href="#" onClick={() => openModal("loginModal")} className="submenu-link">
                       <i className="fa-solid fa-sign-in-alt"></i> Iniciar sesión
                     </a>
                   </li>
                   <li>
-                    <a href="#" onClick={() => {openModal("registerModal"); closeMenu();}} className="submenu-link">
+                    <a href="#" onClick={() => openModal("registerModal")} className="submenu-link">
                       <i className="fa-solid fa-user-plus"></i> Registrarse
                     </a>
                   </li>
@@ -420,3 +342,4 @@ const Menu = () => {
 }
 
 export default Menu
+
