@@ -1,170 +1,237 @@
 /* Estilos dedicados para el modal de verificación de código */
 .vcm-modal {
-    display: none;
-    position: fixed !important;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-  
-  .vcm-modal-content {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    margin: 5% auto;
-    padding: 30px !important;
-    border: 1px solid #35aa26;
-    width: 90%;
-    max-width: 500px !important;
-    border-radius: 12px !important;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 8px rgba(37, 155, 14, 0.1), 0 0 15px rgba(0, 255, 0, 0.6) !important;
-    z-index: 1001;
-    position: relative;
-    text-align: center !important;
-  }
-  
-  .vcm-title {
-    font-family: "Blueberry" !important;
-    text-align: center !important;
-    color: #cf0707 !important;
-    margin: 0 auto 20px auto !important;
-    padding: 0 !important;
-    font-size: 40px !important;
-    font-weight: 600 !important;
-    text-shadow: 2px 2px 4px rgba(7, 153, 26, 0.2) !important;
-    position: relative !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    display: block !important;
-    line-height: 1.2 !important;
-    transition: transform 0.3s ease !important;
-  }
-  
-  .vcm-title:hover {
-    transform: scale(1.05) !important;
-  }
-  
-  .vcm-close {
-    color: white;
-    background-color: #4fd95a;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1060;
-  }
-  
-  .vcm-close:hover {
-    background-color: #f10707;
-    transform: scale(1.1);
-  }
-  
-  .vcm-close:active {
-    transform: scale(0.95);
-  }
-  
-  .vcm-form-group {
-    margin-bottom: 15px;
-  }
-  
-  .vcm-form-group label {
-    display: block;
-    text-align: left;
-    margin-bottom: 8px;
-    color: #000000;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .vcm-form-group input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 5px;
-    border: 1px solid #158b0b;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 16px;
-    background-color: #ffffff;
-    z-index: 10;
-    position: relative;
-    pointer-events: auto !important;
-  }
-  
-  .vcm-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #27b80b;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .vcm-button:hover {
-    background-color: #126102;
-    transform: translateY(-2px);
-  }
-  
-  .vcm-button:active {
-    transform: translateY(1px);
-  }
-  
-  .vcm-password-requirements {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    text-align: center;
-  }
-  
-  .vcm-password-requirements p {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .vcm-password-requirements ul {
-    margin: 0;
-    padding-left: 20px;
-  }
-  
-  .vcm-password-requirements li {
-    margin-bottom: 3px;
-  }
-  
-  /* Estilos para los mensajes de error y éxito */
-  .vcm-error-message {
-    color: #d9534f;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 5px;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-  }
-  
-  .vcm-success-message {
-    color: #28a745;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 5px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-  }
+  display: none;
+  position: fixed !important;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.vcm-modal-content {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  margin: 5% auto;
+  padding: 30px !important;
+  border: 1px solid #35aa26;
+  width: 90%;
+  max-width: 500px !important;
+  border-radius: 12px !important;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(37, 155, 14, 0.1), 0 0 15px rgba(0, 255, 0, 0.6) !important;
+  z-index: 1001;
+  position: relative;
+  text-align: center !important;
+}
+
+.vcm-title {
+  font-family: "Blueberry" !important;
+  text-align: center !important;
+  color: #cf0707 !important;
+  margin: 0 auto 20px auto !important;
+  padding: 0 !important;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  text-shadow: 2px 2px 4px rgba(7, 153, 26, 0.2) !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  display: block !important;
+  line-height: 1.2 !important;
+  transition: transform 0.3s ease !important;
+}
+
+.vcm-title:hover {
+  transform: scale(1.05) !important;
+}
+
+.vcm-close {
+  color: white;
+  background-color: #4fd95a;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1060;
+}
+
+.vcm-close:hover {
+  background-color: #f10707;
+  transform: scale(1.1);
+}
+
+.vcm-close:active {
+  transform: scale(0.95);
+}
+
+.vcm-form-group {
+  margin-bottom: 15px;
+}
+
+.vcm-form-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.vcm-form-group input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 5px;
+  border: 1px solid #158b0b;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #ffffff;
+  z-index: 10;
+  position: relative;
+  pointer-events: auto !important;
+}
+
+.vcm-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #27b80b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.vcm-button:hover {
+  background-color: #126102;
+  transform: translateY(-2px);
+}
+
+.vcm-button:active {
+  transform: translateY(1px);
+}
+
+.vcm-password-requirements {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.vcm-password-requirements p {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.vcm-password-requirements ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.vcm-password-requirements li {
+  margin-bottom: 3px;
+}
+
+/* Estilos para los mensajes de error y éxito */
+.vcm-error-message {
+  color: #d9534f;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.vcm-success-message {
+  color: #28a745;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+.vcm-modal-content {
+  padding: 15px !important;
+  margin: 10% auto;
+  width: 95%;
+}
+
+.vcm-title {
+  font-size: 32px !important;
+  margin-bottom: 15px !important;
+}
+
+.vcm-form-group {
+  margin-bottom: 8px;
+}
+
+.vcm-form-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.vcm-form-group input {
+  padding: 8px;
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+.vcm-button {
+  padding: 8px;
+  font-size: 15px;
+}
+
+.vcm-close {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+
+.vcm-password-requirements {
+  padding: 8px;
+  font-size: 13px;
+}
+}
+
+@media (max-width: 480px) {
+.vcm-modal-content {
+  padding: 12px !important;
+  margin: 15% auto;
+}
+
+.vcm-title {
+  font-size: 28px !important;
+}
+
+.vcm-password-requirements ul {
+  padding-left: 15px;
+}
+
+.vcm-error-message,
+.vcm-success-message {
+  padding: 8px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+}

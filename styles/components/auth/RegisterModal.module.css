@@ -284,11 +284,110 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
+  .modalContent {
+    padding: 15px;
+    width: 98%;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 30px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Mantener el diseño de dos columnas */
   .formRow {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 3px;
   }
   
   .formCol {
-    max-width: 100%;
+    flex: 0 0 calc(50% - 3px); /* Dos columnas con un pequeño gap */
+    max-width: calc(50% - 3px);
+  }
+  
+  .formGroup {
+    margin-bottom: 3px;
+  }
+  
+  .formGroup label {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  
+  .input, 
+  .select, 
+  .dateInput {
+    padding: 6px;
+    margin-bottom: 2px;
+    font-size: 13px;
+    height: 32px; /* Altura fija para uniformidad */
+  }
+  
+  .submitButton {
+    padding: 7px;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .close {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .socialLogin {
+    margin-top: 4px;
+    padding: 7px;
+    font-size: 13px;
+  }
+  
+  .googleContainer {
+    margin-top: 4px;
+  }
+  
+  .gidSignin {
+    margin-top: 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 10px;
+  }
+  
+  .title {
+    font-size: 24px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .registroContainer {
+    padding: 10px !important;
+  }
+  
+  /* Mantener diseño de dos columnas incluso en móviles pequeños */
+  .formCol {
+    flex: 0 0 calc(50% - 3px);
+    max-width: calc(50% - 3px);
+  }
+  
+  .formGroup label {
+    font-size: 12px;
+  }
+  
+  .input, 
+  .select, 
+  .dateInput {
+    padding: 5px;
+    font-size: 12px;
+    height: 30px; /* Altura fija más pequeña */
+  }
+  
+  .botonesContainer {
+    margin-top: 2px;
   }
 }
