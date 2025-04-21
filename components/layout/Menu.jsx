@@ -101,6 +101,7 @@ const Menu = () => {
   // Función mejorada para manejar clics en los enlaces del menú con submenús
   const handleSubmenuToggle = (e, menuName) => {
     e.preventDefault()
+    e.stopPropagation() // Evitar propagación del evento
   
     // Si el menú ya está activo, lo cerramos
     if (activeSubmenu === menuName) {
@@ -132,6 +133,8 @@ const Menu = () => {
     window.addEventListener("keydown", handleUserActivity)
     window.addEventListener("click", handleUserActivity)
     window.addEventListener("scroll", handleUserActivity)
+    window.addEventListener("touchstart", handleUserActivity) // Añadido para táctil
+    window.addEventListener("touchmove", handleUserActivity) // Añadido para táctil
 
     // Configurar listener para detectar cuando el usuario abandona la página
     window.addEventListener("beforeunload", () => {
@@ -174,6 +177,8 @@ const Menu = () => {
       window.removeEventListener("keydown", handleUserActivity)
       window.removeEventListener("click", handleUserActivity)
       window.removeEventListener("scroll", handleUserActivity)
+      window.removeEventListener("touchstart", handleUserActivity)
+      window.removeEventListener("touchmove", handleUserActivity)
 
       // Limpiar el temporizador de inactividad
       if (inactivityTimer) {

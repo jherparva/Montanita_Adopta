@@ -497,6 +497,8 @@ input[type="file"] {
 
 /* Estos cambios solo afectan la parte responsive del menú */
 
+/* Estos cambios solo afectan la parte responsive del menú */
+
 @media (max-width: 768px) {
     .checkbtn {
         display: block;
@@ -578,6 +580,24 @@ input[type="file"] {
         right: 0;
         left: auto;
     }
+
+    .has-submenu.active .submenu {
+        opacity: 1;
+        visibility: visible;
+        padding: 5px 0;
+        max-height: 300px; /* Altura máxima ajustable */
+    }
+    
+    /* Separar los estilos de hover y active */
+    .has-submenu:hover {
+        background: rgba(9, 166, 23, 0.95);
+        border-radius: 8px;
+    }
+    
+    .has-submenu.active {
+        background: rgba(9, 166, 23, 0.95);
+        border-radius: 8px;
+    }
     
     /* Submenús mejorados */
     .submenu {
@@ -644,7 +664,7 @@ input[type="file"] {
     }
     
     .submenu-link i {
-        color: #ffffff !important;
+        color: #ffa908 !important;
         font-size: 14px;
         margin-right: 8px;
     }
