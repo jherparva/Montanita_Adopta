@@ -38,10 +38,10 @@ const Footer = () => {
               <i className="fas fa-map-marker-alt"></i> La Montañita, Caquetá, Colombia
             </p>
             <p>
-              <i className="fas fa-phone"></i> +57 316 653 2433
+              <i className="fas fa-phone"></i> +57 320 206 4950
             </p>
             <p>
-              <i className="fas fa-envelope"></i> info@montanitaadopta.com
+              <i className="fas fa-envelope"></i> montanitaadopta@gmail.com
             </p>
           </div>
 
@@ -58,7 +58,7 @@ const Footer = () => {
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://wa.me/+573166532433" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/+573202064950" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>
