@@ -101,6 +101,12 @@
   .contact-container:hover::after {
     opacity: 0.4;
   }
+
+  @font-face {
+    font-family: 'Blueberry';
+    src: url('/imagenes/Blueberry.ttf') format('truetype');
+    font-display: swap;
+  }
   
   /* Título - específico para contacto */
   .contact-container h2 {

@@ -4,6 +4,12 @@
   gap: 15px;
 }
 
+@font-face {
+  font-family: 'Blueberry';
+  src: url('/imagenes/Blueberry.ttf') format('truetype');
+  font-display: swap;
+}
+
 .donations-page .form-group {
   margin-bottom: 18px;
   position: relative;

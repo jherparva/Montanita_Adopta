@@ -4,6 +4,12 @@
     background-color: #ffffff;
   }
   
+  @font-face {
+    font-family: 'Blueberry';
+    src: url('/imagenes/Blueberry.ttf') format('truetype');
+    font-display: swap;
+  }
+
   .adoptions-section h2 {
     font-family: 'Blueberry', sans-serif;
     text-align: center;
