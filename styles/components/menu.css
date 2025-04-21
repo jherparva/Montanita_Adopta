@@ -1,4 +1,4 @@
-/* CSS del menú con correcciones para dispositivos táctiles */
+/* CSS del menú con las correcciones anteriores */
 nav {
     background: rgba(11, 197, 27, 0.5);
     backdrop-filter: blur(8px);
@@ -91,7 +91,6 @@ nav {
     transform: translateX(0) translateY(10px);
 }
 
-.language-menu-header.active .submenu,
 .language-menu-header:hover .submenu {
     transform: translateX(0) translateY(0);
 }
@@ -142,8 +141,7 @@ nav {
     transition: transform 0.3s ease;
 }
 
-.has-submenu:hover .fa-chevron-down,
-.has-submenu.active .fa-chevron-down {
+.has-submenu:hover .fa-chevron-down {
     transform: rotate(180deg);
 }
 
@@ -154,6 +152,7 @@ nav {
     transition: 0.1s;
     text-decoration: none;
 }
+
 
 .submenu {
     background: rgba(11, 197, 27, 0.5);
@@ -173,8 +172,7 @@ nav {
     overflow: hidden;
 }
 
-.has-submenu:hover .submenu,
-.has-submenu.active .submenu {
+.has-submenu:hover .submenu {
     opacity: 1;
     visibility: visible;
 }
@@ -301,8 +299,7 @@ nav {
     transform: translateX(0) translateY(10px);
 }
 
-.language-menu-header:hover .submenu,
-.language-menu-header.active .submenu {
+.language-menu-header:hover .submenu {
     transform: translateX(0) translateY(0);
 }
 
@@ -498,7 +495,8 @@ input[type="file"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos para dispositivos móviles mejorados con soporte táctil */
+/* Estos cambios solo afectan la parte responsive del menú */
+
 @media (max-width: 768px) {
     .checkbtn {
         display: block;
@@ -508,8 +506,7 @@ input[type="file"] {
         transition: color 0.3s ease;
     }
     
-    .checkbtn:hover,
-    .checkbtn:active {
+    .checkbtn:hover {
         color: #ffffff;
         transform: scale(1.1);
     }
@@ -531,7 +528,6 @@ input[type="file"] {
         display: block;
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
         border-radius: 0 0 0 15px;
-        -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
     }
     
     .main-menu li {
@@ -549,7 +545,7 @@ input[type="file"] {
         margin-bottom: 30px;
     }
     
-    /* Estilos mejorados para menú-link con soporte táctil */
+    /* Estilos mejorados para menú-link */
     .menu-link {
         font-size: 16px;
         display: flex;
@@ -561,8 +557,6 @@ input[type="file"] {
         margin: 0 auto;
         border-radius: 8px;
         transition: background 0.3s ease, transform 0.2s ease;
-        -webkit-tap-highlight-color: rgba(0,0,0,0); /* Elimina el resaltado táctil en Safari */
-        touch-action: manipulation; /* Mejora la interacción táctil */
     }
     
     /* Contenedor para el contenido del menú */
@@ -585,7 +579,7 @@ input[type="file"] {
         left: auto;
     }
     
-    /* Submenús mejorados para soporte táctil */
+    /* Submenús mejorados */
     .submenu {
         position: static;
         left: auto;
@@ -609,7 +603,8 @@ input[type="file"] {
         position: relative;
     }
     
-    /* Solo mostrar submenús cuando la clase active está presente */
+    /* Animación mejorada para el submenú */
+    .has-submenu:hover .submenu,
     .has-submenu.active .submenu {
         opacity: 1;
         visibility: visible;
@@ -617,13 +612,14 @@ input[type="file"] {
         max-height: 300px; /* Altura máxima ajustable */
     }
     
-    /* Estilo mejorado para las opciones activas */
+    /* Estilo mejorado para las opciones en hover */
+    .has-submenu:hover,
     .has-submenu.active {
         background: rgba(9, 166, 23, 0.95);
         border-radius: 8px;
     }
     
-    /* Enlace del submenú con mejor soporte táctil */
+    /* Enlace del submenú */
     .submenu-link {
         padding: 10px 12px;
         text-align: center;
@@ -635,16 +631,13 @@ input[type="file"] {
         font-weight: bold;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
     }
     
     .submenu-link:last-child {
         border-bottom: none;
     }
     
-    .submenu-link:hover,
-    .submenu-link:active {
+    .submenu-link:hover {
         background: rgba(255, 255, 255, 0.15);
         color: #ffffff;
         transform: translateX(3px);
@@ -687,7 +680,8 @@ input[type="file"] {
         transform: rotate(0deg);
     }
     
-    .has-submenu.active .fa-chevron-down {
+    .has-submenu.active .fa-chevron-down,
+    .has-submenu:hover .fa-chevron-down {
         transform: rotate(180deg);
     }
     
@@ -703,8 +697,7 @@ input[type="file"] {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
     
-    .has-submenu > .menu-link:hover,
-    .has-submenu > .menu-link:active {
+    .has-submenu > .menu-link:hover {
         background: rgba(255, 255, 255, 0.2);
     }
     
