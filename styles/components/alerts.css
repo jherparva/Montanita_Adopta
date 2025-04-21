@@ -5,6 +5,12 @@
     padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
+
+  @font-face {
+    font-family: 'Blueberry';
+    src: url('/imagenes/Blueberry.ttf') format('truetype');
+    font-display: swap;
+  }
   
   .swal2-title {
     font-family: "Blueberry", "Poppins", sans-serif;

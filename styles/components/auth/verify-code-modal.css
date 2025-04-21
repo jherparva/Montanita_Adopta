@@ -28,6 +28,12 @@
   text-align: center !important;
 }
 
+@font-face {
+  font-family: 'Blueberry';
+  src: url('/imagenes/Blueberry.ttf') format('truetype');
+  font-display: swap;
+}
+
 .vcm-title {
   font-family: "Blueberry" !important;
   text-align: center !important;
