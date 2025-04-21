@@ -271,6 +271,10 @@
         font-size: 15px;
         margin-bottom: 8px; 
     }
+
+    .footer-contact p:nth-child(3) i {  
+        color: #ffffff;  
+    }
     
     .footer-links a,
     .footer-contact p {
@@ -313,6 +317,10 @@
         font-size: 12px;
         margin-bottom: 3px; 
     }
+
+    .footer-contact p:nth-child(3) i {  
+        color: #ffffff;  
+    }
     
     .social-icons a {
         width: 32px;
@@ -331,13 +339,13 @@
 
 @media screen and (max-width: 576px) {
     .footer-mejorado {
-        padding: 5px 0 3px;
+        padding: 3px 0 2px;
     }
     
     .footer-grid {
-        grid-template-columns: 2fr; 
-        gap: 8px; 
-        margin-bottom: 8px; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 6px; 
+        margin-bottom: 6px; 
     }
     
     .footer-logo {
@@ -354,6 +362,10 @@
         text-align: center;
     }
     
+    .footer-contact p:nth-child(3) i {  
+        color: #ffffff;  
+    }
+
     .footer-contact h3,
     .footer-social h3 {
         font-size: 13px;

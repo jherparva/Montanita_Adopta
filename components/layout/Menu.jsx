@@ -100,14 +100,20 @@ const Menu = () => {
 
   // Función mejorada para manejar clics en los enlaces del menú con submenús
   const handleSubmenuToggle = (e, menuName) => {
-    e.preventDefault()
-  
+    e.preventDefault();
+    e.stopPropagation(); // Evitar que el evento se propague
     // Si el menú ya está activo, lo cerramos
     if (activeSubmenu === menuName) {
-      setActiveSubmenu(null)
+      setActiveSubmenu(null);
     } else {
-    // Si no está activo, lo activamos
-      setActiveSubmenu(menuName)
+      // Si no está activo, primero cerramos cualquier submenú abierto
+      setActiveSubmenu(null);
+      
+      // Pequeño tiempo de espera para evitar conflictos de renderizado
+      setTimeout(() => {
+        // Y luego activamos el nuevo
+        setActiveSubmenu(menuName);
+      }, 10);
     }
   }
 
@@ -166,6 +172,17 @@ const Menu = () => {
       handleRouteChange()
     }
 
+    // Añade esta función para cerrar submenús al hacer clic fuera
+    const handleClickOutside = (event) => {
+      // Si se hace clic fuera de un submenú, cerrar todos los submenús
+      if (activeSubmenu && !event.target.closest('.has-submenu')) {
+        setActiveSubmenu(null);
+      }
+    };
+    // Agregar evento al montar
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('touchend', handleClickOutside);
+
     // Limpiar al desmontar
     return () => {
       clearInterval(authCheckInterval)
@@ -174,13 +191,15 @@ const Menu = () => {
       window.removeEventListener("keydown", handleUserActivity)
       window.removeEventListener("click", handleUserActivity)
       window.removeEventListener("scroll", handleUserActivity)
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('touchend', handleClickOutside);
 
       // Limpiar el temporizador de inactividad
       if (inactivityTimer) {
         clearTimeout(inactivityTimer)
       }
     }
-  }, [isLoggedIn, inactivityTimer, pathname])
+  }, [isLoggedIn, inactivityTimer, pathname, activeSubmenu])
 
   const openModal = (modalId) => {
     window.dispatchEvent(new CustomEvent("openModal", { detail: { modalId } }))
