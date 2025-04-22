@@ -85,7 +85,6 @@ const FilterControls = memo(({ ageFilter, sizeFilter, onAgeChange, onSizeChange,
         <option value="medium">Mediano</option>
         <option value="large">Grande</option>
       </select>
-      <button onClick={onFilterClick}>Filtrar</button>
     </div>
   )
 })
@@ -246,7 +245,7 @@ const AnimalsSection = () => {
         />
 
         <div
-          className="animals-container"
+          className={`animals-container ${activeCategory !== "all" || ageFilter || sizeFilter ? "filtered" : ""}`}
           style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", marginBottom: "30px" }}
         >
           {loading ? (

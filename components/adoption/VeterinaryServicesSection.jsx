@@ -2,6 +2,15 @@
 import { useState, useEffect, useCallback } from "react"
 import ReservationModal from "./ReservationModal"
 import { useToast } from "@/hooks/use-toast"
+import dynamic from 'next/dynamic'
+
+// Cargamos Leaflet dinámicamente solo en el cliente para evitar problemas con SSR
+const MapComponent = dynamic(() => import('./MapComponent'), {
+  ssr: false,
+  loading: () => <div style={{ height: '300px', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
+    <p>Cargando mapa...</p>
+  </div>
+})
 
 const VeterinaryServicesSection = () => {
   const [showReservationModal, setShowReservationModal] = useState(false)
@@ -11,8 +20,6 @@ const VeterinaryServicesSection = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [mapLoaded, setMapLoaded] = useState(false)
-  const [map, setMap] = useState(null)
   const { toast } = useToast()
 
   // Coordenadas del refugio/veterinaria
@@ -35,79 +42,6 @@ const VeterinaryServicesSection = () => {
 
     checkAuth()
   }, [])
-
-  // Inicializar mapa
-  const initMap = useCallback(() => {
-    const mapElement = document.getElementById("vet-refuge-map")
-    if (mapElement && window.google && window.google.maps) {
-      const newMap = new window.google.maps.Map(mapElement, {
-        center: refugeLocation,
-        zoom: 15,
-        mapTypeId: "roadmap",
-        mapTypeControl: true,
-        streetViewControl: true,
-        fullscreenControl: true,
-      })
-
-      // Añadir un marcador para el refugio/veterinaria
-      const marker = new window.google.maps.Marker({
-        position: refugeLocation,
-        map: newMap,
-        title: "Montañita Adopta - Veterinaria",
-        animation: window.google.maps.Animation.DROP,
-        icon: {
-          url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-          scaledSize: new window.google.maps.Size(40, 40),
-        },
-      })
-
-      // Añadir un infowindow al marcador
-      const infowindow = new window.google.maps.InfoWindow({
-        content: `
-          <div style="padding: 10px; max-width: 200px;">
-            <h3 style="margin-top: 0; color: #e01e1e; font-size: 16px;">Montañita Adopta - Veterinaria</h3>
-            <p style="margin-bottom: 5px;"><strong>Dirección:</strong> carrera 5 calle 8a #04, barrio guillermo escobar</p>
-            <p style="margin-bottom: 5px;"><strong>Teléfono:</strong> 3166532433</p>
-            <p style="margin-bottom: 0;"><strong>Horario:</strong> Lunes a Viernes 9:00 AM - 5:00 PM</p>
-          </div>
-        `,
-      })
-
-      marker.addListener("click", () => {
-        infowindow.open(newMap, marker)
-      })
-
-      setMap(newMap)
-      setMapLoaded(true)
-    }
-  }, [refugeLocation])
-
-  // Cargar el mapa de Google Maps
-  useEffect(() => {
-    const loadMap = () => {
-      // Verificar si el API de Google Maps ya está cargado
-      if (window.google && window.google.maps) {
-        initMap()
-      } else {
-        // Si no está cargado, crear un script para cargarlo
-        const script = document.createElement("script")
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initGoogleMapVet`
-        script.async = true
-        script.defer = true
-        document.head.appendChild(script)
-
-        // Definir la función de callback global
-        window.initGoogleMapVet = initMap
-      }
-    }
-
-    // Cargar el mapa cuando el componente se monta
-    const timer = setTimeout(() => {
-      loadMap()
-    }, 1000) // Pequeño retraso para asegurar que el DOM esté listo
-
-    return () => clearTimeout(timer)
-  }, [initMap])
 
   // Cargar servicios
   useEffect(() => {
@@ -343,10 +277,10 @@ const VeterinaryServicesSection = () => {
                   <p>
                     <strong>Teléfono:</strong> 3166532433
                   </p>
-                  {/* Botones alternativos para abrir mapas externos */}
+                  {/* Enlaces directos a mapas externos */}
                   <div className="mt-3">
                     <p className="mb-2 small">
-                      Si el mapa no carga correctamente, puedes abrir nuestra ubicación en:
+                      Abre nuestra ubicación en:
                     </p>
                     <a
                       href="https://maps.apple.com/?ll=1.482825,-75.435075&q=Montañita+Adopta"
@@ -368,8 +302,8 @@ const VeterinaryServicesSection = () => {
                 </div>
                 <div className="col-md-6">
                   <div className="vet-map-container">
-                    {/* Mapa interactivo de Google Maps */}
-                    <div id="vet-refuge-map" style={{ width: "100%", height: "300px", borderRadius: "8px" }}></div>
+                    {/* Mapa de OpenStreetMap usando Leaflet */}
+                    <MapComponent position={[refugeLocation.lat, refugeLocation.lng]} />
                   </div>
                 </div>
               </div>

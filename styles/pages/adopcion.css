@@ -81,19 +81,6 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* En pantallas grandes, cada categoría ocupa el 48% del ancho */
-@media (min-width: 1025px) {
-  .adoptions-section .categories-container .category {
-    width: 48%;
-  }
-}
-
-/* En tablets y móviles, ocupan el 100% */
-@media (max-width: 1024px) {
-  .adoptions-section .categories-container .category {
-    width: 100%;
-  }
-}
 
 .adoptions-section .category:hover {
   transform: translateY(-8px);
@@ -271,43 +258,7 @@
   background-color: #026b19;
 }
 
-/* Media queries */
-@media (max-width: 768px) {
-  .adoptions-section h2 {
-    font-size: 40px;
-  }
-  
-  .adoptions-section .adoption-carousel-item {
-    min-height: 320px;
-  }
-  
-  .adoptions-section .adoption-carousel-item img {
-    height: 220px;
-  }
-}
 
-@media (max-width: 576px) {
-  .adoptions-section h2 {
-    font-size: 32px;
-  }
-  
-  .adoptions-section .adoption-carousel-item {
-    min-height: 300px;
-  }
-  
-  .adoptions-section .adoption-carousel-item img {
-    height: 200px;
-  }
-  
-  .adoptions-section .adoption-carousel-caption h4 {
-    font-size: 18px;
-  }
-  
-  .adoptions-section .adoption-carousel-buttons button {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-}
 
 /* Estilo para el formulario de búsqueda */
 .search-form {
@@ -387,43 +338,7 @@ select:disabled, input[type="text"]:disabled {
   box-shadow: none;
 }
 
-/* Media Query para pantallas de tabletas */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .adoptions-section h2 {
-      font-size: 40px;
-  }
-}
 
-/* Media Query para pantallas pequeñas (móviles) */
-@media (max-width: 600px) {
-  .adoptions-section h2 {
-      font-size: 36px;
-  }
-  
-  .carousel-control {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-  }
-
-  .carousel-item {
-      min-width: calc(100% - 20px);
-      max-width: calc(100% - 20px);
-  }
-  
-  .category h3 {
-      font-size: 20px;
-  }
-  
-  button[type="submit"] {
-      height: 42px;
-  }
-  
-  select, input[type="text"] {
-      font-size: 15px;
-      padding: 10px 12px;
-  }
-}
 
 /* Estilos para la sección de animales */
 
@@ -783,22 +698,6 @@ padding-top: 7%;
   flex-direction: column;
 }
 
-@media (min-width: 768px) {
-  .animal-detail-container {
-      flex-direction: row;
-  }
-}
-
-.animal-image-container {
-  flex: 1;
-  max-width: 100%;
-}
-
-@media (min-width: 768px) {
-  .animal-image-container {
-      max-width: 50%;
-  }
-}
 
 .animal-image-container img {
   width: 100%;
@@ -937,36 +836,6 @@ padding-top: 7%;
 
 /* Ajustes responsivos para la cuadrícula de animales */
 
-@media (max-width: 1200px) {
-  .animals-container {
-      grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .animals-container {
-      grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .animal-tabs, .animal-filters {
-      flex-direction: column;
-      align-items: center;
-  }
-  
-  .tab-button, .animal-filters select, #filter-button {
-      width: 100%;
-      max-width: 250px;
-      margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 600px) {
-  .animals-container {
-      grid-template-columns: 1fr !important;
-  }
-}
 
 
 /* Estilos para la sección de servicios veterinarios con prefijo 'vet-' */
@@ -1289,86 +1158,7 @@ color: #666;
 font-size: 16px;
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-.vet-services-grid {
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
 
-.vet-modal-content {
-  margin: 10% auto;
-  padding: 20px;
-  width: 90%;
-}
-
-.vet-services-section h2 {
-  font-size: 28px;
-}
-}
-
-@media (max-width: 576px) {
-.vet-services-grid {
-  grid-template-columns: 1fr;
-}
-
-.vet-service-card {
-  max-width: 100%;
-}
-
-.vet-modal-content {
-  margin: 15% auto;
-  padding: 15px;
-}
-
-.vet-service-modal button {
-  width: 100%;
-}
-}
-
-/* Estilos para el modal general */
-.vet-modal {
-display: none;
-position: fixed;
-z-index: 1000;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0, 0, 0, 0.5);
-animation: vet-fadeIn 0.3s;
-}
-
-@keyframes vet-fadeIn {
-from {
-  opacity: 0;
-}
-to {
-  opacity: 1;
-}
-}
-
-.vet-modal-content {
-background-color: #fff;
-margin: 5% auto;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-max-width: 600px;
-position: relative;
-animation: vet-slideIn 0.3s;
-}
-
-@keyframes vet-slideIn {
-from {
-  transform: translateY(-50px);
-  opacity: 0;
-}
-to {
-  transform: translateY(0);
-  opacity: 1;
-}
-}
 
 .vet-close {
 position: absolute;
@@ -1657,29 +1447,290 @@ left: 30px;
 transform: rotate(-20deg);
 }
 
-/* Media queries para dispositivos móviles */
+/* Estilos para el modal general */
+.vet-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: vet-fadeIn 0.3s;
+}
+  
+/* ==========================================================================
+   Estilos Base
+   ========================================================================== */
+
+/* Contenedor de imágenes */
+.animal-image-container {
+  flex: 1;
+  max-width: 100%;
+}
+
+/* Mensaje cuando no hay resultados */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Estilos para modal veterinario */
+.vet-modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  position: relative;
+  animation: vet-slideIn 0.3s;
+}
+
+/* ==========================================================================
+   Animaciones
+   ========================================================================== */
+
+@keyframes vet-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vet-slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Media Queries - Pantallas Grandes (Desktop)
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  .adoptions-section .categories-container .category {
+    width: 48%;
+  }
+}
+
+@media (min-width: 768px) {
+  .animal-detail-container {
+    flex-direction: row;
+  }
+  
+  .animal-image-container {
+    max-width: 50%;
+  }
+}
+
+/* ==========================================================================
+   Media Queries - Pantallas Medianas (Tablets/Laptop)
+   ========================================================================== */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .adoptions-section h2 {
+    font-size: 40px;
+  }
+  
+  .adoptions-section .categories-container .category {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .animals-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .adoptions-section .categories-container .category {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .animals-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ==========================================================================
+   Media Queries - Tablets
+   ========================================================================== */
+
 @media (max-width: 768px) {
-.vet-modal-content {
-  padding: 25px 20px;
-  margin: 15px;
+  /* Ocultar animales por defecto en móviles */
+  .animals-container:not(.filtered) {
+    display: none !important;
+  }
+  
+  /* Mensaje para mostrar cuando no hay filtros aplicados */
+  .animals-container:not(.filtered)::before {
+    content: "Aplica filtros para ver los animales disponibles";
+    display: block;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    color: #666;
+  }
+  
+  /* Estilos para sección de animales */
+  .animal-tabs, .animal-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tab-button, .animal-filters select, #filter-button {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 10px;
+  }
+  
+  /* Paginación */
+  .animals-pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .pagination-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  
+  /* Sección de adopciones */
+  .adoptions-section h2 {
+    font-size: 40px;
+  }
+  
+  .adoptions-section .adoption-carousel-item {
+    min-height: 320px;
+  }
+  
+  .adoptions-section .adoption-carousel-item img {
+    height: 220px;
+  }
+  
+  /* Servicios veterinarios */
+  .vet-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .vet-modal-content {
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+  }
+  
+  .vet-services-section h2 {
+    font-size: 28px;
+  }
+  
+  .vet-reservation-modal h2 {
+    font-size: 24px;
+  }
+
+  .vet-form-actions {
+    flex-direction: column;
+  }
 }
 
-.vet-reservation-modal h2 {
-  font-size: 24px;
+/* ==========================================================================
+   Media Queries - Móviles
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .animals-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .adoptions-section h2 {
+    font-size: 36px;
+  }
+  
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .carousel-item {
+    min-width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+  
+  .category h3 {
+    font-size: 20px;
+  }
+  
+  button[type="submit"] {
+    height: 42px;
+  }
+  
+  select, input[type="text"] {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
 }
 
-.vet-form-actions {
-  flex-direction: column;
-}
+@media (max-width: 576px) {
+  .adoptions-section h2 {
+    font-size: 32px;
+  }
+  
+  .adoptions-section .adoption-carousel-item {
+    min-height: 300px;
+  }
+  
+  .adoptions-section .adoption-carousel-item img {
+    height: 200px;
+  }
+  
+  .adoptions-section .adoption-carousel-caption h4 {
+    font-size: 18px;
+  }
+  
+  .adoptions-section .adoption-carousel-buttons button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  .vet-services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vet-service-card {
+    max-width: 100%;
+  }
+  
+  .vet-modal-content {
+    margin: 15% auto;
+    padding: 15px;
+  }
+  
+  .vet-service-modal button {
+    width: 100%;
+  }
 }
 
-/* Media queries para pantallas pequeñas */
 @media (max-width: 480px) {
-.vet-reservation-modal h2 {
-  font-size: 22px;
-}
+  .vet-reservation-modal h2 {
+    font-size: 22px;
+  }
 
-.vet-modal-content {
-  padding: 20px 15px;
-}
+  .vet-modal-content {
+    padding: 20px 15px;
+  }
 }
