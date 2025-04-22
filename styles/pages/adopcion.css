@@ -1647,9 +1647,6 @@ transform: rotate(-20deg);
   }
 }
 
-/* ==========================================================================
-   Media Queries - Móviles
-   ========================================================================== */
 
 @media (max-width: 600px) {
   .animals-container {
@@ -1658,6 +1655,7 @@ transform: rotate(-20deg);
   
   .adoptions-section h2 {
     font-size: 36px;
+    padding-top: 15px;
   }
   
   .carousel-control {
@@ -1688,6 +1686,7 @@ transform: rotate(-20deg);
 @media (max-width: 576px) {
   .adoptions-section h2 {
     font-size: 32px;
+    padding-top: 45px;
   }
   
   .adoptions-section .adoption-carousel-item {
@@ -1726,6 +1725,11 @@ transform: rotate(-20deg);
 }
 
 @media (max-width: 480px) {
+
+  .adoptions-section h2 {
+    font-size: 30px;
+    padding-top: 45px;
+  }
   .vet-reservation-modal h2 {
     font-size: 22px;
   }

@@ -1044,7 +1044,7 @@
   }
 
   .stories-header h3 {
-    font-size: 2.25rem; /* Tamaño reducido para móviles */
+    font-size: 32px;
     margin-bottom: 0.5rem;
   }
   
@@ -1120,7 +1120,7 @@
   }
 
   .stories-header h3 {
-    font-size: 1.1rem; /* Tamaño aún más reducido para pantallas muy pequeñas */
+    font-size: 26px;
   }
   
   .historia-cta h3 {
