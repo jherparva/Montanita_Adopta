@@ -81,6 +81,20 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* En pantallas grandes, cada categoría ocupa el 48% del ancho */
+@media (min-width: 1025px) {
+  .adoptions-section .categories-container .category {
+    width: 48%;
+  }
+}
+
+/* En tablets y móviles, ocupan el 100% */
+@media (max-width: 1024px) {
+  .adoptions-section .categories-container .category {
+    width: 100%;
+  }
+}
+
 .adoptions-section .category:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
@@ -257,6 +271,44 @@
   background-color: #026b19;
 }
 
+/* Media queries */
+@media (max-width: 768px) {
+  .adoptions-section h2 {
+    font-size: 40px;
+  }
+  
+  .adoptions-section .adoption-carousel-item {
+    min-height: 320px;
+  }
+  
+  .adoptions-section .adoption-carousel-item img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  .adoptions-section h2 {
+    font-size: 32px;
+  }
+  
+  .adoptions-section .adoption-carousel-item {
+    min-height: 300px;
+  }
+  
+  .adoptions-section .adoption-carousel-item img {
+    height: 200px;
+  }
+  
+  .adoptions-section .adoption-carousel-caption h4 {
+    font-size: 18px;
+  }
+  
+  .adoptions-section .adoption-carousel-buttons button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
 /* Estilo para el formulario de búsqueda */
 .search-form {
   max-width: 350px;
@@ -333,6 +385,44 @@ select:disabled, input[type="text"]:disabled {
   border-color: #e5e5e5;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+/* Media Query para pantallas de tabletas */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .adoptions-section h2 {
+      font-size: 40px;
+  }
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  .adoptions-section h2 {
+      font-size: 36px;
+  }
+  
+  .carousel-control {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+  }
+
+  .carousel-item {
+      min-width: calc(100% - 20px);
+      max-width: calc(100% - 20px);
+  }
+  
+  .category h3 {
+      font-size: 20px;
+  }
+  
+  button[type="submit"] {
+      height: 42px;
+  }
+  
+  select, input[type="text"] {
+      font-size: 15px;
+      padding: 10px 12px;
+  }
 }
 
 /* Estilos para la sección de animales */
@@ -693,6 +783,23 @@ padding-top: 7%;
   flex-direction: column;
 }
 
+@media (min-width: 768px) {
+  .animal-detail-container {
+      flex-direction: row;
+  }
+}
+
+.animal-image-container {
+  flex: 1;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .animal-image-container {
+      max-width: 50%;
+  }
+}
+
 .animal-image-container img {
   width: 100%;
   height: 100%;
@@ -827,6 +934,40 @@ padding-top: 7%;
   color: #888;
   margin-bottom: 10px;
 }
+
+/* Ajustes responsivos para la cuadrícula de animales */
+
+@media (max-width: 1200px) {
+  .animals-container {
+      grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .animals-container {
+      grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .animal-tabs, .animal-filters {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .tab-button, .animal-filters select, #filter-button {
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .animals-container {
+      grid-template-columns: 1fr !important;
+  }
+}
+
 
 /* Estilos para la sección de servicios veterinarios con prefijo 'vet-' */
 .vet-services-section {
@@ -1146,6 +1287,42 @@ color: #4caf50;
 .vet-no-results p {
 color: #666;
 font-size: 16px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+.vet-services-grid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.vet-modal-content {
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+}
+
+.vet-services-section h2 {
+  font-size: 28px;
+}
+}
+
+@media (max-width: 576px) {
+.vet-services-grid {
+  grid-template-columns: 1fr;
+}
+
+.vet-service-card {
+  max-width: 100%;
+}
+
+.vet-modal-content {
+  margin: 15% auto;
+  padding: 15px;
+}
+
+.vet-service-modal button {
+  width: 100%;
+}
 }
 
 /* Estilos para el modal general */
@@ -1480,318 +1657,29 @@ left: 30px;
 transform: rotate(-20deg);
 }
 
-/* Estilos responsive para secciones de adopción y animales */
-
-/* Estilos generales */
-.adoptions-section,
-.animals-section,
-.vet-services-section {
-width: 100%;
-overflow-x: hidden;
-}
-
-/* Estilos para el carrusel de adopción en dos columnas */
-@media (max-width: 1200px) {
-.categories-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.adoptions-section .category {
-  width: calc(50% - 10px);
-  margin-bottom: 20px;
-}
-
-.adoption-carousel-container {
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 350px; /* Altura fija para mantener consistencia */
-  overflow: hidden;
-}
-
-.adoption-carousel-item {
-  position: absolute;
-  width: 100%;
-  height: 350px; /* Altura fija igual a la del contenedor */
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.adoption-carousel-item.active {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.adoption-carousel-item img {
-  width: 100%;
-  height: 200px; /* Altura fija para las imágenes */
-  object-fit: cover;
-  border-radius: 8px 8px 0 0;
-}
-}
-
-/* Estilos para la sección de búsqueda de animales en 3 columnas */
-@media (max-width: 992px) {
-.animals-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 15px !important;
-}
-
-.animal-card {
-  width: 100%;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.animal-image {
-  height: 160px; /* Altura fija para las imágenes */
-  overflow: hidden;
-}
-
-.animal-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-}
-
-/* Ajustes para tabletas */
+/* Media queries para dispositivos móviles */
 @media (max-width: 768px) {
-.animals-container {
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 12px !important;
+.vet-modal-content {
+  padding: 25px 20px;
+  margin: 15px;
 }
 
-.adoptions-section .category {
-  width: 100%;
-  margin-bottom: 20px;
+.vet-reservation-modal h2 {
+  font-size: 24px;
 }
 
-.animal-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  padding-bottom: 5px;
-}
-
-.animal-filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.animal-filters select {
-  flex: 1;
-  min-width: 120px;
-}
-}
-
-/* Ajustes para móviles */
-@media (max-width: 576px) {
-.animals-container {
-  grid-template-columns: 1fr !important;
-}
-
-.adoption-carousel-container {
-  height: 300px;
-}
-
-.adoption-carousel-item {
-  height: 300px;
-}
-
-.adoption-carousel-item img {
-  height: 160px;
-}
-
-.animal-card {
-  max-width: 100%;
-}
-
-.animals-pagination {
+.vet-form-actions {
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.pagination-btn {
-  width: 100%;
-  max-width: 200px;
 }
 }
 
-/* Optimizaciones adicionales para el carrusel */
-.adoption-carousel {
-position: relative;
-overflow: hidden;
-border-radius: 8px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* Media queries para pantallas pequeñas */
+@media (max-width: 480px) {
+.vet-reservation-modal h2 {
+  font-size: 22px;
 }
 
-.adoption-carousel-caption {
-padding: 15px;
-background-color: #fff;
-border-radius: 0 0 8px 8px;
+.vet-modal-content {
+  padding: 20px 15px;
 }
-
-.adoption-carousel-buttons {
-display: flex;
-gap: 10px;
-justify-content: center;
-margin-top: 10px;
-}
-
-.adoption-carousel-buttons button {
-padding: 8px 15px;
-border-radius: 20px;
-border: none;
-background-color: #4caf50;
-color: white;
-font-weight: 500;
-cursor: pointer;
-transition: background-color 0.3s;
-}
-
-.adoption-carousel-buttons button:hover {
-background-color: #388e3c;
-}
-
-.adoption-carousel-buttons button:last-child {
-background-color: #2196f3;
-}
-
-.adoption-carousel-buttons button:last-child:hover {
-background-color: #0b7dda;
-}
-
-/* Controles del carrusel */
-.adoption-carousel-control {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: rgba(255, 255, 255, 0.7);
-border: none;
-width: 40px;
-height: 40px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-z-index: 2;
-transition: background-color 0.3s;
-}
-
-.adoption-carousel-control:hover {
-background-color: rgba(255, 255, 255, 0.9);
-}
-
-.adoption-carousel-control.prev {
-left: 10px;
-}
-
-.adoption-carousel-control.next {
-right: 10px;
-}
-
-/* Indicadores del carrusel */
-.adoption-carousel-indicators {
-position: absolute;
-bottom: 15px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-gap: 5px;
-z-index: 2;
-}
-
-.adoption-carousel-indicator {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background-color: rgba(255, 255, 255, 0.5);
-border: none;
-cursor: pointer;
-transition: background-color 0.3s;
-}
-
-.adoption-carousel-indicator.active {
-background-color: #fff;
-}
-
-/* Optimizaciones para modal de animales */
-.modal {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
-display: flex;
-align-items: center;
-justify-content: center;
-z-index: 1000;
-}
-
-.modal-content {
-background-color: white;
-border-radius: 8px;
-width: 90%;
-max-width: 800px;
-max-height: 90vh;
-overflow-y: auto;
-position: relative;
-}
-
-.animal-detail-container {
-display: flex;
-flex-direction: column;
-}
-
-@media (min-width: 768px) {
-.animal-detail-container {
-  flex-direction: row;
-}
-
-.animal-image-container {
-  width: 50%;
-  padding: 15px;
-}
-
-.animal-info-container {
-  width: 50%;
-  padding: 15px;
-}
-}
-
-/* Compactar la sección de filtros */
-.animal-filters {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-bottom: 20px;
-padding: 15px;
-background-color: #f9f9f9;
-border-radius: 8px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.animal-filters select {
-padding: 8px 12px;
-border-radius: 4px;
-border: 1px solid #ddd;
-background-color: white;
-flex: 1;
-min-width: 120px;
 }
