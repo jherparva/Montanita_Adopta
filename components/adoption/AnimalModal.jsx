@@ -68,6 +68,34 @@ const AnimalModal = ({ animal, onClose }) => {
     }
   }
 
+  // Función para compartir en redes sociales - usando tus estilos existentes
+  const shareAnimal = useCallback((platform) => {
+    // Crear URL base para compartir
+    const shareUrl = `${window.location.origin}/animales/${animal.id}`
+    const shareText = `¡Conoce a ${animal.name}! Un(a) ${animal.breed} que busca hogar.`
+    
+    let shareLink = '';
+    
+    switch (platform) {
+      case 'facebook':
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
+        break
+      case 'twitter':
+        shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
+        break
+      case 'whatsapp':
+        shareLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`
+        break
+      case 'telegram':
+        shareLink = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
+        break
+    }
+    
+    if (shareLink) {
+      window.open(shareLink, '_blank', 'width=600,height=400')
+    }
+  }, [animal.id, animal.name, animal.breed])
+
   return (
     <div id="animalModal" className="modal" style={{ display: "block" }}>
       <div className="modal-content animal-modal">
@@ -99,6 +127,41 @@ const AnimalModal = ({ animal, onClose }) => {
               <button id="favorite-button" className="secondary-btn" onClick={handleFavorite}>
                 <i className="far fa-heart"></i> Guardar como favorito
               </button>
+            </div>
+            
+            {/* Sección de compartir en redes sociales - usando tus clases CSS existentes */}
+            <div className="social-share-container">
+              <p className="share-title">Ayuda a {animal.name} compartiendo su perfil:</p>
+              <div className="social-buttons">
+                <button 
+                  className="social-btn facebook" 
+                  onClick={() => shareAnimal('facebook')}
+                  aria-label="Compartir en Facebook"
+                >
+                  <i className="fab fa-facebook-f"></i>
+                </button>
+                <button 
+                  className="social-btn twitter" 
+                  onClick={() => shareAnimal('twitter')}
+                  aria-label="Compartir en Twitter"
+                >
+                  <i className="fab fa-twitter"></i>
+                </button>
+                <button 
+                  className="social-btn whatsapp" 
+                  onClick={() => shareAnimal('whatsapp')}
+                  aria-label="Compartir en WhatsApp"
+                >
+                  <i className="fab fa-whatsapp"></i>
+                </button>
+                <button 
+                  className="social-btn telegram" 
+                  onClick={() => shareAnimal('telegram')}
+                  aria-label="Compartir en Telegram"
+                >
+                  <i className="fab fa-telegram-plane"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>

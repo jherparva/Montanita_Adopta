@@ -17,12 +17,6 @@
   padding: 0 20px;
 }
 
-@font-face {
-  font-family: 'Blueberry';
-  src: url('/imagenes/Blueberry.ttf') format('truetype');
-  font-display: swap;
-}
-
 .banner-content h1 {
   font-family: 'Blueberry', sans-serif;
     text-align: center;
@@ -912,10 +906,51 @@
   text-decoration: underline;
 }
 
+/* Estilos base (se mantienen igual) */
+/* ... El código CSS original ... */
+
 /* Responsive */
+@media (max-width: 1200px) {
+  .voluntariado-container,
+  .apadrinar-container {
+    max-width: 95%;
+    gap: 30px;
+  }
+  
+  .requirements-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .voluntarios-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .banner-content h1 {
+    font-size: 45px;
+  }
+  
+  .voluntariado-text h2,
+  .apadrinar-text h2,
+  .volunteer-requirements h2,
+  .voluntarios-galeria h2 {
+    font-size: 2rem;
+  }
+  
+  .testimonios-container {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  .process-steps {
+    max-width: 95%;
+  }
+}
+
 @media (max-width: 768px) {
   .banner-content h1 {
     font-size: 2.5rem;
+    padding-right: 54px;
   }
 
   .voluntariado-container,
@@ -950,5 +985,275 @@
   
   .form-actions button {
     width: 100%;
+  }
+  
+  .voluntariado-image,
+  .apadrinar-image {
+    width: 100%;
+  }
+  
+  .voluntariado-banner {
+    height: 300px;
+  }
+  
+  .requirements-grid {
+    gap: 20px;
+  }
+  
+  .requirement-card {
+    padding: 20px;
+  }
+  
+  .steps-list li {
+    margin-bottom: 20px;
+  }
+  
+  .voluntario-card img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-content h1 {
+    font-size: 2rem;
+    padding-right: 30px;
+  }
+  
+  .section-title,
+  .voluntariado-text h2,
+  .apadrinar-text h2,
+  .volunteer-requirements h2,
+  .voluntarios-galeria h2 {
+    font-size: 1.8rem;
+  }
+  
+  .section-subtitle,
+  .process-steps h3,
+  .testimonios-voluntarios h3 {
+    font-size: 1rem;
+  }
+  
+  .card, 
+  .requirement-card {
+    padding: 15px;
+  }
+  
+  .voluntariado-text,
+  .apadrinar-text {
+    padding: 20px 15px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    margin-bottom: 20px;
+  }
+  
+  .footer-links {
+    margin-bottom: 15px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .volunteer-modal .donation-modal-content,
+  .sponsor-modal .donation-modal-content {
+    padding: 20px 15px;
+  }
+  
+  .close-modal {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .input-group label {
+    font-size: 0.9rem;
+  }
+  
+  .button-primary,
+  .button-secondary,
+  .submit-btn,
+  .form-actions button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .voluntariado-banner {
+    height: 250px;
+  }
+  
+  .volunteer-modal,
+  .sponsor-modal {
+    padding: 20px;
+  }
+  
+  .volunteer-form-container h2,
+  .sponsor-form-container h2 {
+    font-size: 24px;
+  }
+  
+  .volunteer-form-container h3,
+  .sponsor-form-container h3 {
+    font-size: 20px;
+  }
+  
+  .requirement-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 420px) {
+  .banner-content h1 {
+    font-size: 1.6rem;
+    padding-right: 20px;
+  }
+  
+  .section-title,
+  .voluntariado-text h2,
+  .apadrinar-text h2,
+  .volunteer-requirements h2,
+  .voluntarios-galeria h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .section-subtitle,
+  .process-steps h3,
+  .testimonios-voluntarios h3 {
+    font-size: 0.9rem;
+  }
+  
+  .card,
+  .requirement-card {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .voluntariado-text,
+  .apadrinar-text {
+    padding: 15px 10px;
+  }
+  
+  .testimonio {
+    padding: 12px;
+  }
+  
+  .testimonio-autor {
+    font-size: 0.9rem;
+  }
+  
+  .footer-content {
+    padding: 20px 15px;
+  }
+  
+  .footer-links li {
+    margin: 6px 0;
+  }
+  
+  .social-icons a {
+    margin: 0 8px;
+  }
+  
+  .volunteer-modal .donation-modal-content,
+  .sponsor-modal .donation-modal-content {
+    padding: 15px 10px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .input-group {
+    margin-bottom: 10px;
+  }
+  
+  .input-group label {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  
+  .button-primary,
+  .button-secondary,
+  .submit-btn,
+  .form-actions button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .checkbox-group label,
+  .checkbox-item label,
+  .terms-group label {
+    font-size: 0.8rem;
+  }
+  
+  .volunteer-modal,
+  .sponsor-modal {
+    padding: 10px;
+  }
+  
+  .volunteer-form-container h2,
+  .sponsor-form-container h2 {
+    font-size: 22px;
+  }
+  
+  .volunteer-form-container h3,
+  .sponsor-form-container h3 {
+    font-size: 18px;
+  }
+  
+  .volunteer-modal .close,
+  .sponsor-modal .close {
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+  }
+  
+  .voluntariado-banner {
+    height: 200px;
+  }
+  
+  .requirement-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .requirement-icon i {
+    font-size: 1.2rem;
+  }
+  
+  .paw-divider {
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .paw-divider i {
+    font-size: 1rem;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+  }
+  
+  .steps-list li {
+    margin-bottom: 15px;
+  }
+  
+  .voluntario-card img {
+    height: 180px;
+  }
+  
+  .testimonio-autor img {
+    width: 40px;
+    height: 40px;
   }
 }
