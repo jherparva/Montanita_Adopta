@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import "@/styles/components/auth/userSettingsModal.css"
+import { useLanguage } from "@/contexts/language-context"
 
 const UserSettingsModal = ({ isOpen, onClose, userData }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     id: "",
     nombre: "",
@@ -46,24 +48,24 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
     if (formData.contrasena || formData.confirmar_contrasena) {
       if (formData.contrasena !== formData.confirmar_contrasena) {
         window.Swal.fire({
-          title: "Error de validación",
-          text: "Las contraseñas no coinciden",
+          title: t("REGISTER_ERROR_PASSWORD_MATCH", "general"),
+          text: t("REGISTER_ERROR_PASSWORD_MATCH", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
-        setError("Las contraseñas no coinciden")
+        setError(t("REGISTER_ERROR_PASSWORD_MATCH", "general"))
         return false
       }
 
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
       if (!passwordRegex.test(formData.contrasena)) {
         window.Swal.fire({
-          title: "Error de validación",
-          text: "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número",
+          title: t("REGISTER_ERROR_PASSWORD_FORMAT", "general"),
+          text: t("REGISTER_ERROR_PASSWORD_FORMAT", "general"),
           icon: "warning",
           confirmButtonColor: "#3085d6",
         })
-        setError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número")
+        setError(t("REGISTER_ERROR_PASSWORD_FORMAT", "general"))
         return false
       }
     }
@@ -71,12 +73,12 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.correo_electronico)) {
       window.Swal.fire({
-        title: "Error de validación",
-        text: "Formato de correo electrónico inválido",
+        title: t("REGISTER_ERROR_EMAIL_FORMAT", "general"),
+        text: t("REGISTER_ERROR_EMAIL_FORMAT", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
-      setError("Formato de correo electrónico inválido")
+      setError(t("REGISTER_ERROR_EMAIL_FORMAT", "general"))
       return false
     }
 
@@ -91,8 +93,8 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
     }
 
     window.Swal.fire({
-      title: "Procesando...",
-      text: "Actualizando tu información",
+      title: t("SETTINGS_PROCESSING", "general"),
+      text: t("SETTINGS_PROCESSING", "general"),
       allowOutsideClick: false,
       showConfirmButton: false,
       willOpen: () => {
@@ -124,7 +126,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
       const data = await response.json()
 
       if (response.ok) {
-        setSuccess("Información actualizada correctamente")
+        setSuccess(t("SETTINGS_UPDATE_SUCCESS", "general"))
         setFormData((prev) => ({
           ...prev,
           contrasena: "",
@@ -132,10 +134,10 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
         }))
 
         window.Swal.fire({
-          title: "¡Actualizado!",
-          text: "Tu información ha sido actualizada correctamente",
+          title: t("SETTINGS_UPDATED", "general"),
+          text: t("SETTINGS_UPDATE_SUCCESS", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 2000,
           timerProgressBar: true,
@@ -146,20 +148,20 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
       } else {
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al actualizar la información",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
-        setError(data.message || "Error al actualizar la información")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
       }
     } catch (error) {
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error al actualizar usuario:", error)
     } finally {
       setLoading(false)
@@ -168,19 +170,19 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
 
   const handleDeleteAccount = async () => {
     window.Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción eliminará permanentemente tu cuenta y no podrá ser revertida",
+      title: t("SETTINGS_DELETE_CONFIRMATION", "general"),
+      text: t("SETTINGS_DELETE_WARNING", "general"),
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, eliminar cuenta",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: t("SETTINGS_DELETE_CONFIRM", "general"),
+      cancelButtonText: t("SETTINGS_DELETE_CANCEL", "general"),
     }).then(async (result) => {
       if (result.isConfirmed) {
         window.Swal.fire({
-          title: "Procesando...",
-          text: "Eliminando tu cuenta",
+          title: t("SETTINGS_DELETE_PROCESSING", "general"),
+          text: t("SETTINGS_DELETE_PROCESSING", "general"),
           allowOutsideClick: false,
           showConfirmButton: false,
           willOpen: () => {
@@ -207,8 +209,8 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
             window.dispatchEvent(new Event("auth-changed"))
             
             window.Swal.fire({
-              title: "Cuenta eliminada",
-              text: "Tu cuenta ha sido eliminada correctamente",
+              title: t("SETTINGS_DELETE_SUCCESS", "general"),
+              text: t("SETTINGS_DELETE_SUCCESS_MESSAGE", "general"),
               icon: "success",
               confirmButtonColor: "#27b80b",
             }).then(() => {
@@ -218,20 +220,20 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
           } else {
             window.Swal.fire({
               title: "Error",
-              text: data.message || "Error al eliminar la cuenta",
+              text: data.message || t("REGISTER_ERROR_SERVER", "general"),
               icon: "error",
               confirmButtonColor: "#d33",
             })
-            setError(data.message || "Error al eliminar la cuenta")
+            setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
           }
         } catch (error) {
           window.Swal.fire({
             title: "Error",
-            text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+            text: t("REGISTER_ERROR_SERVER", "general"),
             icon: "error",
             confirmButtonColor: "#d33",
           })
-          setError("Error al conectar con el servidor")
+          setError(t("REGISTER_ERROR_SERVER", "general"))
           console.error("Error al eliminar cuenta:", error)
         } finally {
           setLoading(false)
@@ -247,13 +249,13 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
       <div className="user-settings-modal-content">
         <span className="user-settings-close" onClick={onClose}>&times;</span>
         <div className="user-settings-container">
-          <h2>Configuración de Usuario</h2>
+          <h2>{t("SETTINGS_TITLE", "general")}</h2>
           <form id="user-settings-form" onSubmit={handleSubmit}>
             <input type="hidden" name="id" id="user-settings-id" value={formData.id} />
             <div className="user-settings-form-row">
               <div className="user-settings-form-col">
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-nombre">Nombre:</label>
+                  <label htmlFor="user-settings-nombre">{t("SETTINGS_NAME", "general")}</label>
                   <input 
                     type="text" 
                     id="user-settings-nombre" 
@@ -264,7 +266,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                   />
                 </div>
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-correo_electronico">Correo Electrónico:</label>
+                  <label htmlFor="user-settings-correo_electronico">{t("SETTINGS_EMAIL", "general")}</label>
                   <input
                     type="email"
                     id="user-settings-correo_electronico"
@@ -275,7 +277,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                   />
                 </div>
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-codigo_postal">Código Postal:</label>
+                  <label htmlFor="user-settings-codigo_postal">{t("SETTINGS_POSTAL_CODE", "general")}</label>
                   <input
                     type="text"
                     id="user-settings-codigo_postal"
@@ -286,7 +288,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                   />
                 </div>
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-contrasena">Nueva Contraseña:</label>
+                  <label htmlFor="user-settings-contrasena">{t("SETTINGS_NEW_PASSWORD", "general")}</label>
                   <input
                     type="password"
                     id="user-settings-contrasena"
@@ -298,7 +300,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
               </div>
               <div className="user-settings-form-col">
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-direccion">Dirección:</label>
+                  <label htmlFor="user-settings-direccion">{t("SETTINGS_ADDRESS", "general")}</label>
                   <input
                     type="text"
                     id="user-settings-direccion"
@@ -309,7 +311,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                   />
                 </div>
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-telefono">Teléfono:</label>
+                  <label htmlFor="user-settings-telefono">{t("SETTINGS_PHONE", "general")}</label>
                   <input
                     type="text"
                     id="user-settings-telefono"
@@ -320,7 +322,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                   />
                 </div>
                 <div className="user-settings-form-group">
-                  <label htmlFor="user-settings-confirmar_contrasena">Confirmar Nueva Contraseña:</label>
+                  <label htmlFor="user-settings-confirmar_contrasena">{t("SETTINGS_CONFIRM_PASSWORD", "general")}</label>
                   <input
                     type="password"
                     id="user-settings-confirmar_contrasena"
@@ -333,7 +335,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
             </div>
             <div className="user-settings-botones-container">
               <button type="submit" className="user-settings-update-btn" disabled={loading}>
-                {loading ? "Procesando..." : "Actualizar Información"}
+                {loading ? t("SETTINGS_PROCESSING", "general") : t("SETTINGS_UPDATE_BUTTON", "general")}
               </button>
               <button 
                 type="button" 
@@ -342,7 +344,7 @@ const UserSettingsModal = ({ isOpen, onClose, userData }) => {
                 onClick={handleDeleteAccount} 
                 disabled={loading}
               >
-                Eliminar Cuenta
+                {t("SETTINGS_DELETE_BUTTON", "general")}
               </button>
             </div>
           </form>

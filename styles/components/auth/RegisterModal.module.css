@@ -1,6 +1,3 @@
-/* RegisterModal.module.css */
-/* Estilos encapsulados para el componente modal de registro */
-
 .modal {
   position: fixed;
   z-index: 1000;
@@ -169,91 +166,6 @@
 
 .submitButton:active {
   transform: translateY(1px);
-}
-
-.googleContainer {
-  width: 100%;
-  margin-top: 10px;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 10 !important;
-  position: relative !important;
-}
-
-.gidSignin {
-  width: 100% !important;
-  margin-top: 10px !important;
-  display: flex !important;
-  justify-content: center !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 10 !important;
-  position: relative !important;
-}
-
-.gidSignin div[role="button"] {
-  width: 100% !important;
-  border-radius: 6px !important;
-  transition: transform 0.3s !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.gidSignin div[role="button"]:hover {
-  transform: translateY(-2px) !important;
-}
-
-.gidSignin div[role="button"]:active {
-  transform: translateY(1px) !important;
-}
-
-.socialLogin {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.3s;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 10 !important;
-  position: relative !important;
-}
-
-.socialLogin.google {
-  background-color: #db4437;
-  color: #fff;
-}
-
-.socialLogin.facebook {
-  background-color: #3b5998;
-  color: #fff;
-}
-
-.socialLogin:hover {
-  transform: translateY(-2px);
-}
-
-.socialLogin.google:hover {
-  background-color: #c1351d;
-}
-
-.socialLogin.facebook:hover {
-  background-color: #0d2455;
-}
-
-.socialLogin:active {
-  transform: translateY(1px);
-}
-
-.errorMessage {
-  color: red;
-  margin-top: 10px;
-  text-align: center;
 }
 
 /* Estilos para el calendario de flatpickr - usando un selector local para globales */

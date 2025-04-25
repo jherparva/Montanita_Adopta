@@ -1,7 +1,10 @@
 "use client"
+import { useLanguage } from "@/contexts/language-context"
 import "@/styles/components/specific-modals-styles.css"
 
 const PrivacyPolicyModal = ({ onClose, onAccept }) => {
+  const { t } = useLanguage()
+  
   return (
     <div
       className="modal fade show"
@@ -14,77 +17,53 @@ const PrivacyPolicyModal = ({ onClose, onAccept }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="privacyPolicyModalLabel">
-              Política de Privacidad
+              {t("PRIVACY_MODAL_TITLE", "modales")}
             </h5>
             <button type="button" className="btn-close" onClick={onClose}></button>
           </div>
           <div className="modal-body">
-            <h4>Política de Privacidad y Tratamiento de Datos Personales</h4>
+            <h4>{t("PRIVACY_MODAL_HEADER", "modales")}</h4>
             <p>
-              <strong>1. Responsable del tratamiento</strong>
+              <strong>{t("PRIVACY_MODAL_RESPONSIBLE_TITLE", "modales")}</strong>
             </p>
-            <p>
-              La Asociación de Protección Animal "Montañita Adopta" (en adelante, "Montañita Adopta"), con domicilio en
-              La Montañita, Caqueta y CIF [NÚMERO], es el responsable del tratamiento de los datos personales que nos
-              facilite a través de este formulario de contacto.
-            </p>
+            <p>{t("PRIVACY_MODAL_RESPONSIBLE_TEXT", "modales")}</p>
 
             <p>
-              <strong>2. Finalidad del tratamiento</strong>
+              <strong>{t("PRIVACY_MODAL_PURPOSE_TITLE", "modales")}</strong>
             </p>
-            <p>
-              Los datos personales que nos proporcione serán tratados con la finalidad de atender las consultas que nos
-              realice a través del formulario de contacto y, en su caso, gestionar los procesos de adopción o las
-              actividades relacionadas con nuestra asociación en las que pueda estar interesado.
-            </p>
+            <p>{t("PRIVACY_MODAL_PURPOSE_TEXT", "modales")}</p>
 
             <p>
-              <strong>3. Legitimación</strong>
+              <strong>{t("PRIVACY_MODAL_LEGITIMATION_TITLE", "modales")}</strong>
             </p>
-            <p>
-              La base legal para el tratamiento de sus datos es su consentimiento, que nos otorga al marcar la casilla
-              correspondiente y enviar el formulario de contacto.
-            </p>
+            <p>{t("PRIVACY_MODAL_LEGITIMATION_TEXT", "modales")}</p>
 
             <p>
-              <strong>4. Destinatarios</strong>
+              <strong>{t("PRIVACY_MODAL_RECIPIENTS_TITLE", "modales")}</strong>
             </p>
-            <p>
-              Sus datos no serán cedidos a terceros, salvo obligación legal o cuando sea necesario para la gestión de
-              los procesos de adopción, en cuyo caso se le informará previamente.
-            </p>
+            <p>{t("PRIVACY_MODAL_RECIPIENTS_TEXT", "modales")}</p>
 
             <p>
-              <strong>5. Conservación de los datos</strong>
+              <strong>{t("PRIVACY_MODAL_CONSERVATION_TITLE", "modales")}</strong>
             </p>
-            <p>
-              Sus datos se conservarán durante el tiempo necesario para atender su consulta y, en su caso, gestionar los
-              procesos de adopción o las actividades relacionadas con nuestra asociación en las que pueda estar
-              interesado.
-            </p>
+            <p>{t("PRIVACY_MODAL_CONSERVATION_TEXT", "modales")}</p>
 
             <p>
-              <strong>6. Derechos</strong>
+              <strong>{t("PRIVACY_MODAL_RIGHTS_TITLE", "modales")}</strong>
             </p>
-            <p>
-              Tiene derecho a acceder, rectificar y suprimir sus datos, así como a ejercer otros derechos, como se
-              explica en la información adicional.
-            </p>
+            <p>{t("PRIVACY_MODAL_RIGHTS_TEXT", "modales")}</p>
 
             <p>
-              <strong>7. Información adicional</strong>
+              <strong>{t("PRIVACY_MODAL_ADDITIONAL_TITLE", "modales")}</strong>
             </p>
-            <p>
-              Puede consultar la información adicional y detallada sobre Protección de Datos en nuestra política de
-              privacidad completa disponible en nuestra página web.
-            </p>
+            <p>{t("PRIVACY_MODAL_ADDITIONAL_TEXT", "modales")}</p>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={onClose}>
-              Cerrar
+              {t("PRIVACY_MODAL_CLOSE", "modales")}
             </button>
             <button type="button" className="btn btn-primary" id="accept-privacy" onClick={onAccept}>
-              Aceptar
+              {t("PRIVACY_MODAL_ACCEPT", "modales")}
             </button>
           </div>
         </div>
@@ -94,4 +73,3 @@ const PrivacyPolicyModal = ({ onClose, onAccept }) => {
 }
 
 export default PrivacyPolicyModal
-

@@ -187,39 +187,3 @@
   transform: translateY(1px);
 }
 
-/* Estilos específicos para el botón de Google Identity Services */
-#loginModal .g_id_signin {
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  visibility: visible;
-  opacity: 1;
-  z-index: 10;
-  position: relative;
-}
-
-#loginModal .g_id_signin div[role="button"] {
-  width: 100%;
-  border-radius: 6px;
-  transition: transform 0.3s;
-  visibility: visible;
-  opacity: 1;
-}
-
-#loginModal .g_id_signin div[role="button"]:hover {
-  transform: translateY(-2px);
-}
-
-#loginModal .g_id_signin div[role="button"]:active {
-  transform: translateY(1px);
-}
-
-/* Asegurar que los elementos siempre sean visibles */
-#loginModal .g_id_signin,
-#loginModal .social-login {
-  display: block;
-  visibility: visible;
-  opacity: 1;
-  z-index: 999;
-}

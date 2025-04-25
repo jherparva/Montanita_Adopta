@@ -1,9 +1,12 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 const VolunteerForm = ({ user, onClose }) => {
   const router = useRouter()
+  const { t } = useLanguage()
+  
   const [formData, setFormData] = useState({
     nombre: user?.name || user?.nombre || "",
     email: user?.email || user?.correo_electronico || "",
@@ -22,16 +25,16 @@ const VolunteerForm = ({ user, onClose }) => {
   const [success, setSuccess] = useState("")
 
   const areasInteres = [
-    { id: "cuidado_animales", label: "Cuidado de animales" },
-    { id: "paseos", label: "Paseos" },
-    { id: "limpieza", label: "Limpieza" },
-    { id: "eventos", label: "Eventos y jornadas de adopción" },
-    { id: "redes_sociales", label: "Redes sociales" },
-    { id: "transporte", label: "Transporte" },
-    { id: "fotografia", label: "Fotografía" },
-    { id: "veterinaria", label: "Asistencia veterinaria" },
-    { id: "educacion", label: "Educación y concientización" },
-    { id: "recaudacion", label: "Recaudación de fondos" },
+    { id: "cuidado_animales", label: t("VOLUNTEER_FORM_AREA_CARE", "voluntario") },
+    { id: "paseos", label: t("VOLUNTEER_FORM_AREA_WALKS", "voluntario") },
+    { id: "limpieza", label: t("VOLUNTEER_FORM_AREA_CLEANING", "voluntario") },
+    { id: "eventos", label: t("VOLUNTEER_FORM_AREA_EVENTS", "voluntario") },
+    { id: "redes_sociales", label: t("VOLUNTEER_FORM_AREA_SOCIAL", "voluntario") },
+    { id: "transporte", label: t("VOLUNTEER_FORM_AREA_TRANSPORT", "voluntario") },
+    { id: "fotografia", label: t("VOLUNTEER_FORM_AREA_PHOTO", "voluntario") },
+    { id: "veterinaria", label: t("VOLUNTEER_FORM_AREA_VET", "voluntario") },
+    { id: "educacion", label: t("VOLUNTEER_FORM_AREA_EDUCATION", "voluntario") },
+    { id: "recaudacion", label: t("VOLUNTEER_FORM_AREA_FUNDRAISING", "voluntario") },
   ]
 
   const handleChange = (e) => {
@@ -66,13 +69,13 @@ const VolunteerForm = ({ user, onClose }) => {
 
     // Validaciones
     if (!formData.acepta_terminos) {
-      setError("Debes aceptar los términos y condiciones para continuar")
+      setError(t("VOLUNTEER_FORM_ERROR_TERMS", "voluntario"))
       setLoading(false)
       return
     }
 
     if (formData.areas_interes.length === 0) {
-      setError("Por favor, selecciona al menos un área de interés")
+      setError(t("VOLUNTEER_FORM_ERROR_AREAS", "voluntario"))
       setLoading(false)
       return
     }
@@ -92,8 +95,8 @@ const VolunteerForm = ({ user, onClose }) => {
       if (response.ok) {
         if (window.Swal) {
           window.Swal.fire({
-            title: "¡Gracias por tu interés en ser voluntario!",
-            text: "Nos pondremos en contacto contigo muy pronto para coordinar los detalles.",
+            title: t("VOLUNTEER_FORM_SUCCESS", "voluntario"),
+            text: t("VOLUNTEER_FORM_SUCCESS", "voluntario"),
             icon: "success",
             confirmButtonColor: "#4caf50",
           }).then(() => {
@@ -101,32 +104,32 @@ const VolunteerForm = ({ user, onClose }) => {
             router.push("/voluntario")
           })
         } else {
-          setSuccess("¡Gracias por tu interés en ser voluntario! Nos pondremos en contacto contigo pronto.")
+          setSuccess(t("VOLUNTEER_FORM_SUCCESS", "voluntario"))
           setTimeout(() => {
             if (onClose) onClose()
             router.push("/voluntario")
           }, 3000)
         }
       } else {
-        setError(data.message || "Error al enviar la solicitud")
+        setError(data.message || t("VOLUNTEER_FORM_ERROR", "voluntario"))
         
         if (window.Swal) {
           window.Swal.fire({
             title: "Error",
-            text: data.message || "Error al enviar la solicitud",
+            text: data.message || t("VOLUNTEER_FORM_ERROR", "voluntario"),
             icon: "error",
             confirmButtonColor: "#f44336",
           })
         }
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("VOLUNTEER_FORM_ERROR_SERVER", "voluntario"))
       console.error("Error al enviar solicitud de voluntariado:", error)
       
       if (window.Swal) {
         window.Swal.fire({
           title: "Error",
-          text: "Error al conectar con el servidor",
+          text: t("VOLUNTEER_FORM_ERROR_SERVER", "voluntario"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
@@ -138,10 +141,9 @@ const VolunteerForm = ({ user, onClose }) => {
 
   return (
     <div className="volunteer-form-container">
-      <h2>Solicitud de Voluntariado</h2>
+      <h2>{t("VOLUNTEER_FORM_TITLE", "voluntario")}</h2>
       <p className="form-intro">
-        Completa el siguiente formulario para unirte a nuestro equipo de voluntarios. Revisaremos tu solicitud y te
-        contactaremos pronto.
+        {t("VOLUNTEER_FORM_INTRO", "voluntario")}
       </p>
 
       {error && <div className="error-message">{error}</div>}
@@ -149,19 +151,19 @@ const VolunteerForm = ({ user, onClose }) => {
 
       <form onSubmit={handleSubmit} className="volunteer-form">
         <div className="form-section">
-          <h3>Información Personal</h3>
+          <h3>{t("VOLUNTEER_FORM_PERSONAL_INFO", "voluntario")}</h3>
 
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="nombre">
-                Nombre completo: <span className="required">*</span>
+                {t("VOLUNTEER_FORM_NAME", "voluntario")} <span className="required">*</span>
               </label>
               <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="email">
-                Correo electrónico: <span className="required">*</span>
+                {t("VOLUNTEER_FORM_EMAIL", "voluntario")} <span className="required">*</span>
               </label>
               <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
             </div>
@@ -170,7 +172,7 @@ const VolunteerForm = ({ user, onClose }) => {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="telefono">
-                Teléfono: <span className="required">*</span>
+                {t("VOLUNTEER_FORM_PHONE", "voluntario")} <span className="required">*</span>
               </label>
               <input
                 type="tel"
@@ -183,23 +185,23 @@ const VolunteerForm = ({ user, onClose }) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="direccion">Dirección:</label>
+              <label htmlFor="direccion">{t("VOLUNTEER_FORM_ADDRESS", "voluntario")}</label>
               <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} />
             </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="ciudad">Ciudad:</label>
+            <label htmlFor="ciudad">{t("VOLUNTEER_FORM_CITY", "voluntario")}</label>
             <input type="text" id="ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} />
           </div>
         </div>
 
         <div className="form-section">
-          <h3>Disponibilidad y Experiencia</h3>
+          <h3>{t("VOLUNTEER_FORM_AVAILABILITY_SECTION", "voluntario")}</h3>
 
           <div className="form-group">
             <label htmlFor="disponibilidad">
-              Disponibilidad: <span className="required">*</span>
+              {t("VOLUNTEER_FORM_AVAILABILITY", "voluntario")} <span className="required">*</span>
             </label>
             <select
               id="disponibilidad"
@@ -208,45 +210,45 @@ const VolunteerForm = ({ user, onClose }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Selecciona tu disponibilidad</option>
-              <option value="fines-de-semana">Fines de semana</option>
-              <option value="dias-semana">Días de semana</option>
-              <option value="mananas">Mañanas</option>
-              <option value="tardes">Tardes</option>
-              <option value="flexible">Horario flexible</option>
-              <option value="remoto">Trabajo remoto</option>
+              <option value="">{t("VOLUNTEER_FORM_AVAILABILITY_SELECT", "voluntario")}</option>
+              <option value="fines-de-semana">{t("VOLUNTEER_FORM_AVAILABILITY_WEEKENDS", "voluntario")}</option>
+              <option value="dias-semana">{t("VOLUNTEER_FORM_AVAILABILITY_WEEKDAYS", "voluntario")}</option>
+              <option value="mananas">{t("VOLUNTEER_FORM_AVAILABILITY_MORNINGS", "voluntario")}</option>
+              <option value="tardes">{t("VOLUNTEER_FORM_AVAILABILITY_AFTERNOONS", "voluntario")}</option>
+              <option value="flexible">{t("VOLUNTEER_FORM_AVAILABILITY_FLEXIBLE", "voluntario")}</option>
+              <option value="remoto">{t("VOLUNTEER_FORM_AVAILABILITY_REMOTE", "voluntario")}</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="experiencia">Experiencia previa con animales:</label>
+            <label htmlFor="experiencia">{t("VOLUNTEER_FORM_EXPERIENCE", "voluntario")}</label>
             <textarea
               id="experiencia"
               name="experiencia"
               value={formData.experiencia}
               onChange={handleChange}
               rows="3"
-              placeholder="Cuéntanos si has tenido experiencia previa trabajando con animales"
+              placeholder={t("VOLUNTEER_FORM_EXPERIENCE_PLACEHOLDER", "voluntario")}
             ></textarea>
           </div>
 
           <div className="form-group">
-            <label htmlFor="habilidades">Habilidades o conocimientos especiales:</label>
+            <label htmlFor="habilidades">{t("VOLUNTEER_FORM_SKILLS", "voluntario")}</label>
             <textarea
               id="habilidades"
               name="habilidades"
               value={formData.habilidades}
               onChange={handleChange}
               rows="3"
-              placeholder="Ej: fotografía, diseño gráfico, conocimientos veterinarios, etc."
+              placeholder={t("VOLUNTEER_FORM_SKILLS_PLACEHOLDER", "voluntario")}
             ></textarea>
           </div>
         </div>
 
         <div className="form-section">
-          <h3>Áreas de Interés</h3>
+          <h3>{t("VOLUNTEER_FORM_AREAS", "voluntario")}</h3>
           <p>
-            Selecciona las áreas en las que te gustaría colaborar: <span className="required">*</span>
+            {t("VOLUNTEER_FORM_AREAS_SELECT", "voluntario")} <span className="required">*</span>
           </p>
 
           <div className="checkbox-group">
@@ -267,11 +269,11 @@ const VolunteerForm = ({ user, onClose }) => {
         </div>
 
         <div className="form-section">
-          <h3>Motivación</h3>
+          <h3>{t("VOLUNTEER_FORM_MOTIVATION_TITLE", "voluntario")}</h3>
 
           <div className="form-group">
             <label htmlFor="motivacion">
-              ¿Por qué quieres ser voluntario? <span className="required">*</span>
+              {t("VOLUNTEER_FORM_MOTIVATION", "voluntario")} <span className="required">*</span>
             </label>
             <textarea
               id="motivacion"
@@ -280,7 +282,7 @@ const VolunteerForm = ({ user, onClose }) => {
               onChange={handleChange}
               rows="4"
               required
-              placeholder="Cuéntanos qué te motiva a unirte a nuestro equipo de voluntarios"
+              placeholder={t("VOLUNTEER_FORM_MOTIVATION_PLACEHOLDER", "voluntario")}
             ></textarea>
           </div>
         </div>
@@ -296,13 +298,13 @@ const VolunteerForm = ({ user, onClose }) => {
               required
             />
             <label htmlFor="acepta_terminos">
-              Acepto los{" "}
+              {t("VOLUNTEER_FORM_TERMS", "voluntario")}{" "}
               <a href="/terminos-y-condiciones" target="_blank" rel="noreferrer">
-                términos y condiciones
+                {t("VOLUNTEER_FORM_TERMS_LINK", "voluntario")}
               </a>{" "}
-              y la{" "}
+              {t("VOLUNTEER_FORM_PRIVACY", "voluntario")}{" "}
               <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">
-                política de privacidad
+                {t("VOLUNTEER_FORM_PRIVACY_LINK", "voluntario")}
               </a>{" "}
               <span className="required">*</span>
             </label>
@@ -311,7 +313,7 @@ const VolunteerForm = ({ user, onClose }) => {
 
         <div className="form-note">
           <p>
-            <span className="required">*</span> Campos obligatorios
+            <span className="required">*</span> {t("VOLUNTEER_FORM_REQUIRED", "voluntario")}
           </p>
         </div>
 
@@ -319,10 +321,10 @@ const VolunteerForm = ({ user, onClose }) => {
           <button type="submit" className="submit-btn" disabled={loading}>
             {loading ? (
               <>
-                <i className="fas fa-spinner fa-spin"></i> Enviando...
+                <i className="fas fa-spinner fa-spin"></i> {t("VOLUNTEER_FORM_SENDING", "voluntario")}
               </>
             ) : (
-              "Enviar Solicitud"
+              t("VOLUNTEER_FORM_SUBMIT", "voluntario")
             )}
           </button>
           <button
@@ -331,7 +333,7 @@ const VolunteerForm = ({ user, onClose }) => {
             onClick={onClose}
             disabled={loading}
           >
-            Cancelar
+            {t("VOLUNTEER_FORM_CANCEL", "voluntario")}
           </button>
         </div>
       </form>

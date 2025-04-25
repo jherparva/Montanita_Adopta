@@ -2,15 +2,16 @@
 import { useState, useEffect, useCallback, memo } from "react"
 import AnimalModal from "./AnimalModal"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
-const CarouselItem = memo(({ animal, onOpenModal, onAdopt }) => (
+const CarouselItem = memo(({ animal, onOpenModal, onAdopt, t }) => (
   <div className="adoption-carousel-item">
     <img src={animal.image || "/placeholder.svg"} alt={animal.name} />
     <div className="adoption-carousel-caption">
       <h4>{animal.name}</h4>
       <div className="adoption-carousel-buttons">
-        <button onClick={() => onOpenModal(animal)}>Ver detalles</button>
-        <button onClick={() => onAdopt(animal.id)}>Adoptar</button>
+        <button onClick={() => onOpenModal(animal)}>{t("ADOPTION_VIEW_DETAILS", "adopcion")}</button>
+        <button onClick={() => onAdopt(animal.id)}>{t("ADOPTION_ADOPT_BUTTON", "adopcion")}</button>
       </div>
     </div>
   </div>
@@ -26,19 +27,20 @@ const AnimalCarousel = memo(({
   onOpenModal, 
   onAdopt, 
   onChangeSlide, 
-  onGoToSlide 
+  onGoToSlide,
+  t
 }) => {
   if (loading) {
     return (
       <div className="loading-spinner">
         <i className="fas fa-paw fa-spin"></i>
-        <p>Cargando {type === 'dog' ? 'perros' : 'gatos'}...</p>
+        <p>{type === 'dog' ? t("ADOPTION_LOADING_DOGS", "adopcion") : t("ADOPTION_LOADING_CATS", "adopcion")}</p>
       </div>
     )
   }
 
   if (animals.length === 0) {
-    return <p>No hay {type === 'dog' ? 'perros' : 'gatos'} disponibles actualmente.</p>
+    return <p>{type === 'dog' ? t("ADOPTION_NO_DOGS", "adopcion") : t("ADOPTION_NO_CATS", "adopcion")}</p>
   }
 
   return (
@@ -53,8 +55,8 @@ const AnimalCarousel = memo(({
             <div className="adoption-carousel-caption">
               <h4>{animal.name}</h4>
               <div className="adoption-carousel-buttons">
-                <button onClick={() => onOpenModal(animal)}>Ver detalles</button>
-                <button onClick={() => onAdopt(animal.id)}>Adoptar</button>
+                <button onClick={() => onOpenModal(animal)}>{t("ADOPTION_VIEW_DETAILS", "adopcion")}</button>
+                <button onClick={() => onAdopt(animal.id)}>{t("ADOPTION_ADOPT_BUTTON", "adopcion")}</button>
               </div>
             </div>
           </div>
@@ -64,14 +66,14 @@ const AnimalCarousel = memo(({
       <button 
         className="adoption-carousel-control prev" 
         onClick={() => onChangeSlide('prev')}
-        aria-label={`Anterior ${type === 'dog' ? 'perro' : 'gato'}`}
+        aria-label={type === 'dog' ? t("ADOPTION_PREV_DOG", "adopcion") : t("ADOPTION_PREV_CAT", "adopcion")}
       >
         <i className="fas fa-chevron-left"></i>
       </button>
       <button 
         className="adoption-carousel-control next" 
         onClick={() => onChangeSlide('next')}
-        aria-label={`Siguiente ${type === 'dog' ? 'perro' : 'gato'}`}
+        aria-label={type === 'dog' ? t("ADOPTION_NEXT_DOG", "adopcion") : t("ADOPTION_NEXT_CAT", "adopcion")}
       >
         <i className="fas fa-chevron-right"></i>
       </button>
@@ -82,7 +84,7 @@ const AnimalCarousel = memo(({
             key={index}
             className={`adoption-carousel-indicator ${index === currentSlide ? 'active' : ''}`}
             onClick={() => onGoToSlide(index)}
-            aria-label={`Ir al ${type === 'dog' ? 'perro' : 'gato'} ${index + 1}`}
+            aria-label={`${type === 'dog' ? t("ANIMALS_TAB_DOGS", "adopcion") : t("ANIMALS_TAB_CATS", "adopcion")} ${index + 1}`}
           ></button>
         ))}
       </div>
@@ -94,6 +96,7 @@ AnimalCarousel.displayName = 'AnimalCarousel'
 
 const AdoptionSection = () => {
   const router = useRouter()
+  const { t } = useLanguage()
   const [dogs, setDogs] = useState([])
   const [cats, setCats] = useState([])
   const [dogsLoading, setDogsLoading] = useState(true)
@@ -201,11 +204,11 @@ const AdoptionSection = () => {
   return (
     <section className="adoptions-section">
       <div className="container">
-        <h2>ANIMALES EN ADOPCIÓN</h2>
+        <h2>{t("ADOPTION_TITLE", "adopcion")}</h2>
         <div className="categories-container">
           {/* PERROS */}
           <div className="category">
-            <h3>PERROS</h3>
+            <h3>{t("ADOPTION_DOGS_TITLE", "adopcion")}</h3>
             <AnimalCarousel
               animals={dogs}
               currentSlide={dogSlide}
@@ -215,12 +218,13 @@ const AdoptionSection = () => {
               onAdopt={handleAdopt}
               onChangeSlide={changeDogSlide}
               onGoToSlide={goToDogSlide}
+              t={t}
             />
           </div>
 
           {/* GATOS */}
           <div className="category">
-            <h3>GATOS</h3>
+            <h3>{t("ADOPTION_CATS_TITLE", "adopcion")}</h3>
             <AnimalCarousel
               animals={cats}
               currentSlide={catSlide}
@@ -230,6 +234,7 @@ const AdoptionSection = () => {
               onAdopt={handleAdopt}
               onChangeSlide={changeCatSlide}
               onGoToSlide={goToCatSlide}
+              t={t}
             />
           </div>
         </div>

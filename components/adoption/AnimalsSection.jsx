@@ -2,14 +2,15 @@
 import { useState, useEffect, useCallback, useMemo, memo } from "react"
 import AnimalModal from "./AnimalModal"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
-const AnimalCard = memo(({ animal, onOpenModal, onAdopt }) => {
+const AnimalCard = memo(({ animal, onOpenModal, onAdopt, t }) => {
   const getAgeText = (age) => {
     switch (age) {
-      case "puppy": return "Cachorro"
-      case "kitten": return "Gatito"
-      case "adult": return "Adulto"
-      case "senior": return "Senior"
+      case "puppy": return t("ANIMAL_MODAL_PUPPY", "adopcion")
+      case "kitten": return t("ANIMAL_MODAL_KITTEN", "adopcion")
+      case "adult": return t("ANIMAL_MODAL_ADULT", "adopcion")
+      case "senior": return t("ANIMAL_MODAL_SENIOR", "adopcion")
       default: return age
     }
   }
@@ -27,15 +28,15 @@ const AnimalCard = memo(({ animal, onOpenModal, onAdopt }) => {
         <h3>{animal.name}</h3>
         <p>{animal.breed}</p>
         <div className="animal-tags">
-          <span className="tag">{animal.species === "dog" ? "Perro" : "Gato"}</span>
+          <span className="tag">{animal.species === "dog" ? t("ANIMAL_MODAL_DOG", "adopcion") : t("ANIMAL_MODAL_CAT", "adopcion")}</span>
           <span className="tag">{getAgeText(animal.age)}</span>
         </div>
         <div className="animal-actions">
           <button className="primary-btn" onClick={() => onOpenModal(animal)}>
-            Ver detalles
+            {t("ADOPTION_VIEW_DETAILS", "adopcion")}
           </button>
           <button className="secondary-btn" onClick={() => onAdopt(animal.id)}>
-            Adoptar
+            {t("ADOPTION_ADOPT_BUTTON", "adopcion")}
           </button>
         </div>
       </div>
@@ -45,11 +46,11 @@ const AnimalCard = memo(({ animal, onOpenModal, onAdopt }) => {
 
 AnimalCard.displayName = 'AnimalCard'
 
-const TabButtons = memo(({ activeCategory, onCategoryClick }) => {
+const TabButtons = memo(({ activeCategory, onCategoryClick, t }) => {
   const categories = [
-    { id: "all", label: "Todos" },
-    { id: "dog", label: "Perros" },
-    { id: "cat", label: "Gatos" }
+    { id: "all", label: t("ANIMALS_TAB_ALL", "adopcion") },
+    { id: "dog", label: t("ANIMALS_TAB_DOGS", "adopcion") },
+    { id: "cat", label: t("ANIMALS_TAB_CATS", "adopcion") }
   ]
   
   return (
@@ -69,21 +70,21 @@ const TabButtons = memo(({ activeCategory, onCategoryClick }) => {
 
 TabButtons.displayName = 'TabButtons'
 
-const FilterControls = memo(({ ageFilter, sizeFilter, onAgeChange, onSizeChange, onFilterClick }) => {
+const FilterControls = memo(({ ageFilter, sizeFilter, onAgeChange, onSizeChange, t }) => {
   return (
     <div className="animal-filters">
       <select value={ageFilter} onChange={onAgeChange}>
-        <option value="">Todas las edades</option>
-        <option value="puppy">Cachorro</option>
-        <option value="kitten">Gatito</option>
-        <option value="adult">Adulto</option>
-        <option value="senior">Senior</option>
+        <option value="">{t("ANIMALS_FILTER_ALL_AGES", "adopcion")}</option>
+        <option value="puppy">{t("ANIMALS_FILTER_PUPPY", "adopcion")}</option>
+        <option value="kitten">{t("ANIMALS_FILTER_KITTEN", "adopcion")}</option>
+        <option value="adult">{t("ANIMALS_FILTER_ADULT", "adopcion")}</option>
+        <option value="senior">{t("ANIMALS_FILTER_SENIOR", "adopcion")}</option>
       </select>
       <select value={sizeFilter} onChange={onSizeChange}>
-        <option value="">Todos los tamaños</option>
-        <option value="small">Pequeño</option>
-        <option value="medium">Mediano</option>
-        <option value="large">Grande</option>
+        <option value="">{t("ANIMALS_FILTER_ALL_SIZES", "adopcion")}</option>
+        <option value="small">{t("ANIMALS_FILTER_SMALL", "adopcion")}</option>
+        <option value="medium">{t("ANIMALS_FILTER_MEDIUM", "adopcion")}</option>
+        <option value="large">{t("ANIMALS_FILTER_LARGE", "adopcion")}</option>
       </select>
     </div>
   )
@@ -91,15 +92,15 @@ const FilterControls = memo(({ ageFilter, sizeFilter, onAgeChange, onSizeChange,
 
 FilterControls.displayName = 'FilterControls'
 
-const Pagination = memo(({ currentPage, totalPages, onPrevPage, onNextPage }) => {
+const Pagination = memo(({ currentPage, totalPages, onPrevPage, onNextPage, t }) => {
   return (
     <div className="animals-pagination">
       <button className="pagination-btn" disabled={currentPage === 1} onClick={onPrevPage}>
-        <i className="fas fa-chevron-left"></i> Anterior
+        <i className="fas fa-chevron-left"></i> {t("ANIMALS_PAGINATION_PREV", "adopcion")}
       </button>
-      <span>Página {currentPage} de {totalPages}</span>
+      <span>{t("ANIMALS_PAGINATION_PAGE", "adopcion")} {currentPage} {t("ANIMALS_PAGINATION_OF", "adopcion")} {totalPages}</span>
       <button className="pagination-btn" disabled={currentPage === totalPages} onClick={onNextPage}>
-        <i className="fas fa-chevron-right"></i> Siguiente
+        {t("ANIMALS_PAGINATION_NEXT", "adopcion")} <i className="fas fa-chevron-right"></i>
       </button>
     </div>
   )
@@ -109,6 +110,7 @@ Pagination.displayName = 'Pagination'
 
 const AnimalsSection = () => {
   const router = useRouter()
+  const { t } = useLanguage()
   const [activeCategory, setActiveCategory] = useState("all")
   const [ageFilter, setAgeFilter] = useState("")
   const [sizeFilter, setSizeFilter] = useState("")
@@ -229,11 +231,12 @@ const AnimalsSection = () => {
   return (
     <section className="animals-section">
       <div className="container">
-        <h2>NUESTROS ANIMALES PARA ADOPCIÓN</h2>
+        <h2>{t("ANIMALS_SECTION_TITLE", "adopcion")}</h2>
 
         <TabButtons
           activeCategory={activeCategory}
           onCategoryClick={handleCategoryClick}
+          t={t}
         />
 
         <FilterControls
@@ -241,7 +244,7 @@ const AnimalsSection = () => {
           sizeFilter={sizeFilter}
           onAgeChange={handleAgeFilterChange}
           onSizeChange={handleSizeFilterChange}
-          onFilterClick={applyFilters}
+          t={t}
         />
 
         <div
@@ -251,7 +254,7 @@ const AnimalsSection = () => {
           {loading ? (
             <div className="loading-spinner">
               <i className="fas fa-paw fa-spin"></i>
-              <p>Cargando animales...</p>
+              <p>{t("ANIMALS_LOADING", "adopcion")}</p>
             </div>
           ) : currentAnimals.length > 0 ? (
             currentAnimals.map((animal) => (
@@ -260,11 +263,12 @@ const AnimalsSection = () => {
                 animal={animal}
                 onOpenModal={openAnimalModal}
                 onAdopt={handleAdopt}
+                t={t}
               />
             ))
           ) : (
             <div className="no-results">
-              <p>No se encontraron animales con los filtros seleccionados.</p>
+              <p>{t("ANIMALS_NO_RESULTS", "adopcion")}</p>
             </div>
           )}
         </div>
@@ -274,13 +278,15 @@ const AnimalsSection = () => {
           totalPages={totalPages}
           onPrevPage={handlePrevPage}
           onNextPage={handleNextPage}
+          t={t}
         />
       </div>
 
       {showModal && selectedAnimal && (
         <AnimalModal 
           animal={selectedAnimal} 
-          onClose={closeAnimalModal} 
+          onClose={closeAnimalModal}
+          t={t}
         />
       )}
     </section>

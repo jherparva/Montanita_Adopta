@@ -1,8 +1,10 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 const SponsorForm = ({ user, animals, onClose }) => {
+  const { t } = useLanguage()
   const router = useRouter()
   const [formData, setFormData] = useState({
     sponsorName: user?.nombre || user?.name || "",
@@ -29,17 +31,17 @@ const SponsorForm = ({ user, animals, onClose }) => {
     setError("")
 
     try {
-      // Validaciones
+      // Validation messages now use translations
       if (!formData.animalId) {
-        throw new Error("Por favor, selecciona un animal para apadrinar")
+        throw new Error(t("SPONSOR_FORM_ERROR_ANIMAL", "voluntario"))
       }
 
       if (formData.sponsorshipType !== "supplies" && (!formData.amount || formData.amount <= 0)) {
-        throw new Error("Por favor, ingresa un monto válido")
+        throw new Error(t("SPONSOR_FORM_ERROR_AMOUNT", "voluntario"))
       }
 
       if (formData.sponsorshipType === "supplies" && !formData.suppliesDescription) {
-        throw new Error("Por favor, describe los suministros que donarás")
+        throw new Error(t("SPONSOR_FORM_ERROR_SUPPLIES", "voluntario"))
       }
 
       const response = await fetch("/api/volunteer/sponsor", {
@@ -51,13 +53,13 @@ const SponsorForm = ({ user, animals, onClose }) => {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || "Error al procesar la solicitud")
+        throw new Error(data.message || t("SPONSOR_FORM_ERROR_GENERIC", "voluntario"))
       }
 
       if (window.Swal) {
         window.Swal.fire({
-          title: "¡Gracias por tu apadrinamiento!",
-          text: "Tu solicitud ha sido registrada correctamente. Nos pondremos en contacto contigo pronto para coordinar los detalles.",
+          title: t("SPONSOR_FORM_SUCCESS_TITLE", "voluntario"),
+          text: t("SPONSOR_FORM_SUCCESS_TEXT", "voluntario"),
           icon: "success",
           confirmButtonColor: "#4caf50",
         }).then(() => {
@@ -73,12 +75,12 @@ const SponsorForm = ({ user, animals, onClose }) => {
       }
     } catch (err) {
       console.error("Error al enviar formulario:", err)
-      setError(err.message || "Error al procesar la solicitud")
+      setError(err.message || t("SPONSOR_FORM_ERROR_GENERIC", "voluntario"))
 
       if (window.Swal) {
         window.Swal.fire({
           title: "Error",
-          text: err.message || "Error al procesar la solicitud",
+          text: err.message || t("SPONSOR_FORM_ERROR_GENERIC", "voluntario"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
@@ -93,10 +95,9 @@ const SponsorForm = ({ user, animals, onClose }) => {
       <div className="sponsor-form-container">
         <div className="success-message">
           <i className="fas fa-check-circle"></i>
-          <h3>¡Gracias por tu apadrinamiento!</h3>
+          <h3>{t("SPONSOR_FORM_SUCCESS_TITLE", "voluntario")}</h3>
           <p>
-            Tu solicitud ha sido registrada correctamente. Nos pondremos en contacto contigo pronto para coordinar los
-            detalles.
+            {t("SPONSOR_FORM_SUCCESS_TEXT", "voluntario")}
           </p>
         </div>
       </div>
@@ -105,10 +106,9 @@ const SponsorForm = ({ user, animals, onClose }) => {
 
   return (
     <div className="sponsor-form-container">
-      <h2>Formulario de Apadrinamiento</h2>
+      <h2>{t("SPONSOR_FORM_TITLE", "voluntario")}</h2>
       <p className="form-intro">
-        Completa el siguiente formulario para apadrinar a uno de nuestros animales. Nos pondremos en contacto contigo
-        para coordinar los detalles.
+        {t("SPONSOR_FORM_INTRO", "voluntario")}
       </p>
 
       {error && (
@@ -119,11 +119,11 @@ const SponsorForm = ({ user, animals, onClose }) => {
 
       <form className="sponsor-form" onSubmit={handleSubmit}>
         <div className="form-section">
-          <h3>Información Personal</h3>
+          <h3>{t("SPONSOR_FORM_PERSONAL_INFO", "voluntario")}</h3>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="sponsorName">
-                Nombre Completo <span className="required">*</span>
+                {t("SPONSOR_FORM_NAME", "voluntario")} <span className="required">*</span>
               </label>
               <input
                 type="text"
@@ -136,7 +136,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
             </div>
             <div className="form-group">
               <label htmlFor="sponsorEmail">
-                Correo Electrónico <span className="required">*</span>
+                {t("SPONSOR_FORM_EMAIL", "voluntario")} <span className="required">*</span>
               </label>
               <input
                 type="email"
@@ -151,7 +151,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="sponsorPhone">
-                Teléfono <span className="required">*</span>
+                {t("SPONSOR_FORM_PHONE", "voluntario")} <span className="required">*</span>
               </label>
               <input
                 type="tel"
@@ -166,11 +166,11 @@ const SponsorForm = ({ user, animals, onClose }) => {
         </div>
 
         <div className="form-section">
-          <h3>Detalles del Apadrinamiento</h3>
+          <h3>{t("SPONSOR_FORM_DETAILS", "voluntario")}</h3>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="animalId">
-                Animal a Apadrinar <span className="required">*</span>
+                {t("SPONSOR_FORM_ANIMAL", "voluntario")} <span className="required">*</span>
               </label>
               <select 
                 id="animalId" 
@@ -179,7 +179,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
                 onChange={handleChange} 
                 required
               >
-                <option value="">Selecciona un animal</option>
+                <option value="">{t("SPONSOR_FORM_ANIMAL_SELECT", "voluntario")}</option>
                 {animals.map((animal) => (
                   <option key={animal._id} value={animal._id}>
                     {animal.name} (
@@ -190,7 +190,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
             </div>
             <div className="form-group">
               <label htmlFor="sponsorshipType">
-                Tipo de Apadrinamiento <span className="required">*</span>
+                {t("SPONSOR_FORM_TYPE", "voluntario")} <span className="required">*</span>
               </label>
               <select
                 id="sponsorshipType"
@@ -199,9 +199,9 @@ const SponsorForm = ({ user, animals, onClose }) => {
                 onChange={handleChange}
                 required
               >
-                <option value="monthly">Mensual</option>
-                <option value="one-time">Aporte Único</option>
-                <option value="supplies">Donación de Suministros</option>
+                <option value="monthly">{t("SPONSOR_FORM_TYPE_MONTHLY", "voluntario")}</option>
+                <option value="one-time">{t("SPONSOR_FORM_TYPE_ONETIME", "voluntario")}</option>
+                <option value="supplies">{t("SPONSOR_FORM_TYPE_SUPPLIES", "voluntario")}</option>
               </select>
             </div>
           </div>
@@ -210,7 +210,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="amount">
-                  Monto (COP) <span className="required">*</span>
+                  {t("SPONSOR_FORM_AMOUNT", "voluntario")} <span className="required">*</span>
                 </label>
                 <input
                   type="number"
@@ -219,7 +219,9 @@ const SponsorForm = ({ user, animals, onClose }) => {
                   value={formData.amount}
                   onChange={handleChange}
                   min="1"
-                  placeholder={formData.sponsorshipType === "monthly" ? "Mínimo $30,000" : "Mínimo $50,000"}
+                  placeholder={formData.sponsorshipType === "monthly" 
+                    ? t("SPONSOR_FORM_AMOUNT_MONTHLY", "voluntario") 
+                    : t("SPONSOR_FORM_AMOUNT_ONETIME", "voluntario")}
                   required={formData.sponsorshipType !== "supplies"}
                 />
               </div>
@@ -228,7 +230,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="suppliesDescription">
-                  Descripción de Suministros <span className="required">*</span>
+                  {t("SPONSOR_FORM_SUPPLIES", "voluntario")} <span className="required">*</span>
                 </label>
                 <textarea
                   id="suppliesDescription"
@@ -236,7 +238,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
                   value={formData.suppliesDescription}
                   onChange={handleChange}
                   rows="3"
-                  placeholder="Describe los suministros que donarás (tipo, cantidad, etc.)"
+                  placeholder={t("SPONSOR_FORM_SUPPLIES_PLACEHOLDER", "voluntario")}
                   required={formData.sponsorshipType === "supplies"}
                 ></textarea>
               </div>
@@ -245,14 +247,14 @@ const SponsorForm = ({ user, animals, onClose }) => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="notes">Notas Adicionales</label>
+              <label htmlFor="notes">{t("SPONSOR_FORM_NOTES", "voluntario")}</label>
               <textarea
                 id="notes"
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
                 rows="3"
-                placeholder="¿Algo más que quieras decirnos?"
+                placeholder={t("SPONSOR_FORM_NOTES_PLACEHOLDER", "voluntario")}
               ></textarea>
             </div>
           </div>
@@ -262,11 +264,11 @@ const SponsorForm = ({ user, animals, onClose }) => {
           <button type="submit" className="submit-btn" disabled={loading}>
             {loading ? (
               <>
-                <i className="fas fa-spinner fa-spin"></i> Procesando...
+                <i className="fas fa-spinner fa-spin"></i> {t("SPONSOR_FORM_PROCESSING", "voluntario")}
               </>
             ) : (
               <>
-                <i className="fas fa-heart"></i> Enviar Solicitud
+                <i className="fas fa-heart"></i> {t("SPONSOR_FORM_SUBMIT", "voluntario")}
               </>
             )}
           </button>
@@ -276,7 +278,7 @@ const SponsorForm = ({ user, animals, onClose }) => {
             onClick={onClose}
             disabled={loading}
           >
-            Cancelar
+            {t("SPONSOR_FORM_CANCEL", "voluntario")}
           </button>
         </div>
       </form>

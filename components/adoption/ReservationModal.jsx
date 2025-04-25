@@ -3,9 +3,12 @@ import { useState, useEffect, useCallback } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import LoginModal from "../auth/LoginModal"
+import { useLanguage } from "@/contexts/language-context"
 
 const ReservationModal = ({ service, onClose }) => {
   const router = useRouter()
+  const { t } = useLanguage()
+  
   const [formData, setFormData] = useState({
     petOwner: "",
     petName: "",
@@ -113,7 +116,7 @@ const ReservationModal = ({ service, onClose }) => {
       today.setHours(0, 0, 0, 0)
 
       if (selectedDate < today) {
-        setMessage("La fecha de la cita no puede ser en el pasado")
+        setMessage(t("VET_DATE_ERROR_PAST", "adopcion"))
         setMessageType("error")
         return
       }
@@ -145,8 +148,8 @@ const ReservationModal = ({ service, onClose }) => {
         // Usar SweetAlert2 si está disponible
         if (window.Swal) {
           window.Swal.fire({
-            title: "¡Gracias por tu reserva!",
-            text: "Tu cita ha sido reservada correctamente. Nos pondremos en contacto contigo pronto para confirmar los detalles.",
+            title: t("VET_BOOKING_SUCCESS_TITLE", "adopcion"),
+            text: t("VET_BOOKING_SUCCESS_TEXT", "adopcion"),
             icon: "success",
             confirmButtonColor: "#4caf50",
           }).then(() => {
@@ -154,11 +157,11 @@ const ReservationModal = ({ service, onClose }) => {
           })
         } else {
           // Fallback si SweetAlert2 no está disponible
-          setMessage("¡Reserva confirmada! Te contactaremos pronto para confirmar los detalles.")
+          setMessage(t("VET_BOOKING_SUCCESS_MESSAGE", "adopcion"))
           setMessageType("success")
           toast({
-            title: "Reserva exitosa",
-            description: "Tu cita ha sido reservada correctamente",
+            title: t("VET_BOOKING_SUCCESS_TITLE", "adopcion"),
+            description: t("VET_BOOKING_SUCCESS_MESSAGE", "adopcion"),
           })
 
           // Redireccionar después de 3 segundos
@@ -167,11 +170,11 @@ const ReservationModal = ({ service, onClose }) => {
           }, 3000)
         }
       } else {
-        setMessage(data.message || "Error al procesar la reserva")
+        setMessage(data.message || t("VET_BOOKING_ERROR", "adopcion"))
         setMessageType("error")
         toast({
           title: "Error",
-          description: data.message || "Error al procesar la reserva",
+          description: data.message || t("VET_BOOKING_ERROR", "adopcion"),
           variant: "destructive",
         })
       }
@@ -182,17 +185,17 @@ const ReservationModal = ({ service, onClose }) => {
       if (window.Swal) {
         window.Swal.fire({
           title: "Error",
-          text: "Error al procesar la reserva. Por favor, intenta de nuevo.",
+          text: t("VET_BOOKING_ERROR", "adopcion"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
       } else {
         // Fallback sin SweetAlert2
-        setMessage("Error al procesar la reserva. Por favor, intenta de nuevo.")
+        setMessage(t("VET_BOOKING_ERROR", "adopcion"))
         setMessageType("error")
         toast({
           title: "Error",
-          description: "Error al procesar la reserva. Por favor, intenta de nuevo.",
+          description: t("VET_BOOKING_ERROR", "adopcion"),
           variant: "destructive",
         })
       }
@@ -209,13 +212,13 @@ const ReservationModal = ({ service, onClose }) => {
             &times;
           </span>
           <h2>
-            Reservar Cita: <span id="vet-service-type">{service.name}</span>
+            {t("VET_RESERVATION_TITLE", "adopcion")} <span id="vet-service-type">{service.name}</span>
           </h2>
 
           {!isAuthenticated && (
             <div className="vet-auth-message">
               <i className="fas fa-info-circle"></i>
-              <span>Debes iniciar sesión para reservar una cita.</span>
+              <span>{t("VET_AUTH_REQUIRED", "adopcion")}</span>
             </div>
           )}
 
@@ -224,7 +227,7 @@ const ReservationModal = ({ service, onClose }) => {
             <input type="hidden" id="vet-service-id-input" name="serviceId" value={service._id} />
 
             <div className="vet-form-group">
-              <label htmlFor="vet-pet-name">Nombre de la Mascota:</label>
+              <label htmlFor="vet-pet-name">{t("VET_PET_NAME_LABEL", "adopcion")}</label>
               <input
                 type="text"
                 id="vet-pet-name"
@@ -237,7 +240,7 @@ const ReservationModal = ({ service, onClose }) => {
             </div>
 
             <div className="vet-form-group">
-              <label htmlFor="vet-pet-type">Tipo de Mascota:</label>
+              <label htmlFor="vet-pet-type">{t("VET_PET_TYPE_LABEL", "adopcion")}</label>
               <select
                 id="vet-pet-type"
                 name="petType"
@@ -246,14 +249,14 @@ const ReservationModal = ({ service, onClose }) => {
                 required
                 disabled={!isAuthenticated}
               >
-                <option value="">Seleccionar...</option>
-                <option value="dog">Perro</option>
-                <option value="cat">Gato</option>
+                <option value="">{t("VET_PET_TYPE_SELECT", "adopcion")}</option>
+                <option value="dog">{t("VET_PET_TYPE_DOG", "adopcion")}</option>
+                <option value="cat">{t("VET_PET_TYPE_CAT", "adopcion")}</option>
               </select>
             </div>
 
             <div className="vet-form-group">
-              <label htmlFor="vet-appointment-date">Fecha de la Cita:</label>
+              <label htmlFor="vet-appointment-date">{t("VET_APPOINTMENT_DATE_LABEL", "adopcion")}</label>
               <input
                 type="date"
                 id="vet-appointment-date"
@@ -266,7 +269,7 @@ const ReservationModal = ({ service, onClose }) => {
             </div>
 
             <div className="vet-form-group">
-              <label htmlFor="vet-appointment-time">Hora de la Cita:</label>
+              <label htmlFor="vet-appointment-time">{t("VET_APPOINTMENT_TIME_LABEL", "adopcion")}</label>
               <select
                 id="vet-appointment-time"
                 name="appointmentTime"
@@ -275,7 +278,7 @@ const ReservationModal = ({ service, onClose }) => {
                 required
                 disabled={!isAuthenticated}
               >
-                <option value="">Seleccionar...</option>
+                <option value="">{t("VET_APPOINTMENT_TIME_SELECT", "adopcion")}</option>
                 {availableTimes.map((time) => (
                   <option key={time} value={time}>
                     {time}
@@ -285,7 +288,7 @@ const ReservationModal = ({ service, onClose }) => {
             </div>
 
             <div className="vet-form-group">
-              <label htmlFor="vet-notes">Notas adicionales:</label>
+              <label htmlFor="vet-notes">{t("VET_NOTES_LABEL", "adopcion")}</label>
               <textarea
                 id="vet-notes"
                 name="notes"
@@ -305,10 +308,14 @@ const ReservationModal = ({ service, onClose }) => {
 
             <div className="vet-form-actions">
               <button type="submit" className="vet-primary-btn" disabled={isSubmitting || !isAuthenticated}>
-                {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : "Confirmar Reserva"}
+                {isSubmitting ? (
+                  <>{t("VET_LOADING_BUTTON", "adopcion")}</>
+                ) : (
+                  <>{t("VET_CONFIRM_BUTTON", "adopcion")}</>
+                )}
               </button>
               <button type="button" className="vet-secondary-btn" onClick={onClose}>
-                Cancelar
+                {t("VET_CANCEL_BUTTON", "adopcion")}
               </button>
             </div>
           </form>

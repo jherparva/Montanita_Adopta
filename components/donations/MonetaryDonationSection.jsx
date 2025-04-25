@@ -1,8 +1,10 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/language-context"
 
 const MonetaryDonation = () => {
+  const { t } = useLanguage()
   const [showDonationForm, setShowDonationForm] = useState(false)
   const [showEvidenceModal, setShowEvidenceModal] = useState(false)
   const [formData, setFormData] = useState({
@@ -98,21 +100,21 @@ const MonetaryDonation = () => {
         setShowDonationForm(false)
 
         window.Swal.fire({
-          title: "¡Donación Registrada!",
-          text: "Tu donación ha sido registrada correctamente. ¿Deseas subir un comprobante de pago?",
+          title: t("MONETARY_DONATION_SUCCESS_TITLE", "donaciones"),
+          text: t("MONETARY_DONATION_SUCCESS_TEXT", "donaciones"),
           icon: "success",
           showCancelButton: true,
           confirmButtonColor: "#4caf50",
           cancelButtonColor: "#f44336",
-          confirmButtonText: "Sí, subir comprobante",
-          cancelButtonText: "No, más tarde",
+          confirmButtonText: t("MONETARY_DONATION_SUCCESS_BUTTON_YES", "donaciones"),
+          cancelButtonText: t("MONETARY_DONATION_SUCCESS_BUTTON_NO", "donaciones"),
         }).then((result) => {
           if (result.isConfirmed) {
             setShowEvidenceModal(true)
           } else {
             window.Swal.fire({
-              title: "¡Gracias por tu donación!",
-              text: "Tu generosidad nos ayuda a seguir rescatando y cuidando animales necesitados.",
+              title: t("MONETARY_DONATION_THANKS_TITLE", "donaciones"),
+              text: t("MONETARY_DONATION_THANKS_TEXT", "donaciones"),
               icon: "success",
               confirmButtonColor: "#4caf50",
             })
@@ -121,8 +123,8 @@ const MonetaryDonation = () => {
         })
       } else {
         window.Swal.fire({
-          title: "Error",
-          text: data.message || "Error al procesar la donación",
+          title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+          text: data.message || t("MONETARY_DONATION_ERROR_PROCESSING", "donaciones"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
@@ -130,8 +132,8 @@ const MonetaryDonation = () => {
     } catch (error) {
       console.error("Error submitting donation:", error)
       window.Swal.fire({
-        title: "Error",
-        text: "Error al procesar la donación. Por favor, intenta de nuevo.",
+        title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+        text: t("MONETARY_DONATION_ERROR_PROCESSING", "donaciones"),
         icon: "error",
         confirmButtonColor: "#f44336",
       })
@@ -145,8 +147,8 @@ const MonetaryDonation = () => {
 
     if (!evidenceFile) {
       window.Swal.fire({
-        title: "Error",
-        text: "Por favor, selecciona un archivo de comprobante",
+        title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+        text: t("MONETARY_DONATION_ERROR_EVIDENCE_MISSING", "donaciones"),
         icon: "warning",
         confirmButtonColor: "#f44336",
       })
@@ -174,8 +176,8 @@ const MonetaryDonation = () => {
         setShowEvidenceModal(false)
 
         window.Swal.fire({
-          title: "¡Comprobante Recibido!",
-          text: "Gracias por enviar tu comprobante. Tu donación será verificada pronto.",
+          title: t("MONETARY_DONATION_EVIDENCE_SUCCESS_TITLE", "donaciones"),
+          text: t("MONETARY_DONATION_EVIDENCE_SUCCESS_TEXT", "donaciones"),
           icon: "success",
           confirmButtonColor: "#4caf50",
         })
@@ -183,8 +185,8 @@ const MonetaryDonation = () => {
         resetForm()
       } else {
         window.Swal.fire({
-          title: "Error",
-          text: data.message || "Error al subir el comprobante",
+          title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+          text: data.message || t("MONETARY_DONATION_ERROR_EVIDENCE", "donaciones"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
@@ -192,8 +194,8 @@ const MonetaryDonation = () => {
     } catch (error) {
       console.error("Error uploading evidence:", error)
       window.Swal.fire({
-        title: "Error",
-        text: "Error al subir el comprobante. Por favor, intenta de nuevo.",
+        title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+        text: t("MONETARY_DONATION_ERROR_EVIDENCE", "donaciones"),
         icon: "error",
         confirmButtonColor: "#f44336",
       })
@@ -237,32 +239,32 @@ const MonetaryDonation = () => {
     <section id="donacion-monetaria" className="about-section">
       <div className="container">
         <div className="section-header">
-          <h2>Opciones de Donación</h2>
+          <h2>{t("MONETARY_DONATION_TITLE", "donaciones")}</h2>
           <div className="paw-divider">
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
           </div>
-          <p>Tu aporte económico es vital para mantener nuestros rescates y cuidados veterinarios.</p>
+          <p>{t("MONETARY_DONATION_SUBTITLE", "donaciones")}</p>
         </div>
 
         <div className="donation-info-card">
-          <h3>¿En qué se utilizan tus donaciones?</h3>
+          <h3>{t("MONETARY_DONATION_USAGE_TITLE", "donaciones")}</h3>
           <div className="donation-usage">
             <div className="usage-item">
               <i className="fas fa-medkit"></i>
-              <h4>Atención Veterinaria</h4>
-              <p>Vacunas, desparasitación, esterilización y tratamientos médicos para animales rescatados.</p>
+              <h4>{t("MONETARY_DONATION_USAGE_VET_TITLE", "donaciones")}</h4>
+              <p>{t("MONETARY_DONATION_USAGE_VET_TEXT", "donaciones")}</p>
             </div>
             <div className="usage-item">
               <i className="fas fa-utensils"></i>
-              <h4>Alimentación</h4>
-              <p>Alimento de calidad para todos los animales bajo nuestro cuidado.</p>
+              <h4>{t("MONETARY_DONATION_USAGE_FOOD_TITLE", "donaciones")}</h4>
+              <p>{t("MONETARY_DONATION_USAGE_FOOD_TEXT", "donaciones")}</p>
             </div>
             <div className="usage-item">
               <i className="fas fa-home"></i>
-              <h4>Refugio</h4>
-              <p>Mantenimiento de instalaciones, camas, cobijas y elementos de higiene.</p>
+              <h4>{t("MONETARY_DONATION_USAGE_SHELTER_TITLE", "donaciones")}</h4>
+              <p>{t("MONETARY_DONATION_USAGE_SHELTER_TEXT", "donaciones")}</p>
             </div>
           </div>
         </div>
@@ -272,12 +274,12 @@ const MonetaryDonation = () => {
             <div className="about-icon">
               <i className="fas fa-mobile-alt"></i>
             </div>
-            <h3>Nequi</h3>
-            <p>Envía tu donación a:</p>
-            <p className="payment-number">📱 3166532433</p>
+            <h3>{t("MONETARY_DONATION_NEQUI_TITLE", "donaciones")}</h3>
+            <p>{t("MONETARY_DONATION_NEQUI_TEXT", "donaciones")}</p>
+            <p className="payment-number">{t("MONETARY_DONATION_NEQUI_NUMBER", "donaciones")}</p>
             <div className="payment-actions">
               <button className="btn btn-primary donate-btn" onClick={() => handlePaymentMethodClick("nequi")}>
-                <i className="fas fa-heart me-1"></i> Donar con Nequi
+                <i className="fas fa-heart me-1"></i> {t("MONETARY_DONATION_NEQUI_BUTTON", "donaciones")}
               </button>
             </div>
           </div>
@@ -286,12 +288,12 @@ const MonetaryDonation = () => {
             <div className="about-icon">
               <i className="fas fa-university"></i>
             </div>
-            <h3>Banco de Bogotá</h3>
-            <p>Transfiere tu donación a la cuenta de ahorros:</p>
-            <p className="payment-number">🏦 312334428</p>
+            <h3>{t("MONETARY_DONATION_BANK_TITLE", "donaciones")}</h3>
+            <p>{t("MONETARY_DONATION_BANK_TEXT", "donaciones")}</p>
+            <p className="payment-number">{t("MONETARY_DONATION_BANK_NUMBER", "donaciones")}</p>
             <div className="payment-actions">
               <button className="btn btn-primary donate-btn" onClick={() => handlePaymentMethodClick("banco-bogota")}>
-                <i className="fas fa-heart me-1"></i> Donar por Transferencia
+                <i className="fas fa-heart me-1"></i> {t("MONETARY_DONATION_BANK_BUTTON", "donaciones")}
               </button>
             </div>
           </div>
@@ -300,12 +302,12 @@ const MonetaryDonation = () => {
             <div className="about-icon">
               <i className="fab fa-paypal"></i>
             </div>
-            <h3>PayPal</h3>
-            <p>Escanea el siguiente código QR para donar:</p>
+            <h3>{t("MONETARY_DONATION_PAYPAL_TITLE", "donaciones")}</h3>
+            <p>{t("MONETARY_DONATION_PAYPAL_TEXT", "donaciones")}</p>
             <img src="/imagenes/codigo_qr_paypal.png" alt="Código QR PayPal" className="qr-code" />
             <div className="payment-actions">
               <button className="btn btn-primary donate-btn" onClick={() => handlePaymentMethodClick("paypal")}>
-                <i className="fas fa-heart me-1"></i> Donar con PayPal
+                <i className="fas fa-heart me-1"></i> {t("MONETARY_DONATION_PAYPAL_BUTTON", "donaciones")}
               </button>
             </div>
           </div>
@@ -317,121 +319,121 @@ const MonetaryDonation = () => {
               <span className="close" onClick={() => setShowDonationForm(false)}>
                 &times;
               </span>
-              <h2>Registrar Donación</h2>
+              <h2>{t("MONETARY_DONATION_FORM_TITLE", "donaciones")}</h2>
               <p className="donation-method-selected">
-                Método de pago seleccionado:{" "}
+                {t("MONETARY_DONATION_FORM_METHOD", "donaciones")}{" "}
                 <strong>
                   {formData.paymentMethod === "nequi"
-                    ? "Nequi"
+                    ? t("MONETARY_DONATION_NEQUI_TITLE", "donaciones")
                     : formData.paymentMethod === "banco-bogota"
-                      ? "Banco de Bogotá"
-                      : "PayPal"}
+                      ? t("MONETARY_DONATION_BANK_TITLE", "donaciones")
+                      : t("MONETARY_DONATION_PAYPAL_TITLE", "donaciones")}
                 </strong>
               </p>
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="amount">Monto de la Donación (COP):</label>
+                  <label htmlFor="amount">{t("MONETARY_DONATION_FORM_AMOUNT", "donaciones")}</label>
                   <input
                     type="number"
                     id="amount"
                     name="amount"
                     value={formData.amount}
                     onChange={handleInputChange}
-                    placeholder="Ej. 50000"
+                    placeholder={t("MONETARY_DONATION_FORM_AMOUNT_PLACEHOLDER", "donaciones")}
                     required
                     min="1000"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="donorName">Tu Nombre:</label>
+                  <label htmlFor="donorName">{t("MONETARY_DONATION_FORM_NAME", "donaciones")}</label>
                   <input
                     type="text"
                     id="donorName"
                     name="donorName"
                     value={formData.donorName}
                     onChange={handleInputChange}
-                    placeholder="Nombre completo"
+                    placeholder={t("MONETARY_DONATION_FORM_NAME_PLACEHOLDER", "donaciones")}
                     required
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="donorEmail">Correo Electrónico:</label>
+                  <label htmlFor="donorEmail">{t("MONETARY_DONATION_FORM_EMAIL", "donaciones")}</label>
                   <input
                     type="email"
                     id="donorEmail"
                     name="donorEmail"
                     value={formData.donorEmail}
                     onChange={handleInputChange}
-                    placeholder="correo@ejemplo.com"
+                    placeholder={t("MONETARY_DONATION_FORM_EMAIL_PLACEHOLDER", "donaciones")}
                     required
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="donorPhone">Teléfono:</label>
+                  <label htmlFor="donorPhone">{t("MONETARY_DONATION_FORM_PHONE", "donaciones")}</label>
                   <input
                     type="tel"
                     id="donorPhone"
                     name="donorPhone"
                     value={formData.donorPhone}
                     onChange={handleInputChange}
-                    placeholder="Ej. 3001234567"
+                    placeholder={t("MONETARY_DONATION_FORM_PHONE_PLACEHOLDER", "donaciones")}
                     required
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="notes">Mensaje (opcional):</label>
+                  <label htmlFor="notes">{t("MONETARY_DONATION_FORM_MESSAGE", "donaciones")}</label>
                   <textarea
                     id="notes"
                     name="notes"
                     rows="3"
                     value={formData.notes}
                     onChange={handleInputChange}
-                    placeholder="¿Quieres dejarnos un mensaje?"
+                    placeholder={t("MONETARY_DONATION_FORM_MESSAGE_PLACEHOLDER", "donaciones")}
                   ></textarea>
                 </div>
 
                 <div className="payment-instructions">
-                  <h4>Instrucciones de Pago:</h4>
+                  <h4>{t("MONETARY_DONATION_INSTRUCTIONS_TITLE", "donaciones")}</h4>
                   {formData.paymentMethod === "nequi" && (
                     <div className="instruction-steps">
-                      <p>1. Abre tu aplicación Nequi</p>
+                      <p>{t("MONETARY_DONATION_NEQUI_INSTR_1", "donaciones")}</p>
                       <p>
-                        2. Selecciona "Enviar" y envía tu donación al número: <strong>3166532433</strong>
+                        {t("MONETARY_DONATION_NEQUI_INSTR_2", "donaciones")} <strong>3166532433</strong>
                       </p>
-                      <p>3. Toma una captura de pantalla del comprobante</p>
-                      <p>4. Completa este formulario y envíalo</p>
-                      <p>5. Sube el comprobante en el siguiente paso</p>
+                      <p>{t("MONETARY_DONATION_NEQUI_INSTR_3", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_NEQUI_INSTR_4", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_NEQUI_INSTR_5", "donaciones")}</p>
                     </div>
                   )}
                   {formData.paymentMethod === "banco-bogota" && (
                     <div className="instruction-steps">
                       <p>
-                        1. Realiza una transferencia a la cuenta de ahorros: <strong>312334428</strong>
+                        {t("MONETARY_DONATION_BANK_INSTR_1", "donaciones")} <strong>312334428</strong>
                       </p>
-                      <p>2. Titular: Montañita Adopta</p>
-                      <p>3. Guarda el comprobante de la transferencia</p>
-                      <p>4. Completa este formulario y envíalo</p>
-                      <p>5. Sube el comprobante en el siguiente paso</p>
+                      <p>{t("MONETARY_DONATION_BANK_INSTR_2", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_BANK_INSTR_3", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_BANK_INSTR_4", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_BANK_INSTR_5", "donaciones")}</p>
                     </div>
                   )}
                   {formData.paymentMethod === "paypal" && (
                     <div className="instruction-steps">
-                      <p>1. Escanea el código QR con tu aplicación PayPal o visita nuestro enlace de donación</p>
-                      <p>2. Completa la donación en PayPal</p>
-                      <p>3. Guarda el comprobante o toma una captura de pantalla</p>
-                      <p>4. Completa este formulario y envíalo</p>
-                      <p>5. Sube el comprobante en el siguiente paso</p>
+                      <p>{t("MONETARY_DONATION_PAYPAL_INSTR_1", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_PAYPAL_INSTR_2", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_PAYPAL_INSTR_3", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_PAYPAL_INSTR_4", "donaciones")}</p>
+                      <p>{t("MONETARY_DONATION_PAYPAL_INSTR_5", "donaciones")}</p>
                     </div>
                   )}
                 </div>
 
                 <div className="form-actions">
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : "Registrar Donación"}
+                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : t("MONETARY_DONATION_BUTTON_SUBMIT", "donaciones")}
                   </button>
                   <button
                     type="button"
@@ -439,7 +441,7 @@ const MonetaryDonation = () => {
                     onClick={() => setShowDonationForm(false)}
                     disabled={isSubmitting}
                   >
-                    Cancelar
+                    {t("MONETARY_DONATION_BUTTON_CANCEL", "donaciones")}
                   </button>
                 </div>
               </form>
@@ -453,12 +455,12 @@ const MonetaryDonation = () => {
               <span className="close" onClick={() => setShowEvidenceModal(false)}>
                 &times;
               </span>
-              <h2>Subir Comprobante de Donación</h2>
-              <p>Por favor, sube una imagen o captura de pantalla de tu comprobante de donación.</p>
+              <h2>{t("MONETARY_DONATION_EVIDENCE_TITLE", "donaciones")}</h2>
+              <p>{t("MONETARY_DONATION_EVIDENCE_TEXT", "donaciones")}</p>
 
               <form onSubmit={handleEvidenceSubmit}>
                 <div className="form-group">
-                  <label htmlFor="evidence-file">Seleccionar archivo:</label>
+                  <label htmlFor="evidence-file">{t("MONETARY_DONATION_EVIDENCE_FILE_LABEL", "donaciones")}</label>
                   <input
                     type="file"
                     id="evidence-file"
@@ -473,20 +475,20 @@ const MonetaryDonation = () => {
                     className="btn btn-secondary btn-file-select"
                     onClick={() => fileInputRef.current.click()}
                   >
-                    <i className="fas fa-file-upload me-1"></i> Seleccionar Archivo
+                    <i className="fas fa-file-upload me-1"></i> {t("MONETARY_DONATION_EVIDENCE_FILE_BUTTON", "donaciones")}
                   </button>
                 </div>
 
                 {evidencePreview && (
                   <div className="evidence-preview">
-                    <h4>Vista previa:</h4>
+                    <h4>{t("MONETARY_DONATION_EVIDENCE_PREVIEW", "donaciones")}</h4>
                     <img src={evidencePreview} alt="Vista previa del comprobante" />
                   </div>
                 )}
 
                 <div className="form-actions">
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting || !evidenceFile}>
-                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : "Enviar Comprobante"}
+                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : t("MONETARY_DONATION_EVIDENCE_BUTTON_SUBMIT", "donaciones")}
                   </button>
                   <button
                     type="button"
@@ -494,7 +496,7 @@ const MonetaryDonation = () => {
                     onClick={() => setShowEvidenceModal(false)}
                     disabled={isSubmitting}
                   >
-                    Cancelar
+                    {t("MONETARY_DONATION_BUTTON_CANCEL", "donaciones")}
                   </button>
                 </div>
               </form>

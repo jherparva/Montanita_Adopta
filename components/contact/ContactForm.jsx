@@ -1,12 +1,16 @@
 "use client"
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 const ContactForm = () => {
   const router = useRouter()
+  const { language, t } = useLanguage()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,9 +19,6 @@ const ContactForm = () => {
     message: "",
     privacyPolicy: false,
   })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
 
   // Verificar autenticación al cargar el componente
   useEffect(() => {
@@ -64,11 +65,11 @@ const ContactForm = () => {
     // Verificar si el usuario está autenticado
     if (!isAuthenticated) {
       window.Swal.fire({
-        title: "Acceso Requerido",
-        text: "Debes iniciar sesión para enviar mensajes",
+        title: t("CONTACT_ACCESS_REQUIRED", "contact"),
+        text: t("CONTACT_LOGIN_REQUIRED", "contact"),
         icon: "warning",
         confirmButtonColor: "#13a840",
-        confirmButtonText: "Iniciar Sesión",
+        confirmButtonText: t("CONTACT_LOGIN_CONFIRM", "contact"),
       }).then((result) => {
         if (result.isConfirmed) {
           document.dispatchEvent(new CustomEvent("open-login-modal"))
@@ -97,8 +98,8 @@ const ContactForm = () => {
         }
         
         window.Swal.fire({
-          title: "¡Mensaje Enviado!",
-          text: "Hemos recibido tu mensaje. Te responderemos lo antes posible.",
+          title: t("CONTACT_SUCCESS_TITLE", "contact"),
+          text: t("CONTACT_SUCCESS_TEXT", "contact"),
           icon: "success",
           confirmButtonColor: "#13a840",
         })
@@ -115,25 +116,25 @@ const ContactForm = () => {
         console.error("Error al enviar el mensaje:", result.message)
         
         window.Swal.fire({
-          title: "Error",
-          text: result.message || "Error al enviar el mensaje",
+          title: t("CONTACT_ERROR_TITLE", "contact"),
+          text: result.message || t("CONTACT_ERROR_CONNECTION", "contact"),
           icon: "error",
           confirmButtonColor: "#cf0707",
         })
         
-        setErrorMessage(result.message || "Error al enviar el mensaje")
+        setErrorMessage(result.message || t("CONTACT_ERROR_CONNECTION", "contact"))
       }
     } catch (error) {
       console.error("Error en la solicitud:", error)
       
       window.Swal.fire({
-        title: "Error",
-        text: "Error de conexión. Por favor intenta nuevamente.",
+        title: t("CONTACT_ERROR_TITLE", "contact"),
+        text: t("CONTACT_ERROR_CONNECTION", "contact"),
         icon: "error",
         confirmButtonColor: "#cf0707",
       })
       
-      setErrorMessage("Error de conexión. Por favor intenta nuevamente.")
+      setErrorMessage(t("CONTACT_ERROR_CONNECTION", "contact"))
     } finally {
       setIsSubmitting(false)
     }
@@ -143,39 +144,39 @@ const ContactForm = () => {
     e.preventDefault()
     
     window.Swal.fire({
-      title: "Política de Privacidad",
+      title: t("CONTACT_PRIVACY_POLICY_TITLE", "contact"),
       html: `
         <div class="privacy-policy-content" style="text-align: left; max-height: 400px; overflow-y: auto; padding: 10px;">
-          <h3>Política de Privacidad</h3>
-          <p>En Montañita Adopta, respetamos tu privacidad y estamos comprometidos con la protección de tus datos personales.</p>
+          <h3>${t("CONTACT_PRIVACY_CONTENT_TITLE", "contact")}</h3>
+          <p>${t("CONTACT_PRIVACY_INTRO", "contact")}</p>
           
-          <h4>1. Información que recopilamos</h4>
-          <p>Recopilamos la siguiente información cuando nos contactas:</p>
+          <h4>${t("CONTACT_PRIVACY_INFO_TITLE", "contact")}</h4>
+          <p>${t("CONTACT_PRIVACY_INFO_TEXT", "contact")}</p>
           <ul>
-            <li>Nombre completo</li>
-            <li>Correo electrónico</li>
-            <li>Mensaje y asunto</li>
+            <li>${t("CONTACT_PRIVACY_INFO_ITEM1", "contact")}</li>
+            <li>${t("CONTACT_PRIVACY_INFO_ITEM2", "contact")}</li>
+            <li>${t("CONTACT_PRIVACY_INFO_ITEM3", "contact")}</li>
           </ul>
           
-          <h4>2. Uso de la información</h4>
-          <p>La información proporcionada será utilizada exclusivamente para:</p>
+          <h4>${t("CONTACT_PRIVACY_USE_TITLE", "contact")}</h4>
+          <p>${t("CONTACT_PRIVACY_USE_TEXT", "contact")}</p>
           <ul>
-            <li>Responder a tus consultas</li>
-            <li>Procesar solicitudes de adopción o voluntariado</li>
-            <li>Mejorar nuestros servicios</li>
+            <li>${t("CONTACT_PRIVACY_USE_ITEM1", "contact")}</li>
+            <li>${t("CONTACT_PRIVACY_USE_ITEM2", "contact")}</li>
+            <li>${t("CONTACT_PRIVACY_USE_ITEM3", "contact")}</li>
           </ul>
           
-          <h4>3. Seguridad de datos</h4>
-          <p>Implementamos medidas de seguridad para proteger tu información personal y prevenir accesos no autorizados.</p>
+          <h4>${t("CONTACT_PRIVACY_SECURITY_TITLE", "contact")}</h4>
+          <p>${t("CONTACT_PRIVACY_SECURITY_TEXT", "contact")}</p>
           
-          <h4>4. Divulgación a terceros</h4>
-          <p>No compartimos tu información con terceros sin tu consentimiento, excepto cuando sea requerido por ley.</p>
+          <h4>${t("CONTACT_PRIVACY_DISCLOSURE_TITLE", "contact")}</h4>
+          <p>${t("CONTACT_PRIVACY_DISCLOSURE_TEXT", "contact")}</p>
         </div>
       `,
-      confirmButtonText: "Aceptar",
+      confirmButtonText: t("CONTACT_PRIVACY_ACCEPT", "contact"),
       confirmButtonColor: "#13a840",
       showCancelButton: true,
-      cancelButtonText: "Cerrar",
+      cancelButtonText: t("CONTACT_PRIVACY_CLOSE", "contact"),
       cancelButtonColor: "#cf0707",
       width: '600px',
     }).then((result) => {
@@ -186,7 +187,7 @@ const ContactForm = () => {
         }))
       }
     })
-  }, [])
+  }, [t])
 
   // Función para abrir el modal de login
   const openLoginModal = useCallback(() => {
@@ -199,17 +200,17 @@ const ContactForm = () => {
   }, [])
 
   if (isLoading) {
-    return <div className="contact-container">Cargando...</div>
+    return <div className="contact-container">{t("CONTACT_LOADING", "contact")}</div>
   }
 
   if (!isAuthenticated) {
     return (
       <div className="contact-container">
-        <h2>Contáctanos</h2>
+        <h2>{t("CONTACT_TITLE", "contact")}</h2>
         <div className="auth-needed-message">
-          <p>Debes iniciar sesión para enviar mensajes de contacto.</p>
+          <p>{t("CONTACT_AUTH_NEEDED", "contact")}</p>
           <button onClick={openLoginModal} className="login-button">
-            Iniciar Sesión
+            {t("CONTACT_LOGIN_BUTTON", "contact")}
           </button>
         </div>
       </div>
@@ -218,7 +219,7 @@ const ContactForm = () => {
 
   return (
     <div className="contact-container">
-      <h2>Contáctanos</h2>
+      <h2>{t("CONTACT_TITLE", "contact")}</h2>
 
       {/* Banner con llamada a la acción */}
       <div className="cta-banner">
@@ -226,11 +227,8 @@ const ContactForm = () => {
           <i className="fas fa-paw"></i>
         </div>
         <div className="cta-content">
-          <h3>¿Tienes preguntas sobre adopción?</h3>
-          <p>
-            Completa este formulario y te responderemos lo antes posible. ¡Juntos podemos darle un hogar a todos los
-            peluditos!
-          </p>
+          <h3>{t("CONTACT_CTA_TITLE", "contact")}</h3>
+          <p>{t("CONTACT_CTA_TEXT", "contact")}</p>
         </div>
       </div>
 
@@ -239,24 +237,24 @@ const ContactForm = () => {
       <form id="contact-form" onSubmit={handleSubmit}>
         <div className="contact-row">
           <div className="input-group">
-            <label htmlFor="name">Nombre Completo</label>
+            <label htmlFor="name">{t("CONTACT_FORM_NAME", "contact")}</label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Tu nombre completo"
+              placeholder={t("CONTACT_FORM_NAME_PLACEHOLDER", "contact")}
               required
               value={formData.name}
               onChange={handleChange}
             />
           </div>
           <div className="input-group">
-            <label htmlFor="email">Correo Electrónico</label>
+            <label htmlFor="email">{t("CONTACT_FORM_EMAIL", "contact")}</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="tucorreo@ejemplo.com"
+              placeholder={t("CONTACT_FORM_EMAIL_PLACEHOLDER", "contact")}
               required
               value={formData.email}
               onChange={handleChange}
@@ -264,24 +262,24 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="subject">Asunto</label>
+          <label htmlFor="subject">{t("CONTACT_FORM_SUBJECT", "contact")}</label>
           <input
             type="text"
             id="subject"
             name="subject"
-            placeholder="Asunto de tu mensaje"
+            placeholder={t("CONTACT_FORM_SUBJECT_PLACEHOLDER", "contact")}
             required
             value={formData.subject}
             onChange={handleChange}
           />
         </div>
         <div className="input-group">
-          <label htmlFor="message">Mensaje</label>
+          <label htmlFor="message">{t("CONTACT_FORM_MESSAGE", "contact")}</label>
           <textarea
             id="message"
             name="message"
             rows="4"
-            placeholder="Escribe tu mensaje aquí"
+            placeholder={t("CONTACT_FORM_MESSAGE_PLACEHOLDER", "contact")}
             required
             value={formData.message}
             onChange={handleChange}
@@ -299,15 +297,15 @@ const ContactForm = () => {
             onChange={handleChange}
           />
           <label htmlFor="privacy-policy">
-            He leído y acepto la{" "}
+            {t("CONTACT_PRIVACY_CHECKBOX", "contact")}{" "}
             <a href="#" id="privacy-policy-link" onClick={openPrivacyPolicy}>
-              política de privacidad
+              {t("CONTACT_PRIVACY_LINK", "contact")}
             </a>
           </label>
         </div>
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Enviando..." : "Enviar"}
+          {isSubmitting ? t("CONTACT_SUBMITTING", "contact") : t("CONTACT_SUBMIT_BUTTON", "contact")}
         </button>
       </form>
 

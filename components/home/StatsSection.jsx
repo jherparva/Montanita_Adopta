@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-// Corregimos la importación usando la ruta relativa correcta
+import { useLanguage } from "@/contexts/language-context"
 import LoadingSpinner from '../ui/LoadingSpinner'
 
 const StatsSection = () => {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // Actualizamos la ruta a la API correcta según tu estructura
         const response = await fetch('/api/home/stats')
         const data = await response.json()
         
@@ -36,7 +36,6 @@ const StatsSection = () => {
   const ErrorDisplay = () => (
     <div className="stats-error">
       <p>No se pudieron cargar las estadísticas. Por favor, intenta más tarde.</p>
-      {/* Añadimos un botón para reintentar */}
       <button 
         className="retry-button" 
         onClick={() => {
@@ -84,7 +83,7 @@ const StatsSection = () => {
               <i className="fas fa-home"></i>
             </div>
             <div className="stat-number">{stats.adoptedCount}+</div>
-            <div className="stat-label">Animales Adoptados</div>
+            <div className="stat-label">{t("HOME_STATS_ANIMALS_ADOPTED", "home")}</div>
           </div>
 
           <div className="stat-item">
@@ -92,7 +91,7 @@ const StatsSection = () => {
               <i className="fas fa-medkit"></i>
             </div>
             <div className="stat-number">{stats.rescuedCount}+</div>
-            <div className="stat-label">Animales Rescatados</div>
+            <div className="stat-label">{t("HOME_STATS_ANIMALS_RESCUED", "home")}</div>
           </div>
 
           <div className="stat-item">
@@ -100,7 +99,7 @@ const StatsSection = () => {
               <i className="fas fa-user-friends"></i>
             </div>
             <div className="stat-number">{stats.volunteersCount}+</div>
-            <div className="stat-label">Voluntarios Activos</div>
+            <div className="stat-label">{t("HOME_STATS_ACTIVE_VOLUNTEERS", "home")}</div>
           </div>
 
           <div className="stat-item">
@@ -108,7 +107,7 @@ const StatsSection = () => {
               <i className="fas fa-hand-holding-heart"></i>
             </div>
             <div className="stat-number">{stats.donorsCount}+</div>
-            <div className="stat-label">Donantes</div>
+            <div className="stat-label">{t("HOME_STATS_DONORS", "home")}</div>
           </div>
         </div>
       </div>

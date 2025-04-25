@@ -1,8 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const WelcomePopup = () => {
   const [showPopup, setShowPopup] = useState(false)
+  const { t } = useLanguage()
   
   useEffect(() => {
     // Verifica si el usuario está logueado (usando localStorage como ejemplo)
@@ -31,20 +33,18 @@ const WelcomePopup = () => {
         </span>
         <div className="welcome-header">
           <img src="/imagenes/logo.webp" alt="Logo Montañita" className="logo" />
-          <h2>¡Bienvenido a Montañita Adopta!</h2>
+          <h2>{t("HOME_WELCOME_TITLE", "home")}</h2>
         </div>
         <div className="welcome-body">
-          <p>
-            Gracias por visitar nuestra plataforma dedicada a encontrar hogares amorosos para nuestros amigos peludos
-          </p>
-          <p>Explora nuestro sitio para conocer a los animales que están esperando una familia como la tuya.</p>
+          <p>{t("HOME_WELCOME_DESCRIPTION1", "home")}</p>
+          <p>{t("HOME_WELCOME_DESCRIPTION2", "home")}</p>
           <div className="welcome-paws">
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
           </div>
           <button id="welcome-button" className="welcome-button" onClick={() => setShowPopup(false)}>
-            Comenzar
+            {t("HOME_WELCOME_BUTTON", "home")}
           </button>
         </div>
       </div>

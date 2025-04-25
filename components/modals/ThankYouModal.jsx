@@ -1,8 +1,11 @@
 "use client"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 import "@/styles/components/specific-modals-styles.css"
 
 const ThankYouModal = ({ onClose }) => {
+  const { t } = useLanguage()
+  
   return (
     <div
       className="modal fade show"
@@ -15,7 +18,7 @@ const ThankYouModal = ({ onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="thankYouModalLabel">
-              ¡Mensaje Enviado!
+              {t("THANKYOU_MODAL_TITLE", "modales")}
             </h5>
             <button type="button" className="btn-close" onClick={onClose}></button>
           </div>
@@ -23,15 +26,15 @@ const ThankYouModal = ({ onClose }) => {
             <div className="thank-you-icon">
               <i className="fas fa-check-circle"></i>
             </div>
-            <h4>¡Gracias por contactarnos!</h4>
-            <p>Hemos recibido tu mensaje correctamente. Nos pondremos en contacto contigo lo antes posible.</p>
+            <h4>{t("THANKYOU_MODAL_HEADER", "modales")}</h4>
+            <p>{t("THANKYOU_MODAL_TEXT", "modales")}</p>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={onClose}>
-              Cerrar
+              {t("THANKYOU_MODAL_CLOSE", "modales")}
             </button>
             <Link href="/" className="btn btn-primary">
-              Volver al inicio
+              {t("THANKYOU_MODAL_HOME", "modales")}
             </Link>
           </div>
         </div>
@@ -41,4 +44,3 @@ const ThankYouModal = ({ onClose }) => {
 }
 
 export default ThankYouModal
-

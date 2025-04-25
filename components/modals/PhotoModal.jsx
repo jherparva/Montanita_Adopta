@@ -1,12 +1,16 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 import "@/styles/components/specific-modals-styles.css"
 
-const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
+const UserPhotoUploader = ({ isOpen, onClose, currentPhoto }) => {
+  const { t } = useLanguage()
   const [previewSrc, setPreviewSrc] = useState(null)
   const [errorMessage, setErrorMessage] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showEnlarged, setShowEnlarged] = useState(false)
+  const [enlargedImage, setEnlargedImage] = useState(null)
   const fileInputRef = useRef(null)
   const router = useRouter()
 
@@ -16,16 +20,17 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
     setPreviewSrc(null)
     setErrorMessage("")
     setLoading(false)
-    document.body.classList.add("modal-open")
+    setShowEnlarged(false)
+    document.body.classList.add("uploader-modal-open")
     
-    const modalElement = document.getElementById("photoModal")
+    const modalElement = document.getElementById("userPhotoUploader")
     if (modalElement) {
       modalElement.style.display = "block"
       modalElement.classList.add("show")
     }
     
     return () => {
-      document.body.classList.remove("modal-open")
+      document.body.classList.remove("uploader-modal-open")
     }
   }, [isOpen])
 
@@ -38,12 +43,12 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
     const validTypes = ["image/jpeg", "image/png", "image/gif"]
     
     if (!validTypes.includes(file.type)) {
-      setErrorMessage("Formato de archivo no válido. Por favor, sube una imagen JPG, PNG o GIF.")
+      setErrorMessage(t("PHOTO_MODAL_ERROR_FORMAT", "modales"))
       return
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      setErrorMessage("La imagen es demasiado grande. El tamaño máximo es 5MB.")
+      setErrorMessage(t("PHOTO_MODAL_ERROR_SIZE", "modales"))
       return
     }
 
@@ -79,10 +84,11 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
 
     const file = fileInputRef.current?.files[0]
     if (!file && !previewSrc) {
-      setErrorMessage("Por favor, selecciona una imagen")
+      const errorMsg = t("PHOTO_MODAL_ERROR_SELECT", "modales")
+      setErrorMessage(errorMsg)
       window.Swal?.fire({
-        title: "Error",
-        text: "Por favor, selecciona una imagen",
+        title: t("CONTACT_ERROR_TITLE", "contact"),
+        text: errorMsg,
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -111,10 +117,10 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
 
       if (response.ok) {
         window.Swal?.fire({
-          title: "¡Foto actualizada!",
-          text: "Tu foto de perfil ha sido actualizada correctamente",
+          title: t("PHOTO_MODAL_SUCCESS_TITLE", "modales"),
+          text: t("PHOTO_MODAL_SUCCESS_TEXT", "modales"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("PHOTO_MODAL_CONTINUE", "modales"),
           confirmButtonColor: "#27b80b",
           timer: 2000,
           timerProgressBar: true,
@@ -128,15 +134,15 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
         onClose()
         setTimeout(() => router.refresh(), 500)
       } else {
-        throw new Error(data.message || "Error al subir la imagen")
+        throw new Error(data.message || t("PHOTO_MODAL_ERROR_DEFAULT", "modales"))
       }
     } catch (error) {
       console.error("Error al subir la imagen:", error)
-      setErrorMessage(error.message || "Error al subir la imagen. Por favor, inténtalo de nuevo.")
+      setErrorMessage(error.message || t("PHOTO_MODAL_ERROR_DEFAULT", "modales"))
       
       window.Swal?.fire({
-        title: "Error",
-        text: error.message || "Error al subir la imagen. Por favor, inténtalo de nuevo.",
+        title: t("CONTACT_ERROR_TITLE", "contact"),
+        text: error.message || t("PHOTO_MODAL_ERROR_DEFAULT", "modales"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -145,50 +151,95 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
     }
   }
 
+  const openEnlargedImage = (src) => {
+    setEnlargedImage(src);
+    setShowEnlarged(true);
+  }
+
+  const closeEnlargedImage = () => {
+    setShowEnlarged(false);
+  }
+
   if (!isOpen) return null
 
   return (
-    <div id="photoModal" className="photo-modal" style={{ display: "block" }}>
-      <div className="photo-modal-content">
-        <div className="photo-modal-header">
-          <h2>Cambiar foto de perfil</h2>
-          <span className="photo-modal-close" onClick={onClose}>
+    <div id="userPhotoUploader" className="uploader-modal" style={{ display: "block" }}>
+      <div className="uploader-modal-content">
+        <div className="uploader-modal-header">
+          <h2>{t("PHOTO_MODAL_TITLE", "modales")}</h2>
+          <span className="uploader-modal-close" onClick={onClose}>
             &times;
           </span>
         </div>
-        <div className="photo-upload-container">
-          <div className="photo-preview-section">
-            <div className="current-photo">
-              <h4>Foto actual</h4>
-              <img id="current-profile-photo" src={currentPhoto || "/placeholder.svg"} alt="Foto actual" />
+        <div className="uploader-container">
+          <div className="uploader-preview-section">
+            <div className="uploader-current-photo">
+              <h4>{t("PHOTO_MODAL_CURRENT", "modales")}</h4>
+              <div className="uploader-preview-container">
+                <img 
+                  id="current-profile-photo" 
+                  src={currentPhoto || "/placeholder.svg"} 
+                  alt={t("PHOTO_MODAL_CURRENT", "modales")} 
+                  style={{ objectFit: 'cover', width: '100%', height: '120px' }}
+                  onClick={() => currentPhoto && openEnlargedImage(currentPhoto)}
+                />
+                {currentPhoto && (
+                  <div className="uploader-preview-overlay">
+                    <button 
+                      type="button" 
+                      className="uploader-preview-button" 
+                      onClick={() => openEnlargedImage(currentPhoto)}
+                    >
+                      <i className="fas fa-search-plus"></i>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
             <div
-              className={`new-photo ${previewSrc ? "" : "empty-preview"}`}
+              className={`uploader-new-photo ${previewSrc ? "" : "uploader-empty-preview"}`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
-              <h4>Nueva foto</h4>
+              <h4>{t("PHOTO_MODAL_NEW", "modales")}</h4>
               {previewSrc ? (
-                <img id="photo-preview" src={previewSrc} alt="Vista previa" />
+                <div className="uploader-preview-container">
+                  <img 
+                    id="uploader-photo-preview" 
+                    src={previewSrc} 
+                    alt={t("PHOTO_MODAL_NEW", "modales")} 
+                    style={{ objectFit: 'cover', width: '100%', height: '120px' }}
+                    onClick={() => openEnlargedImage(previewSrc)}
+                  />
+                  <div className="uploader-preview-overlay">
+                    <button 
+                      type="button" 
+                      className="uploader-preview-button" 
+                      onClick={() => openEnlargedImage(previewSrc)}
+                    >
+                      <i className="fas fa-search-plus"></i>
+                    </button>
+                  </div>
+                </div>
               ) : (
-                <div className="empty-preview-placeholder">
+                <div className="uploader-empty-preview-placeholder">
                   <i className="fas fa-cloud-upload-alt"></i>
-                  <span>Arrastra una imagen aquí</span>
+                  <span>{t("PHOTO_MODAL_DRAG_HERE", "modales")}</span>
                 </div>
               )}
-              <div className="drag-overlay">
+              <div className="uploader-drag-overlay">
                 <i className="fas fa-cloud-arrow-up"></i>
-                <span>Suelta la imagen aquí</span>
+                <span>{t("PHOTO_MODAL_DROP_HERE", "modales")}</span>
               </div>
             </div>
           </div>
 
           <form id="profile-photo-form" onSubmit={handleSubmit}>
-            <div className="file-input-container">
-              <div className="upload-btn-wrapper">
-                <button type="button" className="file-upload-button" onClick={() => fileInputRef.current?.click()}>
-                  <i className="fas fa-upload"></i> Seleccionar imagen
+            <div className="uploader-file-input-container">
+              <div className="uploader-btn-wrapper">
+                <button type="button" className="uploader-file-button" onClick={() => fileInputRef.current?.click()}>
+                  <i className="fas fa-upload"></i> {t("PHOTO_MODAL_SELECT_BUTTON", "modales")}
                 </button>
                 <input
                   type="file"
@@ -199,31 +250,31 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
                   ref={fileInputRef}
                 />
               </div>
-              <div className="drag-drop-info">
-                <p>O arrastra y suelta una imagen aquí</p>
-                <p className="file-requirements">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 5MB</p>
+              <div className="uploader-drag-drop-info">
+                <p>{t("PHOTO_MODAL_DRAG_DROP_INFO", "modales")}</p>
+                <p className="uploader-file-requirements">{t("PHOTO_MODAL_FILE_REQUIREMENTS", "modales")}</p>
               </div>
             </div>
 
             {errorMessage && (
-              <div id="photo-error" className="error-message">
+              <div id="uploader-error" className="uploader-error-message">
                 {errorMessage}
               </div>
             )}
 
-            <div className="photo-modal-footer">
-              <button type="button" className="btn-cancel" onClick={onClose}>
-                <i className="fas fa-times"></i> Cancelar
+            <div className="uploader-modal-footer">
+              <button type="button" className="uploader-btn-cancel" onClick={onClose}>
+                <i className="fas fa-times"></i> {t("PHOTO_MODAL_CANCEL", "modales")}
               </button>
               <button
                 type="submit"
-                className={`btn-save ${loading ? "loading" : ""}`}
+                className={`uploader-btn-save ${loading ? "loading" : ""}`}
                 id="save-photo-btn"
                 disabled={!previewSrc || loading}
               >
                 {loading ? "" : (
                   <>
-                    <i className="fas fa-save"></i> Guardar cambios
+                    <i className="fas fa-save"></i> {t("PHOTO_MODAL_SAVE", "modales")}
                   </>
                 )}
               </button>
@@ -231,8 +282,20 @@ const PhotoModal = ({ isOpen, onClose, currentPhoto }) => {
           </form>
         </div>
       </div>
+
+      {/* Modal para ver la imagen ampliada */}
+      {showEnlarged && (
+        <div className="uploader-enlarged-image-modal" onClick={closeEnlargedImage}>
+          <div className="uploader-enlarged-image-container" onClick={(e) => e.stopPropagation()}>
+            <span className="uploader-enlarged-image-close" onClick={closeEnlargedImage}>
+              &times;
+            </span>
+            <img src={enlargedImage} alt="Imagen ampliada" />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-export default PhotoModal
+export default UserPhotoUploader

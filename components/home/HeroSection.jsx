@@ -1,22 +1,23 @@
+"use client"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
 const HeroSection = () => {
+  const { t } = useLanguage()
+  
   return (
     <section className="hero-section">
       <div className="container">
         <div className="hero-content">
-          <h1>Montañita Adopta</h1>
-          <p className="hero-subtitle">Dando segundas oportunidades a quienes más lo necesitan</p>
-          <p className="hero-description">
-            Somos una organización sin fines de lucro dedicada al rescate, rehabilitación y adopción de animales
-            abandonados en La Montañita, Caquetá.
-          </p>
+          <h1>{t("HOME_HERO_TITLE", "home")}</h1>
+          <p className="hero-subtitle">{t("HOME_HERO_SUBTITLE", "home")}</p>
+          <p className="hero-description">{t("HOME_HERO_DESCRIPTION", "home")}</p>
           <div className="hero-buttons">
             <Link href="/adopcion" className="btn btn-primary">
-              <i className="fas fa-paw"></i> Adoptar
+              <i className="fas fa-paw"></i> {t("HOME_HERO_BUTTON_ADOPT", "home")}
             </Link>
             <Link href="/donaciones" className="btn btn-secondary">
-              <i className="fas fa-heart"></i> Donar
+              <i className="fas fa-heart"></i> {t("HOME_HERO_BUTTON_DONATE", "home")}
             </Link>
           </div>
         </div>
@@ -27,4 +28,3 @@ const HeroSection = () => {
 }
 
 export default HeroSection
-

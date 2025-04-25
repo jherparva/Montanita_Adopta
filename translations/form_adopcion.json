@@ -1,0 +1,206 @@
+{
+    "es": {
+      "ADOPTION_TITLE": "Formulario de Adopción",
+      "ADOPTION_LOADING": "Cargando...",
+      "ADOPTION_AUTH_NEEDED": "Debes iniciar sesión para enviar una solicitud de adopción.",
+      "ADOPTION_LOGIN_BUTTON": "Iniciar Sesión",
+      
+      "ADOPTION_PET_INFO": "Información de la mascota",
+      "ADOPTION_PET_AGE": "Edad",
+      "ADOPTION_PET_BREED": "Raza",
+      "ADOPTION_PET_SEX": "Sexo",
+      "ADOPTION_PET_STATUS": "Esperando un hogar",
+      
+      "ADOPTION_AGE_PUPPY": "Cachorro",
+      "ADOPTION_AGE_KITTEN": "Gatito",
+      "ADOPTION_AGE_ADULT": "Adulto",
+      "ADOPTION_AGE_SENIOR": "Senior",
+      
+      "ADOPTION_SEX_MALE": "Macho",
+      "ADOPTION_SEX_FEMALE": "Hembra",
+      "ADOPTION_SEX_UNSPECIFIED": "No especificado",
+      
+      "ADOPTION_PERSONAL_INFO": "Información Personal",
+      "ADOPTION_FORM_FULLNAME": "Nombre Completo",
+      "ADOPTION_FORM_MARITAL_STATUS": "Estado Civil",
+      "ADOPTION_FORM_ID_DOCUMENT": "Documento de Identificación",
+      "ADOPTION_FORM_PHONE": "Celular",
+      
+      "ADOPTION_HOME_INFO": "Domicilio",
+      "ADOPTION_FORM_ADDRESS": "Dirección",
+      "ADOPTION_FORM_DEPARTMENT": "Departamento",
+      "ADOPTION_FORM_MUNICIPALITY": "Municipio",
+      "ADOPTION_FORM_PET_NAME": "Nombre del Compañero que Desea Adoptar",
+      
+      "ADOPTION_FAMILY_INFO": "Entorno Familiar",
+      "ADOPTION_FORM_KIDS": "¿Hay niños en la casa?",
+      "ADOPTION_FORM_KIDS_AGE": "¿Qué edad tienen los niños?",
+      "ADOPTION_FORM_KIDS_AGE_PLACEHOLDER": "Si no hay niños, escriba 'No aplica'",
+      "ADOPTION_FORM_ALLERGIES": "¿Hay personas alérgicas en la casa?",
+      
+      "ADOPTION_EXPERIENCE_INFO": "Experiencia con Mascotas",
+      "ADOPTION_FORM_HAD_PETS": "¿Ha tenido mascotas antes?",
+      "ADOPTION_FORM_ADOPTION_REASON": "Motivo por el cual desea adoptar",
+      
+      "ADOPTION_COMMITMENT_INFO": "Compromiso",
+      "ADOPTION_FORM_COMMITMENT_TEXT": "¿Se compromete a llevar la mascota a un centro veterinario posterior a la entrega para hacer revisión veterinaria, esquema de vacunación si no lo tiene o si desea iniciarlo de nuevo, exámenes de sangre o coprológicos según recomendación veterinaria? ¿ESTÁ DE ACUERDO CON ESTO?",
+      "ADOPTION_FORM_COMMITMENT_YES": "Sí, me comprometo",
+      "ADOPTION_FORM_COMMITMENT_NO": "No, no puedo comprometerme",
+      
+      "ADOPTION_SELECT_OPTION": "Seleccione una opción",
+      "ADOPTION_OPTION_YES": "Sí",
+      "ADOPTION_OPTION_NO": "No",
+      
+      "ADOPTION_SUBMIT_BUTTON": "Enviar Solicitud",
+      "ADOPTION_SUBMITTING": "Enviando...",
+      
+      "ADOPTION_SUCCESS_TITLE": "¡Solicitud Enviada!",
+      "ADOPTION_SUCCESS_TEXT": "Gracias por tu solicitud. Nos pondremos en contacto contigo pronto.",
+      "ADOPTION_SUCCESS_BUTTON": "Aceptar",
+      
+      "ADOPTION_ERROR_TITLE": "Error",
+      "ADOPTION_ERROR_TEXT": "Error al enviar la solicitud. Por favor intenta nuevamente.",
+      "ADOPTION_ERROR_CONNECTION": "Error de conexión. Por favor intenta nuevamente.",
+      
+      "ADOPTION_LOGIN_REQUIRED_TITLE": "Autenticación Requerida",
+      "ADOPTION_LOGIN_REQUIRED_TEXT": "Debes iniciar sesión para enviar una solicitud de adopción",
+      "ADOPTION_LOGIN_CONFIRM": "Sí, iniciar sesión",
+      "ADOPTION_LOGIN_CANCEL": "No, más tarde"
+    },
+    "en": {
+      "ADOPTION_TITLE": "Adoption Form",
+      "ADOPTION_LOADING": "Loading...",
+      "ADOPTION_AUTH_NEEDED": "You must be logged in to submit an adoption request.",
+      "ADOPTION_LOGIN_BUTTON": "Log In",
+      
+      "ADOPTION_PET_INFO": "Pet Information",
+      "ADOPTION_PET_AGE": "Age",
+      "ADOPTION_PET_BREED": "Breed",
+      "ADOPTION_PET_SEX": "Sex",
+      "ADOPTION_PET_STATUS": "Waiting for a home",
+      
+      "ADOPTION_AGE_PUPPY": "Puppy",
+      "ADOPTION_AGE_KITTEN": "Kitten",
+      "ADOPTION_AGE_ADULT": "Adult",
+      "ADOPTION_AGE_SENIOR": "Senior",
+      
+      "ADOPTION_SEX_MALE": "Male",
+      "ADOPTION_SEX_FEMALE": "Female",
+      "ADOPTION_SEX_UNSPECIFIED": "Unspecified",
+      
+      "ADOPTION_PERSONAL_INFO": "Personal Information",
+      "ADOPTION_FORM_FULLNAME": "Full Name",
+      "ADOPTION_FORM_MARITAL_STATUS": "Marital Status",
+      "ADOPTION_FORM_ID_DOCUMENT": "ID Document",
+      "ADOPTION_FORM_PHONE": "Phone Number",
+      
+      "ADOPTION_HOME_INFO": "Home Address",
+      "ADOPTION_FORM_ADDRESS": "Address",
+      "ADOPTION_FORM_DEPARTMENT": "Department/State",
+      "ADOPTION_FORM_MUNICIPALITY": "City/Municipality",
+      "ADOPTION_FORM_PET_NAME": "Name of the Pet You Wish to Adopt",
+      
+      "ADOPTION_FAMILY_INFO": "Family Environment",
+      "ADOPTION_FORM_KIDS": "Are there children in the house?",
+      "ADOPTION_FORM_KIDS_AGE": "How old are the children?",
+      "ADOPTION_FORM_KIDS_AGE_PLACEHOLDER": "If there are no children, write 'Not applicable'",
+      "ADOPTION_FORM_ALLERGIES": "Are there people with allergies in the house?",
+      
+      "ADOPTION_EXPERIENCE_INFO": "Pet Experience",
+      "ADOPTION_FORM_HAD_PETS": "Have you had pets before?",
+      "ADOPTION_FORM_ADOPTION_REASON": "Reason why you want to adopt",
+      
+      "ADOPTION_COMMITMENT_INFO": "Commitment",
+      "ADOPTION_FORM_COMMITMENT_TEXT": "Do you commit to taking the pet to a veterinary center after delivery for veterinary check-up, vaccination schedule if it doesn't have one or if you want to start it again, blood tests or coprological exams as per veterinary recommendation? DO YOU AGREE WITH THIS?",
+      "ADOPTION_FORM_COMMITMENT_YES": "Yes, I commit",
+      "ADOPTION_FORM_COMMITMENT_NO": "No, I cannot commit",
+      
+      "ADOPTION_SELECT_OPTION": "Select an option",
+      "ADOPTION_OPTION_YES": "Yes",
+      "ADOPTION_OPTION_NO": "No",
+      
+      "ADOPTION_SUBMIT_BUTTON": "Submit Application",
+      "ADOPTION_SUBMITTING": "Submitting...",
+      
+      "ADOPTION_SUCCESS_TITLE": "Application Submitted!",
+      "ADOPTION_SUCCESS_TEXT": "Thank you for your application. We will contact you soon.",
+      "ADOPTION_SUCCESS_BUTTON": "Accept",
+      
+      "ADOPTION_ERROR_TITLE": "Error",
+      "ADOPTION_ERROR_TEXT": "Error submitting the application. Please try again.",
+      "ADOPTION_ERROR_CONNECTION": "Connection error. Please try again.",
+      
+      "ADOPTION_LOGIN_REQUIRED_TITLE": "Authentication Required",
+      "ADOPTION_LOGIN_REQUIRED_TEXT": "You must log in to submit an adoption application",
+      "ADOPTION_LOGIN_CONFIRM": "Yes, log in",
+      "ADOPTION_LOGIN_CANCEL": "No, later"
+    },
+    "fr": {
+      "ADOPTION_TITLE": "Formulaire d'Adoption",
+      "ADOPTION_LOADING": "Chargement...",
+      "ADOPTION_AUTH_NEEDED": "Vous devez être connecté pour soumettre une demande d'adoption.",
+      "ADOPTION_LOGIN_BUTTON": "Se Connecter",
+      
+      "ADOPTION_PET_INFO": "Informations sur l'animal",
+      "ADOPTION_PET_AGE": "Âge",
+      "ADOPTION_PET_BREED": "Race",
+      "ADOPTION_PET_SEX": "Sexe",
+      "ADOPTION_PET_STATUS": "En attente d'un foyer",
+      
+      "ADOPTION_AGE_PUPPY": "Chiot",
+      "ADOPTION_AGE_KITTEN": "Chaton",
+      "ADOPTION_AGE_ADULT": "Adulte",
+      "ADOPTION_AGE_SENIOR": "Senior",
+      
+      "ADOPTION_SEX_MALE": "Mâle",
+      "ADOPTION_SEX_FEMALE": "Femelle",
+      "ADOPTION_SEX_UNSPECIFIED": "Non spécifié",
+      
+      "ADOPTION_PERSONAL_INFO": "Informations Personnelles",
+      "ADOPTION_FORM_FULLNAME": "Nom Complet",
+      "ADOPTION_FORM_MARITAL_STATUS": "État Civil",
+      "ADOPTION_FORM_ID_DOCUMENT": "Document d'Identité",
+      "ADOPTION_FORM_PHONE": "Numéro de Téléphone",
+      
+      "ADOPTION_HOME_INFO": "Adresse du Domicile",
+      "ADOPTION_FORM_ADDRESS": "Adresse",
+      "ADOPTION_FORM_DEPARTMENT": "Département/Région",
+      "ADOPTION_FORM_MUNICIPALITY": "Ville/Commune",
+      "ADOPTION_FORM_PET_NAME": "Nom de l'animal que vous souhaitez adopter",
+      
+      "ADOPTION_FAMILY_INFO": "Environnement Familial",
+      "ADOPTION_FORM_KIDS": "Y a-t-il des enfants dans la maison?",
+      "ADOPTION_FORM_KIDS_AGE": "Quel âge ont les enfants?",
+      "ADOPTION_FORM_KIDS_AGE_PLACEHOLDER": "S'il n'y a pas d'enfants, écrivez 'Non applicable'",
+      "ADOPTION_FORM_ALLERGIES": "Y a-t-il des personnes allergiques dans la maison?",
+      
+      "ADOPTION_EXPERIENCE_INFO": "Expérience avec les Animaux",
+      "ADOPTION_FORM_HAD_PETS": "Avez-vous déjà eu des animaux?",
+      "ADOPTION_FORM_ADOPTION_REASON": "Raison pour laquelle vous souhaitez adopter",
+      
+      "ADOPTION_COMMITMENT_INFO": "Engagement",
+      "ADOPTION_FORM_COMMITMENT_TEXT": "Vous engagez-vous à emmener l'animal dans un centre vétérinaire après la remise pour un examen vétérinaire, un calendrier de vaccination s'il n'en a pas ou si vous souhaitez le recommencer, des analyses de sang ou des examens coprologiques selon les recommandations vétérinaires? ÊTES-VOUS D'ACCORD AVEC CELA?",
+      "ADOPTION_FORM_COMMITMENT_YES": "Oui, je m'engage",
+      "ADOPTION_FORM_COMMITMENT_NO": "Non, je ne peux pas m'engager",
+      
+      "ADOPTION_SELECT_OPTION": "Sélectionnez une option",
+      "ADOPTION_OPTION_YES": "Oui",
+      "ADOPTION_OPTION_NO": "Non",
+      
+      "ADOPTION_SUBMIT_BUTTON": "Soumettre la Demande",
+      "ADOPTION_SUBMITTING": "Soumission en cours...",
+      
+      "ADOPTION_SUCCESS_TITLE": "Demande Soumise!",
+      "ADOPTION_SUCCESS_TEXT": "Merci pour votre demande. Nous vous contacterons bientôt.",
+      "ADOPTION_SUCCESS_BUTTON": "Accepter",
+      
+      "ADOPTION_ERROR_TITLE": "Erreur",
+      "ADOPTION_ERROR_TEXT": "Erreur lors de la soumission de la demande. Veuillez réessayer.",
+      "ADOPTION_ERROR_CONNECTION": "Erreur de connexion. Veuillez réessayer.",
+      
+      "ADOPTION_LOGIN_REQUIRED_TITLE": "Authentification Requise",
+      "ADOPTION_LOGIN_REQUIRED_TEXT": "Vous devez vous connecter pour soumettre une demande d'adoption",
+      "ADOPTION_LOGIN_CONFIRM": "Oui, se connecter",
+      "ADOPTION_LOGIN_CANCEL": "Non, plus tard"
+    }
+  }

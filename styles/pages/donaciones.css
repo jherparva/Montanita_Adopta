@@ -63,7 +63,6 @@
   resize: vertical;
 }
 
-/* Botón para subir archivo */
 .donations-page .file-upload-container {
   position: relative;
   overflow: hidden;
@@ -127,7 +126,6 @@
   white-space: nowrap;
 }
 
-/* Vista previa de evidencia */
 .donations-page .evidence-preview {
   margin: 20px 0;
   text-align: center;
@@ -146,7 +144,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Mejora del input para archivos */
 .donations-page .file-input {
   position: absolute;
   width: 1px;
@@ -196,7 +193,6 @@
   left: 100%;
 }
 
-/* Botón de envío del formulario */
 .donations-page .submit-btn,
 .donations-page .form-actions button {
   padding: 12px 25px;
@@ -246,7 +242,6 @@
   box-shadow: none;
 }
 
-/* Mejoras para el modal */
 .donations-page .donation-modal {
   position: fixed;
   top: 0;
@@ -319,7 +314,6 @@
   box-shadow: 0 2px 8px rgba(255, 62, 0, 0.1);
 }
 
-/* Barra de progreso */
 .donations-page .form-progress {
   height: 6px;
   background-color: #f0f0f0;
@@ -349,7 +343,6 @@
   opacity: 1;
 }
 
-/* Banner CTA */
 .donations-page .cta-banner {
   display: flex;
   align-items: center;
@@ -388,7 +381,6 @@
   text-align: left;
 }
 
-/* Elementos decorativos */
 .donations-page .donation-form-container {
   position: relative;
 }
@@ -451,7 +443,6 @@
   pointer-events: none;
 }
 
-/* Mensaje de error */
 .donations-page .error-message {
   padding: 12px 15px;
   margin: 15px 0;
@@ -471,13 +462,12 @@
   font-size: 18px;
 }
 
-/* Media queries para el formulario */
 @media (max-width: 768px) {
   .donations-page .donation-form-container,
   .donations-page .donation-modal-content {
     padding: 25px 20px;
-    margin: 15px auto; /* Centrado en móviles */
-    width: calc(100% - 30px); /* Ajuste para márgenes laterales */
+    margin: 15px auto; 
+    width: calc(100% - 30px);
   }
 
   .donations-page .donation-form h3,
@@ -517,7 +507,6 @@
   }
 }
 
-/* Estilos encapsulados para la sección de donaciones */
 .donations-page .donation-section {
   padding: 60px 0;
   background-color: #f9f9f9;
@@ -557,7 +546,6 @@
   line-height: 1.6;
 }
 
-/* Tarjetas de donación */
 .donations-page .donation-info-card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -612,7 +600,6 @@
   line-height: 1.5;
 }
 
-/* Monetary donation section */
 .donations-page .about-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -673,7 +660,6 @@
   gap: 10px;
 }
 
-/* Buttons */
 .donations-page .btn {
   padding: 12px 20px;
   border: none;
@@ -721,7 +707,6 @@
   color: #ffffff;
 }
 
-/* Payment instructions */
 .donations-page .payment-instructions {
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -748,7 +733,6 @@
   font-weight: 600;
 }
 
-/* Food donation section */
 .donations-page .food-donation-info {
   margin-top: 30px;
 }
@@ -820,7 +804,6 @@
   gap: 8px;
 }
 
-/* Map container */
 .donations-page .map-container {
   margin-top: 20px;
   border-radius: 8px;
@@ -828,7 +811,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero section */
 .donations-page .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.301), rgba(0, 0, 0, 0.486));
   background-size: cover;
@@ -847,8 +829,8 @@
     font-weight: 600;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
     position: relative;
-    display: inline-block;
-    left: 25%;
+    display: block;
+    left: 50%;
     transform: translateX(-50%);
     padding-top: 7%;
     animation: titleFloatDonation 3s ease-in-out infinite;
@@ -908,7 +890,6 @@
   justify-content: center;
 }
 
-/* Authentication message */
 .donations-page .auth-required-message {
   margin: 30px 0;
 }
@@ -921,7 +902,6 @@
   color: #0c5460;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .donations-page .about-grid {
     grid-template-columns: 1fr;
@@ -948,6 +928,7 @@
   }
   
   .donations-page .hero-section h1 {
-    font-size: 36px;
+    font-size: 32px;
+    padding-top: 80px;
   }
 }

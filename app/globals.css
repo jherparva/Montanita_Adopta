@@ -90,50 +90,10 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Blueberry', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-  }
-
-  html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
   /* Estilos globales para imágenes */
   img {
     max-width: 100%;
     height: auto;
   }
-
-  /* Estructura básica de la página */
-  main {
-    min-height: 70vh;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    flex: 1;
-  }
-
-  /* Estilos básicos para contenedores */
-  .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  /* Asegurar que los scripts no afecten el layout */
-  script {
-    display: none !important;
-  }
+  
 }

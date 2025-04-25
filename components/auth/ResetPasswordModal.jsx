@@ -1,8 +1,10 @@
 "use client"
 import { useState } from "react"
 import "@/styles/components/auth/reset-password.css"
+import { useLanguage } from "@/contexts/language-context"
 
 const ResetPasswordModal = ({ isOpen, onClose, openVerifyCodeModal }) => {
+  const { t } = useLanguage()
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -26,13 +28,13 @@ const ResetPasswordModal = ({ isOpen, onClose, openVerifyCodeModal }) => {
       const data = await response.json()
 
       if (response.ok) {
-        setSuccess("Se ha enviado un código de recuperación a tu correo electrónico")
+        setSuccess(t("RESET_PASSWORD_SUCCESS", "general"))
 
         window.Swal.fire({
-          title: "Código enviado",
-          text: "Se ha enviado un código de recuperación a tu correo electrónico",
+          title: t("RESET_PASSWORD_CODE_SENT", "general"),
+          text: t("RESET_PASSWORD_SUCCESS", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 3000,
           timerProgressBar: true,
@@ -43,22 +45,22 @@ const ResetPasswordModal = ({ isOpen, onClose, openVerifyCodeModal }) => {
           openVerifyCodeModal(email)
         }, 3000)
       } else {
-        setError(data.message || "Error al enviar el código de recuperación")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
 
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al enviar el código de recuperación",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error al solicitar recuperación:", error)
 
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -73,9 +75,9 @@ const ResetPasswordModal = ({ isOpen, onClose, openVerifyCodeModal }) => {
     <div id="resetPasswordModal" className="modal" style={{ display: "block" }}>
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Recuperar Contraseña</h2>
+        <h2>{t("RESET_PASSWORD_TITLE", "general")}</h2>
         <form id="reset-password-form" onSubmit={handleSubmit}>
-          <label htmlFor="reset-password-email">Correo Electrónico:</label>
+          <label htmlFor="reset-password-email">{t("RESET_PASSWORD_EMAIL", "general")}</label>
           <input
             type="email"
             id="reset-password-email"
@@ -85,7 +87,7 @@ const ResetPasswordModal = ({ isOpen, onClose, openVerifyCodeModal }) => {
             required
           />
           <button type="submit" disabled={loading}>
-            {loading ? "Enviando..." : "Enviar Código de Recuperación"}
+            {loading ? t("RESET_PASSWORD_PROCESSING", "general") : t("RESET_PASSWORD_BUTTON", "general")}
           </button>
         </form>
         {error && (

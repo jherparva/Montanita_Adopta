@@ -1,0 +1,95 @@
+/* google-social-buttons.css */
+
+/* Container for Google Sign-In button */
+.google-signin-container {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
+  position: relative;
+}
+
+/* Google Sign-In button styling */
+.google-signin-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
+  position: relative;
+}
+
+.google-signin-button div[role="button"] {
+  width: 100% !important;
+  border-radius: 6px;
+  transition: transform 0.3s;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.google-signin-button div[role="button"]:hover {
+  transform: translateY(-2px);
+}
+
+.google-signin-button div[role="button"]:active {
+  transform: translateY(1px);
+}
+
+/* Social login buttons */
+.social-login-button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
+  position: relative;
+}
+
+/* Facebook button styling */
+.social-login-button.facebook {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.social-login-button.facebook:hover {
+  background-color: #2d4373;
+  transform: translateY(-2px);
+}
+
+.social-login-button.facebook:active {
+  transform: translateY(1px);
+}
+
+/* Google button styling (for custom Google button if needed) */
+.social-login-button.google {
+  background-color: #db4437;
+  color: #fff;
+}
+
+.social-login-button.google:hover {
+  background-color: #c1351d;
+  transform: translateY(-2px);
+}
+
+.social-login-button.google:active {
+  transform: translateY(1px);
+}
+
+/* Error message styling */
+.auth-error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}

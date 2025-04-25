@@ -1,4 +1,3 @@
-/* Banner */
 .voluntariado-banner {
   background: linear-gradient(rgba(0, 0, 0, 0.301), rgba(0, 0, 0, 0.486));
   background-size: cover;
@@ -19,26 +18,28 @@
 
 .banner-content h1 {
   font-family: 'Blueberry', sans-serif;
-    text-align: center;
-    color: #cf0707;
-    margin-bottom: 30px;
-    font-size: 55px;
-    font-weight: 600;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 7%;
-    animation: titleFloatVolunteer 3s ease-in-out infinite;
+  text-align: center;
+  color: #cf0707;
+  margin-bottom: 30px;
+  font-size: 55px;
+  font-weight: 600;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: block; 
+  width: 100%; 
+  padding-top: 7%;
+  animation: titleFloatVolunteer 3s ease-in-out infinite;
+  transform: none; 
+  left: 0; 
 }
+
 
 @keyframes titleFloatVolunteer {
   0%, 100% {
-    transform: translateY(0) translateX(-50%);
+    transform: translateY(0); 
   }
   50% {
-    transform: translateY(-5px) translateX(-50%);
+    transform: translateY(-5px); 
   }
 }
 
@@ -91,7 +92,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Sección de información */
 .voluntariado-container {
   display: flex;
   flex-wrap: wrap;
@@ -142,7 +142,6 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Sección de requisitos */
 .volunteer-requirements {
   background-color: #f9f9f9;
   padding: 60px 20px;
@@ -265,7 +264,6 @@
   line-height: 1.5;
 }
 
-/* Galería de voluntarios */
 .voluntarios-galeria {
   padding: 60px 20px;
 }
@@ -382,7 +380,6 @@
   font-size: 0.9rem;
 }
 
-/* Sección de apadrinamiento */
 .apadrinar-container {
   display: flex;
   flex-wrap: wrap;
@@ -434,8 +431,6 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Estilos para centrar los modales en la pantalla */
 .volunteer-modal,
 .sponsor-modal {
   position: fixed;
@@ -452,14 +447,12 @@
   padding: 90px;
 }
 
-/* Asegurarse de que el contenido del modal esté centrado dentro del contenedor */
 .volunteer-modal .donation-modal-content,
 .sponsor-modal .donation-modal-content {
   margin: auto;
-  /* El resto de tus estilos actuales se mantienen */
 }
 
-/* Estilos compartidos para los modales de Voluntario y Apadrinamiento */
+
 .volunteer-modal .donation-modal-content,
 .sponsor-modal .donation-modal-content {
   background-color: #ffffff;
@@ -490,7 +483,6 @@
   color: #2bff00;
 }
 
-/* Estilos para el formulario de voluntario */
 .volunteer-form-container,
 .sponsor-form-container {
   background-color: #ffffff;
@@ -618,7 +610,6 @@
   resize: vertical;
 }
 
-/* Estilos para checkboxes en formulario de voluntario */
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -643,7 +634,6 @@
   cursor: pointer;
 }
 
-/* Estilos para el grupo de términos y condiciones */
 .terms-group {
   display: flex;
   align-items: flex-start;
@@ -672,7 +662,6 @@
   color: #2bff00;
 }
 
-/* Mensajes de error y éxito */
 .error-message,
 .success-message {
   padding: 15px;
@@ -701,7 +690,6 @@
   font-size: 18px;
 }
 
-/* Botones de acción */
 .form-actions {
   display: flex;
   justify-content: center;
@@ -771,7 +759,6 @@
   background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%) !important;
 }
 
-/* Indicador de campos obligatorios */
 .required {
   color: #ff3e00;
 }
@@ -783,7 +770,6 @@
   text-align: right;
 }
 
-/* Estilos específicos para el formulario de apadrinamiento */
 .opciones-apadrinamiento {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -817,7 +803,6 @@
   font-size: 14px;
 }
 
-/* Estilos adicionales para el estado de la solicitud */
 .success-message-container {
   max-width: 800px;
   margin: 0 auto 40px;
@@ -906,10 +891,6 @@
   text-decoration: underline;
 }
 
-/* Estilos base (se mantienen igual) */
-/* ... El código CSS original ... */
-
-/* Responsive */
 @media (max-width: 1200px) {
   .voluntariado-container,
   .apadrinar-container {
@@ -950,7 +931,8 @@
 @media (max-width: 768px) {
   .banner-content h1 {
     font-size: 2.5rem;
-    padding-right: 54px;
+    padding-right: 0; 
+    padding-top: 100px;
   }
 
   .voluntariado-container,
@@ -1016,7 +998,8 @@
 @media (max-width: 576px) {
   .banner-content h1 {
     font-size: 2rem;
-    padding-right: 30px;
+    padding-right: 0;
+    padding-top: 160px;
   }
   
   .section-title,
@@ -1111,7 +1094,8 @@
 @media (max-width: 420px) {
   .banner-content h1 {
     font-size: 1.6rem;
-    padding-right: 20px;
+    padding-right: 0;
+    padding-top: 200px;
   }
   
   .section-title,

@@ -27,21 +27,18 @@ const nextConfig = {
       "localhost"
     ]
   },
-  // Adding this to fix the cookies static rendering issue
-  // This tells Next.js to generate these routes at runtime (not build time)
   generateEtags: false,
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: false,
   
-  // Important: Set this to affect dynamic route behavior
   output: 'standalone',
   
   async headers() {
     return [
       {
-        // Apply these headers to all routes
+
         source: '/api/:path*',
         headers: [
         { key: 'Cross-Origin-Opener-Policy', value: 'unsafe-none' }, // 🔧 Clave para permitir postMessage
@@ -57,15 +54,14 @@ const nextConfig = {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
-    authInterrupts: true, // Añadimos esta configuración para habilitar unauthorized() y forbidden()
-    // New experimental features to handle dynamic routes better
-    isrMemoryCacheSize: 0, // Disable ISR cache for dynamic routes
+    authInterrupts: true,
+    isrMemoryCacheSize: 0, 
     instrumentationHook: true,
   },
 }
 
 if (userConfig) {
-  // ESM imports will have a "default" property
+
   const config = userConfig.default || userConfig
 
   for (const key in config) {

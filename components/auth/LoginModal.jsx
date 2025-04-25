@@ -3,8 +3,11 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
 import "@/styles/components/auth/login.css"
+import "@/styles/components/auth/google-social-buttons.css"
+import { useLanguage } from "@/contexts/language-context"
 
 const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal }) => {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,16 +16,32 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
   const [error, setError] = useState("")
   const router = useRouter()
 
+  // En LoginModal.jsx
   useEffect(() => {
-    // Definir el callback de Google globalmente
-    window.handleCredentialResponse = (response) => {
+    // Definir el callback de Google globalmente con un nombre único para login
+    window.handleCredentialResponseLogin = (response) => {
       handleGoogleLogin(response.credential)
     }
     
-    return () => {
-      delete window.handleCredentialResponse
+    // Renderizar el botón de Google solo cuando el modal esté abierto
+    if (isOpen && window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id: "385524721924-ufgkod1roqrgi6iaflumbo6dmictc7mm.apps.googleusercontent.com",
+        callback: window.handleCredentialResponseLogin,
+        auto_select: false,
+      })
+      
+      window.google.accounts.id.renderButton(
+        document.getElementById("google-signin-button-login"),
+        { theme: "outline", size: "large", width: "100%" }
+      )
     }
-  }, [])
+    
+    return () => {
+      // Limpiar el callback cuando el componente se desmonte
+      delete window.handleCredentialResponseLogin
+    }
+  }, [isOpen]) // Re-ejecutar cuando isOpen cambie
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -55,10 +74,10 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
         onClose()
 
         window.Swal.fire({
-          title: "¡Bienvenido!",
-          text: "Has iniciado sesión correctamente",
+          title: t("LOGIN_WELCOME", "general"),
+          text: t("LOGIN_SUCCESS", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 3500,
           timerProgressBar: true,
@@ -71,22 +90,22 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
           window.location.reload()
         }, 3500)
       } else {
-        setError(data.message || "Error al iniciar sesión")
+        setError(data.message || t("LOGIN_ERROR", "general"))
 
         window.Swal.fire({
-          title: "Error de inicio de sesión",
-          text: data.message || "Credenciales inválidas",
+          title: t("LOGIN_ERROR", "general"),
+          text: data.message || t("LOGIN_ERROR_CREDENTIALS", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("LOGIN_ERROR_SERVER", "general"))
       console.error("Error de login:", error)
 
       window.Swal.fire({
-        title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        title: t("LOGIN_ERROR", "general"),
+        text: t("LOGIN_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -122,19 +141,19 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
         setError(data.message || "Error al iniciar sesión con Google")
 
         window.Swal.fire({
-          title: "Error",
+          title: t("LOGIN_ERROR", "general"),
           text: data.message || "Error al iniciar sesión con Google",
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("LOGIN_ERROR_SERVER", "general"))
       console.error("Error de login con Google:", error)
 
       window.Swal.fire({
-        title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        title: t("LOGIN_ERROR", "general"),
+        text: t("LOGIN_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -153,8 +172,8 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
           setError("Inicio de sesión con Facebook cancelado")
 
           window.Swal.fire({
-            title: "Cancelado",
-            text: "Inicio de sesión con Facebook cancelado",
+            title: t("REGISTER_CANCELED_FACEBOOK", "general"),
+            text: t("REGISTER_CANCELED_FACEBOOK", "general"),
             icon: "info",
             confirmButtonColor: "#3085d6",
           })
@@ -191,19 +210,19 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
         setError(data.message || "Error al iniciar sesión con Facebook")
 
         window.Swal.fire({
-          title: "Error",
+          title: t("LOGIN_ERROR", "general"),
           text: data.message || "Error al iniciar sesión con Facebook",
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("LOGIN_ERROR_SERVER", "general"))
       console.error("Error de login con Facebook:", error)
 
       window.Swal.fire({
-        title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        title: t("LOGIN_ERROR", "general"),
+        text: t("LOGIN_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -222,13 +241,13 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
             &times;
           </span>
           <div className="login-header">
-            <h2>Iniciar Sesión</h2>
+            <h2>{t("LOGIN_TITLE", "general")}</h2>
           </div>
           <form id="login-form" onSubmit={handleSubmit}>
-            <label htmlFor="email">Correo Electrónico:</label>
+            <label htmlFor="email">{t("LOGIN_EMAIL", "general")}</label>
             <input type="email" id="login-email" name="email" value={formData.email} onChange={handleChange} required />
 
-            <label htmlFor="password">Contraseña:</label>
+            <label htmlFor="password">{t("LOGIN_PASSWORD", "general")}</label>
             <input
               type="password"
               id="login-password"
@@ -239,7 +258,7 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
             />
 
             <button type="submit" disabled={loading}>
-              {loading ? "Procesando..." : "Ingresar"}
+              {loading ? t("LOGIN_PROCESSING", "general") : t("LOGIN_BUTTON", "general")}
             </button>
             <a
               href="#"
@@ -250,26 +269,25 @@ const LoginModal = ({ isOpen, onClose, openRegisterModal, openResetPasswordModal
                 openResetPasswordModal()
               }}
             >
-              Olvidé mi contraseña
+              {t("LOGIN_FORGOT_PASSWORD", "general")}
             </a>
 
-            <div
-              id="g_id_onload"
+            <div className="google-signin-container" id="g_id_onload" 
               data-client_id="385524721924-ufgkod1roqrgi6iaflumbo6dmictc7mm.apps.googleusercontent.com"
               data-context="signin"
               data-ux_mode="popup"
               data-callback="handleCredentialResponse"
-              data-auto_prompt="false"
-            ></div>
+              data-auto_prompt="false">
+            </div>
 
-            <div className="g_id_signin" data-type="standard"></div>
+            <div id="google-signin-button-login" className="google-signin-button"></div>
 
-            <button type="button" className="social-login facebook" onClick={handleFacebookLogin}>
-              Entrar con Facebook
+            <button type="button" className="social-login-button facebook" onClick={handleFacebookLogin}>
+              {t("LOGIN_WITH_FACEBOOK", "general")}
             </button>
           </form>
           {error && (
-            <div id="login-alert" style={{ color: "red", display: "block" }}>
+            <div className="auth-error-message" style={{ display: "block" }}>
               {error}
             </div>
           )}

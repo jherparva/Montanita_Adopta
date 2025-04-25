@@ -1,0 +1,173 @@
+{
+    "es": {
+      "STORIES_TITLE": "Historias de adopciones exitosas",
+      "STORIES_SHARE_BUTTON": "Compartir mi historia",
+      "STORIES_CANCEL_BUTTON": "Cancelar",
+      "STORIES_NO_STORIES": "Aún no hay historias publicadas. ¡Sé el primero en compartir tu experiencia!",
+      
+      "STORIES_FEATURED_TITLE": "Historias Destacadas",
+      "STORIES_VIEW_MORE": "Ver más historias",
+      "STORIES_VIEW_LESS": "Ver menos historias",
+      
+      "STORIES_TESTIMONIALS_TITLE": "Testimonios Destacados",
+      
+      "STORIES_LOADING": "Cargando historias...",
+      "STORIES_ERROR": "Error al cargar historias. Por favor, intenta más tarde.",
+      "STORIES_RETRY": "Intentar de nuevo",
+      
+      "STORIES_AUTH_NEEDED": "Debes iniciar sesión para compartir tu historia",
+      "STORIES_LOGIN_BUTTON": "Iniciar sesión",
+      
+      "STORIES_FORM_TITLE": "Comparte tu historia de adopción",
+      "STORIES_FORM_CTA_TITLE": "¡Tu historia puede inspirar a otros!",
+      "STORIES_FORM_CTA_TEXT": "Cuéntanos cómo cambió tu vida al adoptar un peludito. Tus palabras pueden motivar a más personas a dar un hogar a quienes lo necesitan.",
+      
+      "STORIES_FORM_NAME": "Nombre:",
+      "STORIES_FORM_NAME_PLACEHOLDER": "Tu nombre completo",
+      "STORIES_FORM_EMAIL": "Correo electrónico:",
+      "STORIES_FORM_EMAIL_PLACEHOLDER": "tucorreo@ejemplo.com",
+      "STORIES_FORM_TITLE_LABEL": "Título de tu historia:",
+      "STORIES_FORM_TITLE_PLACEHOLDER": "Un título atractivo para tu historia",
+      "STORIES_FORM_STORY": "Tu historia:",
+      "STORIES_FORM_STORY_PLACEHOLDER": "Cuéntanos tu experiencia de adopción...",
+      
+      "STORIES_FORM_IMAGE": "Imagen (opcional):",
+      "STORIES_FORM_IMAGE_SELECT": "Seleccionar imagen",
+      "STORIES_FORM_IMAGE_FORMATS": "Formatos permitidos: JPG, PNG, GIF, WEBP. Tamaño máximo: 5MB",
+      "STORIES_FORM_IMAGE_PREVIEW": "Vista previa:",
+      
+      "STORIES_FORM_SUBMIT": "Enviar historia",
+      "STORIES_FORM_SUBMITTING": "Enviando...",
+      
+      "STORIES_SUCCESS_TITLE": "¡Historia enviada!",
+      "STORIES_SUCCESS_TEXT": "Gracias por compartir tu historia. Será revisada por nuestro equipo antes de ser publicada.",
+      
+      "STORIES_ERROR_TITLE": "Error",
+      "STORIES_ERROR_TEXT": "Error al enviar la historia. Por favor, intenta más tarde.",
+      
+      "STORIES_VIDEO_TITLE": "Videos Motivacionales",
+      "STORIES_VIDEO_HISTORY1": "Historia 1",
+      "STORIES_VIDEO_HISTORY2": "Historia 2",
+      "STORIES_VIDEO_HISTORY3": "Historia 3",
+      "STORIES_VIDEO_UNSUPPORTED": "Tu navegador no soporta videos HTML5.",
+      
+      "STORIES_CTA_TITLE": "¿Quieres crear tu propia historia?",
+      "STORIES_CTA_TEXT": "Miles de mascotas están esperando un hogar. Tu próxima historia de éxito podría comenzar con una adopción.",
+      "STORIES_CTA_BUTTON1": "Conoce a tus futuros amigos",
+      "STORIES_CTA_BUTTON2": "Información sobre adopción"
+    },
+    "en": {
+      "STORIES_TITLE": "Successful Adoption Stories",
+      "STORIES_SHARE_BUTTON": "Share my story",
+      "STORIES_CANCEL_BUTTON": "Cancel",
+      "STORIES_NO_STORIES": "There are no stories published yet. Be the first to share your experience!",
+      
+      "STORIES_FEATURED_TITLE": "Featured Stories",
+      "STORIES_VIEW_MORE": "View more stories",
+      "STORIES_VIEW_LESS": "View fewer stories",
+      
+      "STORIES_TESTIMONIALS_TITLE": "Featured Testimonials",
+      
+      "STORIES_LOADING": "Loading stories...",
+      "STORIES_ERROR": "Error loading stories. Please try again later.",
+      "STORIES_RETRY": "Try again",
+      
+      "STORIES_AUTH_NEEDED": "You must log in to share your story",
+      "STORIES_LOGIN_BUTTON": "Log in",
+      
+      "STORIES_FORM_TITLE": "Share your adoption story",
+      "STORIES_FORM_CTA_TITLE": "Your story can inspire others!",
+      "STORIES_FORM_CTA_TEXT": "Tell us how your life changed after adopting a pet. Your words can motivate more people to provide a home for those in need.",
+      
+      "STORIES_FORM_NAME": "Name:",
+      "STORIES_FORM_NAME_PLACEHOLDER": "Your full name",
+      "STORIES_FORM_EMAIL": "Email:",
+      "STORIES_FORM_EMAIL_PLACEHOLDER": "your-email@example.com",
+      "STORIES_FORM_TITLE_LABEL": "Story title:",
+      "STORIES_FORM_TITLE_PLACEHOLDER": "An attractive title for your story",
+      "STORIES_FORM_STORY": "Your story:",
+      "STORIES_FORM_STORY_PLACEHOLDER": "Tell us about your adoption experience...",
+      
+      "STORIES_FORM_IMAGE": "Image (optional):",
+      "STORIES_FORM_IMAGE_SELECT": "Select image",
+      "STORIES_FORM_IMAGE_FORMATS": "Allowed formats: JPG, PNG, GIF, WEBP. Maximum size: 5MB",
+      "STORIES_FORM_IMAGE_PREVIEW": "Preview:",
+      
+      "STORIES_FORM_SUBMIT": "Submit story",
+      "STORIES_FORM_SUBMITTING": "Sending...",
+      
+      "STORIES_SUCCESS_TITLE": "Story submitted!",
+      "STORIES_SUCCESS_TEXT": "Thank you for sharing your story. It will be reviewed by our team before publishing.",
+      
+      "STORIES_ERROR_TITLE": "Error",
+      "STORIES_ERROR_TEXT": "Error submitting the story. Please try again later.",
+      
+      "STORIES_VIDEO_TITLE": "Motivational Videos",
+      "STORIES_VIDEO_HISTORY1": "Story 1",
+      "STORIES_VIDEO_HISTORY2": "Story 2",
+      "STORIES_VIDEO_HISTORY3": "Story 3",
+      "STORIES_VIDEO_UNSUPPORTED": "Your browser does not support HTML5 videos.",
+      
+      "STORIES_CTA_TITLE": "Do you want to create your own story?",
+      "STORIES_CTA_TEXT": "Thousands of pets are waiting for a home. Your next success story could begin with an adoption.",
+      "STORIES_CTA_BUTTON1": "Meet your future friends",
+      "STORIES_CTA_BUTTON2": "Adoption information"
+    },
+    "fr": {
+      "STORIES_TITLE": "Histoires d'adoptions réussies",
+      "STORIES_SHARE_BUTTON": "Partager mon histoire",
+      "STORIES_CANCEL_BUTTON": "Annuler",
+      "STORIES_NO_STORIES": "Il n'y a pas encore d'histoires publiées. Soyez le premier à partager votre expérience !",
+      
+      "STORIES_FEATURED_TITLE": "Histoires en vedette",
+      "STORIES_VIEW_MORE": "Voir plus d'histoires",
+      "STORIES_VIEW_LESS": "Voir moins d'histoires",
+      
+      "STORIES_TESTIMONIALS_TITLE": "Témoignages en vedette",
+      
+      "STORIES_LOADING": "Chargement des histoires...",
+      "STORIES_ERROR": "Erreur lors du chargement des histoires. Veuillez réessayer plus tard.",
+      "STORIES_RETRY": "Réessayer",
+      
+      "STORIES_AUTH_NEEDED": "Vous devez vous connecter pour partager votre histoire",
+      "STORIES_LOGIN_BUTTON": "Se connecter",
+      
+      "STORIES_FORM_TITLE": "Partagez votre histoire d'adoption",
+      "STORIES_FORM_CTA_TITLE": "Votre histoire peut en inspirer d'autres !",
+      "STORIES_FORM_CTA_TEXT": "Dites-nous comment votre vie a changé après avoir adopté un animal. Vos mots peuvent motiver davantage de personnes à offrir un foyer à ceux qui en ont besoin.",
+      
+      "STORIES_FORM_NAME": "Nom :",
+      "STORIES_FORM_NAME_PLACEHOLDER": "Votre nom complet",
+      "STORIES_FORM_EMAIL": "Email :",
+      "STORIES_FORM_EMAIL_PLACEHOLDER": "votre-email@exemple.com",
+      "STORIES_FORM_TITLE_LABEL": "Titre de votre histoire :",
+      "STORIES_FORM_TITLE_PLACEHOLDER": "Un titre attrayant pour votre histoire",
+      "STORIES_FORM_STORY": "Votre histoire :",
+      "STORIES_FORM_STORY_PLACEHOLDER": "Racontez-nous votre expérience d'adoption...",
+      
+      "STORIES_FORM_IMAGE": "Image (facultatif) :",
+      "STORIES_FORM_IMAGE_SELECT": "Sélectionner une image",
+      "STORIES_FORM_IMAGE_FORMATS": "Formats autorisés : JPG, PNG, GIF, WEBP. Taille maximale : 5MB",
+      "STORIES_FORM_IMAGE_PREVIEW": "Aperçu :",
+      
+      "STORIES_FORM_SUBMIT": "Envoyer l'histoire",
+      "STORIES_FORM_SUBMITTING": "Envoi en cours...",
+      
+      "STORIES_SUCCESS_TITLE": "Histoire envoyée !",
+      "STORIES_SUCCESS_TEXT": "Merci d'avoir partagé votre histoire. Elle sera examinée par notre équipe avant publication.",
+      
+      "STORIES_ERROR_TITLE": "Erreur",
+      "STORIES_ERROR_TEXT": "Erreur lors de l'envoi de l'histoire. Veuillez réessayer plus tard.",
+      
+      "STORIES_VIDEO_TITLE": "Vidéos motivantes",
+      "STORIES_VIDEO_HISTORY1": "Histoire 1",
+      "STORIES_VIDEO_HISTORY2": "Histoire 2",
+      "STORIES_VIDEO_HISTORY3": "Histoire 3",
+      "STORIES_VIDEO_UNSUPPORTED": "Votre navigateur ne prend pas en charge les vidéos HTML5.",
+      
+      "STORIES_CTA_TITLE": "Voulez-vous créer votre propre histoire ?",
+      "STORIES_CTA_TEXT": "Des milliers d'animaux attendent un foyer. Votre prochaine réussite pourrait commencer par une adoption.",
+      "STORIES_CTA_BUTTON1": "Rencontrez vos futurs amis",
+      "STORIES_CTA_BUTTON2": "Informations sur l'adoption"
+    }
+  }

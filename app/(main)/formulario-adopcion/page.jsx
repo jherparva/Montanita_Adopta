@@ -1,3 +1,4 @@
+//C:\Users\jhon\Music\montanita-adopta\app\(main)\formulario-adopcion\page.jsx
 "use client"
 import { useState, useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"

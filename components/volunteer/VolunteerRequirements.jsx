@@ -1,95 +1,99 @@
+import { useLanguage } from "@/contexts/language-context"
+
 const VolunteerRequirements = () => {
+  const { t } = useLanguage()
+  
   return (
     <section className="volunteer-requirements">
       <div className="container">
-        <h2>Requisitos para ser Voluntario</h2>
+        <h2>{t("VOLUNTEER_REQUIREMENTS_TITLE", "voluntario")}</h2>
 
         <div className="requirements-grid">
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-user-clock"></i>
             </div>
-            <h3>Edad mínima</h3>
-            <p>Ser mayor de 18 años. Los menores pueden participar acompañados de un adulto responsable.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_AGE_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_AGE", "voluntario")}</p>
           </div>
 
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-calendar-check"></i>
             </div>
-            <h3>Compromiso</h3>
-            <p>Disponibilidad para cumplir con el horario acordado de manera regular.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_COMMITMENT_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_COMMITMENT", "voluntario")}</p>
           </div>
 
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-heart"></i>
             </div>
-            <h3>Amor por los animales</h3>
-            <p>Pasión y respeto por los animales y su bienestar.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_LOVE_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_LOVE", "voluntario")}</p>
           </div>
 
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-hands-helping"></i>
             </div>
-            <h3>Trabajo en equipo</h3>
-            <p>Capacidad para trabajar en equipo y seguir instrucciones.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_TEAM_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_TEAM", "voluntario")}</p>
           </div>
 
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-file-signature"></i>
             </div>
-            <h3>Documentación</h3>
-            <p>Documento de identidad vigente y completar el formulario de solicitud.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_DOCS_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_DOCS", "voluntario")}</p>
           </div>
 
           <div className="requirement-card">
             <div className="requirement-icon">
               <i className="fas fa-book-reader"></i>
             </div>
-            <h3>Capacitación</h3>
-            <p>Disposición para recibir capacitación sobre el manejo adecuado de los animales.</p>
+            <h3>{t("VOLUNTEER_REQUIREMENT_TRAINING_TITLE", "voluntario")}</h3>
+            <p>{t("VOLUNTEER_REQUIREMENT_TRAINING", "voluntario")}</p>
           </div>
         </div>
 
         <div className="process-steps">
-          <h3>Proceso de Selección</h3>
+          <h3>{t("VOLUNTEER_PROCESS_TITLE", "voluntario")}</h3>
           <ol className="steps-list">
             <li>
               <span className="step-number">1</span>
               <div className="step-content">
-                <h4>Envío de solicitud</h4>
-                <p>Completa el formulario de solicitud con tus datos y áreas de interés.</p>
+                <h4>{t("VOLUNTEER_PROCESS_STEP1_TITLE", "voluntario")}</h4>
+                <p>{t("VOLUNTEER_PROCESS_STEP1", "voluntario")}</p>
               </div>
             </li>
             <li>
               <span className="step-number">2</span>
               <div className="step-content">
-                <h4>Revisión de solicitud</h4>
-                <p>Nuestro equipo revisará tu solicitud y verificará la información proporcionada.</p>
+                <h4>{t("VOLUNTEER_PROCESS_STEP2_TITLE", "voluntario")}</h4>
+                <p>{t("VOLUNTEER_PROCESS_STEP2", "voluntario")}</p>
               </div>
             </li>
             <li>
               <span className="step-number">3</span>
               <div className="step-content">
-                <h4>Entrevista</h4>
-                <p>Si tu perfil es compatible, te contactaremos para una entrevista presencial o virtual.</p>
+                <h4>{t("VOLUNTEER_PROCESS_STEP3_TITLE", "voluntario")}</h4>
+                <p>{t("VOLUNTEER_PROCESS_STEP3", "voluntario")}</p>
               </div>
             </li>
             <li>
               <span className="step-number">4</span>
               <div className="step-content">
-                <h4>Capacitación</h4>
-                <p>Recibirás una capacitación sobre nuestros protocolos y el manejo adecuado de los animales.</p>
+                <h4>{t("VOLUNTEER_PROCESS_STEP4_TITLE", "voluntario")}</h4>
+                <p>{t("VOLUNTEER_PROCESS_STEP4", "voluntario")}</p>
               </div>
             </li>
             <li>
               <span className="step-number">5</span>
               <div className="step-content">
-                <h4>Incorporación</h4>
-                <p>¡Bienvenido al equipo! Comenzarás tus actividades según el área y horario acordados.</p>
+                <h4>{t("VOLUNTEER_PROCESS_STEP5_TITLE", "voluntario")}</h4>
+                <p>{t("VOLUNTEER_PROCESS_STEP5", "voluntario")}</p>
               </div>
             </li>
           </ol>

@@ -1,9 +1,22 @@
 import { formatDistanceToNow } from "date-fns"
-import { es } from "date-fns/locale"
+import { es, enUS, fr } from "date-fns/locale"
+import { useLanguage } from "@/contexts/language-context"
 
 const SuccessStoryCard = ({ story }) => {
+  const { currentLanguage } = useLanguage()
+  
+  // Selecciona el idioma correcto para date-fns
+  const getLocale = () => {
+    switch (currentLanguage) {
+      case 'es': return es;
+      case 'en': return enUS;
+      case 'fr': return fr;
+      default: return es;
+    }
+  }
+  
   const formattedDate = story.date
-    ? formatDistanceToNow(new Date(story.date), { addSuffix: true, locale: es })
+    ? formatDistanceToNow(new Date(story.date), { addSuffix: true, locale: getLocale() })
     : "Fecha desconocida"
 
   return (

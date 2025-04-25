@@ -1,7 +1,9 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const SuccessStoryForm = ({ onSubmit }) => {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -104,21 +106,21 @@ const SuccessStoryForm = ({ onSubmit }) => {
     if (!isAuthenticated) {
       if (window.Swal) {
         window.Swal.fire({
-          title: "Inicia sesión",
-          text: "Debes iniciar sesión para compartir tu historia",
+          title: t("STORIES_LOGIN_BUTTON", "historias"),
+          text: t("STORIES_AUTH_NEEDED", "historias"),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#e01e1e",
           cancelButtonColor: "#6c757d",
-          confirmButtonText: "Iniciar sesión",
-          cancelButtonText: "Cancelar",
+          confirmButtonText: t("STORIES_LOGIN_BUTTON", "historias"),
+          cancelButtonText: t("STORIES_CANCEL_BUTTON", "historias"),
         }).then((result) => {
           if (result.isConfirmed) {
             openLoginModal()
           }
         })
       } else {
-        alert("Debes iniciar sesión para compartir tu historia")
+        alert(t("STORIES_AUTH_NEEDED", "historias"))
         openLoginModal()
       }
       return
@@ -141,7 +143,7 @@ const SuccessStoryForm = ({ onSubmit }) => {
         const imageData = await imageResponse.json()
 
         if (!imageResponse.ok) {
-          throw new Error(imageData.message || "Error al subir la imagen")
+          throw new Error(imageData.message || t("STORIES_ERROR_TEXT", "historias"))
         }
 
         imageUrl = imageData.imageUrl
@@ -179,12 +181,12 @@ const SuccessStoryForm = ({ onSubmit }) => {
       }
     } catch (error) {
       console.error("Error al enviar la historia:", error)
-      setError(error.message || "Error al enviar la historia")
+      setError(error.message || t("STORIES_ERROR_TEXT", "historias"))
 
       if (window.Swal) {
         window.Swal.fire({
-          title: "Error",
-          text: error.message || "Error al enviar la historia. Por favor, intenta más tarde.",
+          title: t("STORIES_ERROR_TITLE", "historias"),
+          text: error.message || t("STORIES_ERROR_TEXT", "historias"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
@@ -220,25 +222,22 @@ const SuccessStoryForm = ({ onSubmit }) => {
 
   return (
     <div className="success-story-form">
-      <h3>Comparte tu historia de adopción</h3>
+      <h3>{t("STORIES_FORM_TITLE", "historias")}</h3>
 
       <div className="cta-banner">
         <div className="cta-icon">
           <i className="fas fa-paw"></i>
         </div>
         <div className="cta-content">
-          <h3>¡Tu historia puede inspirar a otros!</h3>
-          <p>
-            Cuéntanos cómo cambió tu vida al adoptar un peludito. Tus palabras pueden motivar a más personas a dar un
-            hogar a quienes lo necesitan.
-          </p>
+          <h3>{t("STORIES_FORM_CTA_TITLE", "historias")}</h3>
+          <p>{t("STORIES_FORM_CTA_TEXT", "historias")}</p>
         </div>
       </div>
 
       {!isAuthenticated && (
         <div className="auth-warning">
           <p>
-            <i className="fas fa-exclamation-circle"></i> Debes iniciar sesión para compartir tu historia.
+            <i className="fas fa-exclamation-circle"></i> {t("STORIES_AUTH_NEEDED", "historias")}
           </p>
           <button
             type="button"
@@ -256,7 +255,7 @@ const SuccessStoryForm = ({ onSubmit }) => {
               fontWeight: "bold",
             }}
           >
-            <i className="fas fa-sign-in-alt"></i> Iniciar sesión
+            <i className="fas fa-sign-in-alt"></i> {t("STORIES_LOGIN_BUTTON", "historias")}
           </button>
         </div>
       )}
@@ -270,14 +269,14 @@ const SuccessStoryForm = ({ onSubmit }) => {
           <form onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="name">Nombre:</label>
+                <label htmlFor="name">{t("STORIES_FORM_NAME", "historias")}</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Tu nombre completo"
+                  placeholder={t("STORIES_FORM_NAME_PLACEHOLDER", "historias")}
                   required
                   disabled={user && (user.name || user.nombre)}
                 />
@@ -285,14 +284,14 @@ const SuccessStoryForm = ({ onSubmit }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Correo electrónico:</label>
+                <label htmlFor="email">{t("STORIES_FORM_EMAIL", "historias")}</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="tucorreo@ejemplo.com"
+                  placeholder={t("STORIES_FORM_EMAIL_PLACEHOLDER", "historias")}
                   required
                   disabled={user && user.email}
                 />
@@ -301,35 +300,35 @@ const SuccessStoryForm = ({ onSubmit }) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="title">Título de tu historia:</label>
+              <label htmlFor="title">{t("STORIES_FORM_TITLE_LABEL", "historias")}</label>
               <input
                 type="text"
                 id="title"
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                placeholder="Un título atractivo para tu historia"
+                placeholder={t("STORIES_FORM_TITLE_PLACEHOLDER", "historias")}
                 required
               />
               <span className="input-complete">✓</span>
             </div>
 
             <div className="form-group">
-              <label htmlFor="story">Tu historia:</label>
+              <label htmlFor="story">{t("STORIES_FORM_STORY", "historias")}</label>
               <textarea
                 id="story"
                 name="story"
                 value={formData.story}
                 onChange={handleChange}
                 rows="5"
-                placeholder="Cuéntanos tu experiencia de adopción..."
+                placeholder={t("STORIES_FORM_STORY_PLACEHOLDER", "historias")}
                 required
               ></textarea>
               <span className="input-complete">✓</span>
             </div>
 
             <div className="form-group">
-              <label htmlFor="image">Imagen (opcional):</label>
+              <label htmlFor="image">{t("STORIES_FORM_IMAGE", "historias")}</label>
               <div className="file-upload-container">
                 <button
                   type="button"
@@ -345,7 +344,7 @@ const SuccessStoryForm = ({ onSubmit }) => {
                     marginBottom: "10px",
                   }}
                 >
-                  <i className="fas fa-cloud-upload-alt"></i> Seleccionar imagen
+                  <i className="fas fa-cloud-upload-alt"></i> {t("STORIES_FORM_IMAGE_SELECT", "historias")}
                 </button>
                 <input
                   type="file"
@@ -358,12 +357,12 @@ const SuccessStoryForm = ({ onSubmit }) => {
                 />
                 {formData.image && <div className="file-name-display">{formData.image.name}</div>}
               </div>
-              <small>Formatos permitidos: JPG, PNG, GIF, WEBP. Tamaño máximo: 5MB</small>
+              <small>{t("STORIES_FORM_IMAGE_FORMATS", "historias")}</small>
             </div>
 
             {imagePreview && (
               <div className="image-preview">
-                <h4>Vista previa:</h4>
+                <h4>{t("STORIES_FORM_IMAGE_PREVIEW", "historias")}</h4>
                 <img src={imagePreview} alt="Vista previa" />
               </div>
             )}
@@ -373,11 +372,11 @@ const SuccessStoryForm = ({ onSubmit }) => {
             <button type="submit" className="submit-btn" disabled={loading} onClick={createRipple}>
               {loading ? (
                 <>
-                  <i className="fas fa-spinner fa-spin"></i> Enviando...
+                  <i className="fas fa-spinner fa-spin"></i> {t("STORIES_FORM_SUBMITTING", "historias")}
                 </>
               ) : (
                 <>
-                  <i className="fas fa-paper-plane"></i> Enviar historia
+                  <i className="fas fa-paper-plane"></i> {t("STORIES_FORM_SUBMIT", "historias")}
                 </>
               )}
             </button>

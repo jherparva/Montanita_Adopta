@@ -1,8 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
 import VolunteerForm from "./VolunteerForm"
+import { useLanguage } from "@/contexts/language-context"
 
 const VolunteerBanner = () => {
+  const { t } = useLanguage()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [showModal, setShowModal] = useState(false)
@@ -41,10 +43,10 @@ const VolunteerBanner = () => {
   return (
     <div className="voluntariado-banner">
       <div className="banner-content">
-        <h1>VOLUNTARIADO</h1>
-        <p>Únete a nuestro equipo y ayuda a cambiar vidas</p>
+        <h1>{t("VOLUNTEER_BANNER_TITLE", "voluntario")}</h1>
+        <p>{t("VOLUNTEER_BANNER_SUBTITLE", "voluntario")}</p>
         <a href="#" className="cta-button" onClick={handleVolunteerClick}>
-          Quiero ser voluntario
+          {t("VOLUNTEER_BANNER_CTA", "voluntario")}
         </a>
       </div>
 

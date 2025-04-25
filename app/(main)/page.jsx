@@ -1,3 +1,5 @@
+//C:\Users\jhon\Music\montanita-adopta\app\(main)\page.jsx
+
 import HomeCarousel from "@/components/home/Carousel"
 import HeroSection from "@/components/home/HeroSection"
 import AboutSection from "@/components/home/AboutSection"

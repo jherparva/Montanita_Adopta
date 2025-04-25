@@ -1,3 +1,4 @@
+//C:\Users\jhon\Music\montanita-adopta\app\(main)\adopcion\page.jsx
 import AdoptionSection from "@/components/adoption/AdoptionSection"
 import AnimalsSection from "@/components/adoption/AnimalsSection"
 import VeterinaryServicesSection from "@/components/adoption/VeterinaryServicesSection"

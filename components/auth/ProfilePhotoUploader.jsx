@@ -3,8 +3,10 @@
 "use client"
 import { useState } from "react"
 import PhotoModal from "../modals/PhotoModal"
+import { useLanguage } from "@/contexts/language-context"
 
 const ProfilePhotoUploader = ({ user, onPhotoUpdate }) => {
+  const { t } = useLanguage()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPhoto, setCurrentPhoto] = useState(user?.profilePhoto || "/placeholder-user.jpg")
 
@@ -50,12 +52,12 @@ const ProfilePhotoUploader = ({ user, onPhotoUpdate }) => {
       <div className="profile-photo-container">
         <img
           src={currentPhoto || "/placeholder.svg"}
-          alt={`Foto de perfil de ${user?.nombre || "usuario"}`}
+          alt={`${t("PHOTO_PROFILE", "general")} ${user?.nombre || "usuario"}`}
           className="profile-photo"
           onClick={openPhotoModal}
         />
         <button className="change-photo-button" onClick={openPhotoModal}>
-          <i className="fas fa-camera"></i> Cambiar foto
+          <i className="fas fa-camera"></i> {t("PHOTO_CHANGE", "general")}
         </button>
       </div>
 

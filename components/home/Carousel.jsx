@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const HomeCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -7,51 +8,53 @@ const HomeCarousel = () => {
   const [isInViewport, setIsInViewport] = useState(false)
   const carouselRef = useRef(null)
   const carouselItemsRef = useRef([])
+  const { t } = useLanguage()
   
-  // Slides del carrusel principal
+  // Slides del carrusel principal usando traducciones
   const slides = [
     {
       image: "/imagenes/1.webp",
-      title: "Montañita Adopta",
-      description: "Únete a nuestra comunidad y forma parte del cambio que queremos ver.",
+      title: t("HOME_CAROUSEL_SLIDE1_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE1_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/2.webp",
-      title: "Cambia su destino",
-      description: "Nuestros amigos peludos buscan una familia que les brinde el amor que merecen.",
+      title: t("HOME_CAROUSEL_SLIDE2_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE2_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/3.webp",
-      title: "Encuentra tu compañero ideal",
-      description: "Descubre la alegría de dar un hogar a quien realmente lo necesita.",
+      title: t("HOME_CAROUSEL_SLIDE3_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE3_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/4.webp",
-      title: "Dale un hogar a quien lo necesita",
-      description: "La felicidad tiene cuatro patas y está esperando por ti en Montañita Adopta.",
+      title: t("HOME_CAROUSEL_SLIDE4_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE4_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/5.webp",
-      title: "Una familia para cada mascota",
-      description: "Juntos podemos crear un futuro mejor para los animales de La Montañita.",
+      title: t("HOME_CAROUSEL_SLIDE5_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE5_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/6.webp",
-      title: "Ellos esperan por ti",
-      description: "Tu hogar puede ser el refugio que un animal ha estado esperando.",
+      title: t("HOME_CAROUSEL_SLIDE6_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE6_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/7.webp",
-      title: "Amor de cuatro patas",
-      description: "No compres, adopta. Hay miles de corazones latiendo en busca de un hogar.",
+      title: t("HOME_CAROUSEL_SLIDE7_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE7_DESCRIPTION", "home"),
     },
     {
       image: "/imagenes/8.webp",
-      title: "Montañita Adopta",
-      description: "Únete a nuestra comunidad y forma parte del cambio que queremos ver.",
+      title: t("HOME_CAROUSEL_SLIDE8_TITLE", "home"),
+      description: t("HOME_CAROUSEL_SLIDE8_DESCRIPTION", "home"),
     },
   ]
   
+  // El resto del código permanece igual...
   // Función de throttle reutilizable
   const throttle = (func, limit) => {
     let inThrottle

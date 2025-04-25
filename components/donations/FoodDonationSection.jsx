@@ -1,6 +1,16 @@
 "use client"
 import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/language-context"
+import dynamic from 'next/dynamic'
+
+// Importamos el componente de mapa dinámicamente solo en el cliente
+const MapComponent = dynamic(() => import('./MapComponent'), {
+  ssr: false,
+  loading: () => <div style={{ height: '300px', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
+    <p>Cargando mapa...</p>
+  </div>
+})
 
 const FoodDonation = () => {
   const [deliveryOption, setDeliveryOption] = useState("")
@@ -18,11 +28,11 @@ const FoodDonation = () => {
     notes: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [mapLoaded, setMapLoaded] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
+  const { t } = useLanguage()
 
   // Coordenadas del refugio
   const refugeLocation = { lat: 1.482825, lng: -75.435075 }
@@ -54,70 +64,6 @@ const FoodDonation = () => {
 
     checkAuth()
   }, [])
-
-  useEffect(() => {
-    // Cargar el mapa cuando se muestre la sección de entrega personal
-    if (deliveryOption === "self" && !mapLoaded && showDonationForm) {
-      const loadMap = () => {
-        if (window.google && window.google.maps) {
-          initMap()
-        } else {
-          const script = document.createElement("script")
-          script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initGoogleMap`
-          script.async = true
-          script.defer = true
-          document.head.appendChild(script)
-          window.initGoogleMap = initMap
-        }
-      }
-
-      const initMap = () => {
-        const mapElement = document.getElementById("refuge-map")
-        if (mapElement) {
-          const newMap = new window.google.maps.Map(mapElement, {
-            center: refugeLocation,
-            zoom: 15,
-            mapTypeId: "roadmap",
-            mapTypeControl: true,
-            streetViewControl: true,
-            fullscreenControl: true,
-          })
-
-          // Añadir un marcador para el refugio
-          const marker = new window.google.maps.Marker({
-            position: refugeLocation,
-            map: newMap,
-            title: "Montañita Adopta",
-            animation: window.google.maps.Animation.DROP,
-            icon: {
-              url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-              scaledSize: new window.google.maps.Size(40, 40),
-            },
-          })
-
-          // Añadir un infowindow al marcador
-          const infowindow = new window.google.maps.InfoWindow({
-            content: `
-              <div style="padding: 10px; max-width: 200px;">
-                <h3 style="margin-top: 0; color: #e01e1e; font-size: 16px;">Montañita Adopta</h3>
-                <p style="margin-bottom: 5px;"><strong>Dirección:</strong> carrera 5 calle 8a #04, barrio guillermo escobar</p>
-                <p style="margin-bottom: 5px;"><strong>Teléfono:</strong> 3166532433</p>
-                <p style="margin-bottom: 0;"><strong>Horario:</strong> Lunes a Viernes 9:00 AM - 5:00 PM</p>
-              </div>
-            `,
-          })
-
-          marker.addListener("click", () => {
-            infowindow.open(newMap, marker)
-          })
-
-          setMapLoaded(true)
-        }
-      }
-
-      loadMap()
-    }
-  }, [deliveryOption, mapLoaded, showDonationForm])
 
   const handleDeliveryOptionClick = (option) => {
     // Verificar si el usuario está autenticado
@@ -182,11 +128,11 @@ const FoodDonation = () => {
 
       if (data.success) {
         window.Swal.fire({
-          title: "¡Gracias por tu donación!",
-          text: "Tu donación de alimentos ha sido registrada correctamente. Nos pondremos en contacto contigo pronto para coordinar los detalles.",
+          title: t("FOOD_DONATION_SUCCESS_TITLE", "donaciones"),
+          text: t("FOOD_DONATION_SUCCESS_TEXT", "donaciones"),
           icon: "success",
           confirmButtonColor: "#4caf50",
-          confirmButtonText: "Entendido",
+          confirmButtonText: t("FOOD_DONATION_SUCCESS_BUTTON", "donaciones"),
         })
 
         // Resetear el formulario
@@ -206,8 +152,8 @@ const FoodDonation = () => {
         setShowDonationForm(false)
       } else {
         window.Swal.fire({
-          title: "Error",
-          text: data.message || "Error al procesar la donación",
+          title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+          text: data.message || t("MONETARY_DONATION_ERROR_PROCESSING", "donaciones"),
           icon: "error",
           confirmButtonColor: "#f44336",
         })
@@ -215,8 +161,8 @@ const FoodDonation = () => {
     } catch (error) {
       console.error("Error submitting donation:", error)
       window.Swal.fire({
-        title: "Error",
-        text: "Error al procesar la donación. Por favor, intenta de nuevo.",
+        title: t("MONETARY_DONATION_ERROR_TITLE", "donaciones"),
+        text: t("MONETARY_DONATION_ERROR_PROCESSING", "donaciones"),
         icon: "error",
         confirmButtonColor: "#f44336",
       })
@@ -235,13 +181,13 @@ const FoodDonation = () => {
     <section id="donacion-alimentos" className="testimonials-section">
       <div className="container">
         <div className="section-header">
-          <h2>Donación de Alimentos</h2>
+          <h2>{t("FOOD_DONATION_TITLE", "donaciones")}</h2>
           <div className="paw-divider">
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
             <i className="fas fa-paw"></i>
           </div>
-          <p>Ayuda a alimentar a nuestros rescatados con comida de calidad.</p>
+          <p>{t("FOOD_DONATION_SUBTITLE", "donaciones")}</p>
         </div>
 
         <div className="testimonial-card">
@@ -250,33 +196,33 @@ const FoodDonation = () => {
               className="btn btn-primary donate-btn"
               onClick={isAuthenticated ? () => setShowDonationForm(true) : openLoginModal}
             >
-              <i className="fas fa-heart me-1"></i> Registrar Donación de Alimentos
+              <i className="fas fa-heart me-1"></i> {t("FOOD_DONATION_BUTTON", "donaciones")}
             </button>
           </div>
 
           <div className="food-donation-info">
             <div className="food-donation-types">
-              <h3>Tipos de alimentos que necesitamos:</h3>
+              <h3>{t("FOOD_DONATION_TYPES_TITLE", "donaciones")}</h3>
               <div className="food-types-grid">
                 <div className="food-type-item">
                   <i className="fas fa-bone"></i>
-                  <h4>Comida para Perros</h4>
-                  <p>Alimento seco o húmedo para perros adultos.</p>
+                  <h4>{t("FOOD_DONATION_DOG_TITLE", "donaciones")}</h4>
+                  <p>{t("FOOD_DONATION_DOG_TEXT", "donaciones")}</p>
                 </div>
                 <div className="food-type-item">
                   <i className="fas fa-paw"></i>
-                  <h4>Comida para Gatos</h4>
-                  <p>Alimento seco o húmedo para gatos adultos.</p>
+                  <h4>{t("FOOD_DONATION_CAT_TITLE", "donaciones")}</h4>
+                  <p>{t("FOOD_DONATION_CAT_TEXT", "donaciones")}</p>
                 </div>
                 <div className="food-type-item">
                   <i className="fas fa-baby"></i>
-                  <h4>Comida para Cachorros</h4>
-                  <p>Alimento especial para cachorros en crecimiento.</p>
+                  <h4>{t("FOOD_DONATION_PUPPY_TITLE", "donaciones")}</h4>
+                  <p>{t("FOOD_DONATION_PUPPY_TEXT", "donaciones")}</p>
                 </div>
                 <div className="food-type-item">
                   <i className="fas fa-cat"></i>
-                  <h4>Comida para Gatitos</h4>
-                  <p>Alimento especial para gatitos en crecimiento.</p>
+                  <h4>{t("FOOD_DONATION_KITTEN_TITLE", "donaciones")}</h4>
+                  <p>{t("FOOD_DONATION_KITTEN_TEXT", "donaciones")}</p>
                 </div>
               </div>
             </div>
@@ -293,12 +239,12 @@ const FoodDonation = () => {
               }}>
                 &times;
               </span>
-              <h2>Formulario de Donación de Alimentos</h2>
+              <h2>{t("FOOD_DONATION_FORM_TITLE", "donaciones")}</h2>
 
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="foodType" className="form-label">
-                    Tipo de Alimento:
+                    {t("FOOD_DONATION_FORM_TYPE_LABEL", "donaciones")}
                   </label>
                   <select
                     id="foodType"
@@ -308,24 +254,24 @@ const FoodDonation = () => {
                     onChange={handleInputChange}
                     required
                   >
-                    <option value="dog-food">Comida para Perros</option>
-                    <option value="cat-food">Comida para Gatos</option>
-                    <option value="puppy-food">Comida para Cachorros</option>
-                    <option value="kitten-food">Comida para Gatitos</option>
-                    <option value="special-diet">Dietas Especiales/Medicadas</option>
+                    <option value="dog-food">{t("FOOD_DONATION_FORM_TYPE_DOG", "donaciones")}</option>
+                    <option value="cat-food">{t("FOOD_DONATION_FORM_TYPE_CAT", "donaciones")}</option>
+                    <option value="puppy-food">{t("FOOD_DONATION_FORM_TYPE_PUPPY", "donaciones")}</option>
+                    <option value="kitten-food">{t("FOOD_DONATION_FORM_TYPE_KITTEN", "donaciones")}</option>
+                    <option value="special-diet">{t("FOOD_DONATION_FORM_TYPE_SPECIAL", "donaciones")}</option>
                   </select>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="quantity" className="form-label">
-                    Cantidad (Kg):
+                    {t("FOOD_DONATION_FORM_QUANTITY_LABEL", "donaciones")}
                   </label>
                   <input
                     type="number"
                     id="quantity"
                     name="quantity"
                     className="form-control"
-                    placeholder="Ej. 5, 10, 20"
+                    placeholder={t("FOOD_DONATION_FORM_QUANTITY_PLACEHOLDER", "donaciones")}
                     value={formData.quantity}
                     onChange={handleInputChange}
                     required
@@ -334,14 +280,14 @@ const FoodDonation = () => {
 
                 <div className="form-group">
                   <label htmlFor="donorName" className="form-label">
-                    Tu Nombre:
+                    {t("MONETARY_DONATION_FORM_NAME", "donaciones")}
                   </label>
                   <input
                     type="text"
                     id="donorName"
                     name="donorName"
                     className="form-control"
-                    placeholder="Nombre completo"
+                    placeholder={t("MONETARY_DONATION_FORM_NAME_PLACEHOLDER", "donaciones")}
                     value={formData.donorName}
                     onChange={handleInputChange}
                     required
@@ -350,14 +296,14 @@ const FoodDonation = () => {
 
                 <div className="form-group">
                   <label htmlFor="donorEmail" className="form-label">
-                    Correo Electrónico:
+                    {t("MONETARY_DONATION_FORM_EMAIL", "donaciones")}
                   </label>
                   <input
                     type="email"
                     id="donorEmail"
                     name="donorEmail"
                     className="form-control"
-                    placeholder="correo@ejemplo.com"
+                    placeholder={t("MONETARY_DONATION_FORM_EMAIL_PLACEHOLDER", "donaciones")}
                     value={formData.donorEmail}
                     onChange={handleInputChange}
                     required
@@ -366,14 +312,14 @@ const FoodDonation = () => {
 
                 <div className="form-group">
                   <label htmlFor="donorPhone" className="form-label">
-                    Teléfono:
+                    {t("MONETARY_DONATION_FORM_PHONE", "donaciones")}
                   </label>
                   <input
                     type="tel"
                     id="donorPhone"
                     name="donorPhone"
                     className="form-control"
-                    placeholder="Ej. 3001234567"
+                    placeholder={t("MONETARY_DONATION_FORM_PHONE_PLACEHOLDER", "donaciones")}
                     value={formData.donorPhone}
                     onChange={handleInputChange}
                     required
@@ -381,48 +327,49 @@ const FoodDonation = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Opciones de entrega:</label>
+                  <label className="form-label">{t("FOOD_DONATION_DELIVERY_OPTIONS", "donaciones")}</label>
                   <div className="delivery-options">
                     <button
                       type="button"
                       className={`delivery-option btn ${deliveryOption === "self" ? "btn-primary" : "btn-outline-primary"} me-2`}
                       onClick={() => handleDeliveryOptionClick("self")}
                     >
-                      <i className="fas fa-hand-holding-heart me-1"></i> Entregaré personalmente
+                      <i className="fas fa-hand-holding-heart me-1"></i> {t("FOOD_DONATION_DELIVERY_SELF", "donaciones")}
                     </button>
                     <button
                       type="button"
                       className={`delivery-option btn ${deliveryOption === "pickup" ? "btn-primary" : "btn-outline-primary"}`}
                       onClick={() => handleDeliveryOptionClick("pickup")}
                     >
-                      <i className="fas fa-truck me-1"></i> Solicitar recogida
+                      <i className="fas fa-truck me-1"></i> {t("FOOD_DONATION_DELIVERY_PICKUP", "donaciones")}
                     </button>
                   </div>
                 </div>
 
-                {/* Mostrar ubicación del refugio si selecciona entrega personal */}
+                {/* Mostrar ubicación del refugio con Leaflet si selecciona entrega personal */}
                 {deliveryOption === "self" && (
                   <div id="shelter-location" className="form-group">
                     <div className="card">
                       <div className="card-header bg-success text-white">
-                        <i className="fas fa-map-marker-alt me-2"></i> Ubicación del Refugio
+                        <i className="fas fa-map-marker-alt me-2"></i> {t("FOOD_DONATION_SHELTER_LOCATION", "donaciones")}
                       </div>
                       <div className="card-body">
                         <p>
-                          <strong>Dirección:</strong> carrera 5 calle 8a #04, barrio guillermo escobar
+                          <strong>{t("FOOD_DONATION_SHELTER_ADDRESS", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_SHELTER_ADDRESS", "donaciones").split(":")[1]}
                         </p>
                         <p>
-                          <strong>Horarios de recepción:</strong> Lunes a Viernes de 9:00 AM a 5:00 PM
+                          <strong>{t("FOOD_DONATION_SHELTER_HOURS", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_SHELTER_HOURS", "donaciones").split(":")[1]}
                         </p>
                         <p>
-                          <strong>Teléfono:</strong> 3166532433
+                          <strong>{t("FOOD_DONATION_SHELTER_PHONE", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_SHELTER_PHONE", "donaciones").split(":")[1]}
                         </p>
                         <div className="map-container">
-                          <div id="refuge-map" style={{ width: "100%", height: "300px", borderRadius: "8px" }}></div>
+                          {/* Componente de mapa Leaflet */}
+                          <MapComponent position={[refugeLocation.lat, refugeLocation.lng]} />
                         </div>
                         <div className="mt-3 text-center">
                           <p className="mb-2 small">
-                            Si el mapa no carga correctamente, puedes abrir nuestra ubicación en:
+                            {t("FOOD_DONATION_MAP_TEXT", "donaciones")}
                           </p>
                           <a
                             href="https://maps.apple.com/?ll=1.482825,-75.435075&q=Montañita+Adopta"
@@ -430,7 +377,7 @@ const FoodDonation = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <i className="fab fa-apple me-1"></i> Apple Maps
+                            <i className="fab fa-apple me-1"></i> {t("FOOD_DONATION_MAP_APPLE", "donaciones")}
                           </a>
                           <a
                             href="https://www.google.com/maps?q=1.482825,-75.435075"
@@ -438,7 +385,7 @@ const FoodDonation = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <i className="fab fa-google me-1"></i> Google Maps
+                            <i className="fab fa-google me-1"></i> {t("FOOD_DONATION_MAP_GOOGLE", "donaciones")}
                           </a>
                         </div>
                       </div>
@@ -451,12 +398,12 @@ const FoodDonation = () => {
                   <div id="pickup-address" className="form-group">
                     <div className="card">
                       <div className="card-header bg-primary text-white">
-                        <i className="fas fa-truck me-2"></i> Información para la recogida
+                        <i className="fas fa-truck me-2"></i> {t("FOOD_DONATION_PICKUP_INFO", "donaciones")}
                       </div>
                       <div className="card-body">
                         <div className="form-group">
                           <label htmlFor="pickupCity" className="form-label">
-                            Ciudad:
+                            {t("FOOD_DONATION_PICKUP_CITY_LABEL", "donaciones")}
                           </label>
                           <select
                             id="pickupCity"
@@ -465,28 +412,28 @@ const FoodDonation = () => {
                             value={formData.pickupCity}
                             onChange={handlePickupCityChange}
                           >
-                            <option value="mismo-ciudad">Misma ciudad del refugio</option>
-                            <option value="otra-ciudad">Otra ciudad</option>
+                            <option value="mismo-ciudad">{t("FOOD_DONATION_PICKUP_CITY_SAME", "donaciones")}</option>
+                            <option value="otra-ciudad">{t("FOOD_DONATION_PICKUP_CITY_OTHER", "donaciones")}</option>
                           </select>
                         </div>
 
                         {formData.pickupCity === "mismo-ciudad" && (
                           <div id="local-pickup" className="form-group">
                             <label htmlFor="pickupAddress" className="form-label">
-                              Dirección para recogida:
+                              {t("FOOD_DONATION_PICKUP_ADDRESS_LABEL", "donaciones")}
                             </label>
                             <input
                               type="text"
                               id="pickupAddress"
                               name="pickupAddress"
                               className="form-control"
-                              placeholder="Ingresa tu dirección completa"
+                              placeholder={t("FOOD_DONATION_PICKUP_ADDRESS_PLACEHOLDER", "donaciones")}
                               value={formData.pickupAddress}
                               onChange={handleInputChange}
                               required
                             />
                             <small className="text-muted">
-                              Recogeremos la donación en los próximos 2-3 días hábiles.
+                              {t("FOOD_DONATION_PICKUP_TIME", "donaciones")}
                             </small>
                           </div>
                         )}
@@ -494,20 +441,19 @@ const FoodDonation = () => {
                         {formData.pickupCity === "otra-ciudad" && (
                           <div id="remote-pickup" className="form-group">
                             <div className="alert alert-info">
-                              <i className="fas fa-info-circle me-2"></i> Para donaciones desde otras ciudades, puedes
-                              enviar los alimentos a nuestra dirección:
+                              <i className="fas fa-info-circle me-2"></i> {t("FOOD_DONATION_REMOTE_INFO", "donaciones")}
                               <hr />
                               <p>
-                                <strong>Dirección:</strong> carrera 5 calle 8a #04, barrio guillermo escobar
+                                <strong>{t("FOOD_DONATION_REMOTE_ADDRESS", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_REMOTE_ADDRESS", "donaciones").split(":")[1]}
                               </p>
                               <p>
-                                <strong>Ciudad:</strong> La Montañita, Caqueta
+                                <strong>{t("FOOD_DONATION_REMOTE_CITY", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_REMOTE_CITY", "donaciones").split(":")[1]}
                               </p>
                               <p>
-                                <strong>A nombre de:</strong> Montañita Adopta
+                                <strong>{t("FOOD_DONATION_REMOTE_NAME", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_REMOTE_NAME", "donaciones").split(":")[1]}
                               </p>
                               <p>
-                                <strong>Teléfono:</strong> 3166532433
+                                <strong>{t("FOOD_DONATION_REMOTE_PHONE", "donaciones").split(":")[0]}:</strong> {t("FOOD_DONATION_REMOTE_PHONE", "donaciones").split(":")[1]}
                               </p>
                             </div>
                           </div>
@@ -519,14 +465,14 @@ const FoodDonation = () => {
 
                 <div className="form-group">
                   <label htmlFor="notes" className="form-label">
-                    Mensaje (opcional):
+                    {t("MONETARY_DONATION_FORM_MESSAGE", "donaciones")}
                   </label>
                   <textarea
                     id="notes"
                     name="notes"
                     rows="3"
                     className="form-control"
-                    placeholder="¿Quieres dejarnos un mensaje?"
+                    placeholder={t("MONETARY_DONATION_FORM_MESSAGE_PLACEHOLDER", "donaciones")}
                     value={formData.notes}
                     onChange={handleInputChange}
                   ></textarea>
@@ -534,7 +480,7 @@ const FoodDonation = () => {
 
                 <div className="form-actions">
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting || !deliveryOption}>
-                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : "Registrar Donación"}
+                    {isSubmitting ? <i className="fas fa-spinner fa-spin"></i> : t("FOOD_DONATION_BUTTON_SUBMIT", "donaciones")}
                   </button>
                   <button
                     type="button"
@@ -545,7 +491,7 @@ const FoodDonation = () => {
                     }}
                     disabled={isSubmitting}
                   >
-                    Cancelar
+                    {t("FOOD_DONATION_BUTTON_CANCEL", "donaciones")}
                   </button>
                 </div>
               </form>

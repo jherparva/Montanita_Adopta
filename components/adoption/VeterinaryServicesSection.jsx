@@ -3,14 +3,7 @@ import { useState, useEffect, useCallback } from "react"
 import ReservationModal from "./ReservationModal"
 import { useToast } from "@/hooks/use-toast"
 import dynamic from 'next/dynamic'
-
-// Cargamos Leaflet dinámicamente solo en el cliente para evitar problemas con SSR
-const MapComponent = dynamic(() => import('./MapComponent'), {
-  ssr: false,
-  loading: () => <div style={{ height: '300px', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
-    <p>Cargando mapa...</p>
-  </div>
-})
+import { useLanguage } from "@/contexts/language-context"
 
 const VeterinaryServicesSection = () => {
   const [showReservationModal, setShowReservationModal] = useState(false)
@@ -21,6 +14,16 @@ const VeterinaryServicesSection = () => {
   const [error, setError] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const { toast } = useToast()
+  const { language, t } = useLanguage()
+
+  // Cargamos Leaflet dinámicamente solo en el cliente para evitar problemas con SSR
+  // CORRECCIÓN: MapComponent definido después de inicializar useLanguage
+  const MapComponent = dynamic(() => import('./MapComponent'), {
+    ssr: false,
+    loading: () => <div style={{ height: '300px', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
+      <p>{t("MAP_LOADING", "adopcion")}</p>
+    </div>
+  })
 
   // Coordenadas del refugio/veterinaria
   const refugeLocation = { lat: 1.482825, lng: -75.435075 }
@@ -66,19 +69,19 @@ const VeterinaryServicesSection = () => {
         if (data.success) {
           setServices(data.services || [])
         } else {
-          setError("Error al cargar los servicios veterinarios")
+          setError(t("VET_ERROR_LOADING", "adopcion"))
           toast({
             title: "Error",
-            description: "No se pudieron cargar los servicios veterinarios",
+            description: t("VET_ERROR_LOADING", "adopcion"),
             variant: "destructive",
           })
         }
       } catch (err) {
         console.error("Error fetching veterinary services:", err)
-        setError("Error al cargar los servicios veterinarios")
+        setError(t("VET_ERROR_LOADING", "adopcion"))
         toast({
           title: "Error",
-          description: "No se pudieron cargar los servicios veterinarios",
+          description: t("VET_ERROR_LOADING", "adopcion"),
           variant: "destructive",
         })
       } finally {
@@ -87,7 +90,7 @@ const VeterinaryServicesSection = () => {
     }
 
     fetchServices()
-  }, [toast])
+  }, [toast, t])
 
   const handleReserveClick = useCallback((service) => {
     setSelectedService(service)
@@ -160,7 +163,7 @@ const VeterinaryServicesSection = () => {
       return (
         <div className="vet-loading-spinner">
           <i className="fas fa-spinner fa-spin"></i>
-          <p>Cargando servicios veterinarios...</p>
+          <p>{t("VET_LOADING_SERVICES", "adopcion")}</p>
         </div>
       )
     }
@@ -178,7 +181,7 @@ const VeterinaryServicesSection = () => {
       return (
         <div className="vet-no-results">
           <i className="fas fa-search"></i>
-          <p>No se encontraron servicios disponibles</p>
+          <p>{t("VET_NO_SERVICES", "adopcion")}</p>
         </div>
       )
     }
@@ -195,14 +198,14 @@ const VeterinaryServicesSection = () => {
               {service.description.length > 80 ? `${service.description.substring(0, 80)}...` : service.description}
             </p>
             <button className="vet-service-btn vet-info-btn" onClick={() => handleInfoClick(service)}>
-              Más Información
+              {t("VET_SERVICE_MORE_INFO", "adopcion")}
             </button>
             <button
               className="vet-service-btn vet-reserve-btn"
               data-service={service.name}
               onClick={() => handleReserveClick(service)}
             >
-              Reservar Cita
+              {t("VET_SERVICE_BOOK", "adopcion")}
             </button>
           </div>
         ))}
@@ -253,34 +256,34 @@ const VeterinaryServicesSection = () => {
   return (
     <section className="vet-services-section">
       <div className="container">
-        <h2>SERVICIOS VETERINARIOS</h2>
+        <h2>{t("VET_SERVICES_TITLE", "adopcion")}</h2>
         {renderServiceCards()}
       </div>
 
       {/* Sección de ubicación con mapa interactivo */}
       <div className="vet-location-container">
         <div className="container">
-          <h3>NUESTRA UBICACIÓN</h3>
+          <h3>{t("VET_LOCATION_TITLE", "adopcion")}</h3>
           <div className="vet-location-card">
             <div className="vet-card-header">
-              <i className="fas fa-map-marker-alt me-2"></i> Ubicación de la Veterinaria
+              <i className="fas fa-map-marker-alt me-2"></i> {t("VET_LOCATION_CARD_TITLE", "adopcion")}
             </div>
             <div className="vet-card-body">
               <div className="row">
                 <div className="col-md-6">
                   <p>
-                    <strong>Dirección:</strong> carrera 5 calle 8a #04, barrio guillermo escobar
+                    <strong>{t("VET_ADDRESS_LABEL", "adopcion")}</strong> {t("MAP_ADDRESS", "adopcion")}
                   </p>
                   <p>
-                    <strong>Horarios de atención:</strong> Lunes a Viernes de 9:00 AM a 5:00 PM
+                    <strong>{t("VET_SCHEDULE_LABEL", "adopcion")}</strong> {t("MAP_SCHEDULE", "adopcion")}
                   </p>
                   <p>
-                    <strong>Teléfono:</strong> 3166532433
+                    <strong>{t("VET_PHONE_LABEL", "adopcion")}</strong> {t("MAP_PHONE", "adopcion")}
                   </p>
                   {/* Enlaces directos a mapas externos */}
                   <div className="mt-3">
                     <p className="mb-2 small">
-                      Abre nuestra ubicación en:
+                      {t("VET_MAPS_OPEN_IN", "adopcion")}
                     </p>
                     <a
                       href="https://maps.apple.com/?ll=1.482825,-75.435075&q=Montañita+Adopta"
@@ -288,7 +291,7 @@ const VeterinaryServicesSection = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="fab fa-apple me-1"></i> Apple Maps
+                      <i className="fab fa-apple me-1"></i> {t("VET_MAPS_APPLE", "adopcion")}
                     </a>
                     <a
                       href="https://www.google.com/maps?q=1.482825,-75.435075"
@@ -296,7 +299,7 @@ const VeterinaryServicesSection = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="fab fa-google me-1"></i> Google Maps
+                      <i className="fab fa-google me-1"></i> {t("VET_MAPS_GOOGLE", "adopcion")}
                     </a>
                   </div>
                 </div>
@@ -321,15 +324,15 @@ const VeterinaryServicesSection = () => {
             </span>
             <h2>{selectedService.name}</h2>
             <div className="vet-service-details">
-              <h3>Descripción del Servicio</h3>
+              <h3>{t("VET_SERVICE_DESCRIPTION_TITLE", "adopcion")}</h3>
               <p>{selectedService.description}</p>
-              <h3>Beneficios</h3>
+              <h3>{t("VET_SERVICE_BENEFITS_TITLE", "adopcion")}</h3>
               <ul>
                 {renderBenefits(selectedService.name)}
               </ul>
             </div>
             <div className="vet-service-pricing">
-              <h3>Precio del Servicio</h3>
+              <h3>{t("VET_SERVICE_PRICE_TITLE", "adopcion")}</h3>
               <p>{formatPrice(selectedService.price)}</p>
             </div>
             <button
@@ -338,7 +341,7 @@ const VeterinaryServicesSection = () => {
                 handleReserveClick(selectedService)
               }}
             >
-              Reservar Cita
+              {t("VET_SERVICE_BOOK", "adopcion")}
             </button>
           </div>
         </div>

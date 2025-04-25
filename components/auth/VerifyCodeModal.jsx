@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import "@/styles/components/auth/verify-code-modal.css" 
+import { useLanguage } from "@/contexts/language-context"
 
 const VerifyCodeModal = ({ isOpen, onClose, email }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     email: "",
     code: "",
@@ -32,32 +34,32 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
   const validateForm = () => {
     if (formData.newPassword !== formData.confirmPassword) {
       window.Swal.fire({
-        title: "Error de validación",
-        text: "Las contraseñas no coinciden",
+        title: t("REGISTER_ERROR_PASSWORD_MATCH", "general"),
+        text: t("REGISTER_ERROR_PASSWORD_MATCH", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
-      setError("Las contraseñas no coinciden")
+      setError(t("REGISTER_ERROR_PASSWORD_MATCH", "general"))
       return false
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
     if (!passwordRegex.test(formData.newPassword)) {
       window.Swal.fire({
-        title: "Error de validación",
+        title: t("VERIFY_CODE_PASSWORD_REQUIREMENTS", "general"),
         html: `
-          <p>La contraseña debe tener al menos:</p>
+          <p>${t("VERIFY_CODE_PASSWORD_REQUIREMENTS", "general")}</p>
           <ul style="text-align: left; display: inline-block;">
-            <li>8 caracteres</li>
-            <li>Una letra mayúscula</li>
-            <li>Una letra minúscula</li>
-            <li>Un número</li>
+            <li>${t("VERIFY_CODE_REQ_LENGTH", "general")}</li>
+            <li>${t("VERIFY_CODE_REQ_UPPERCASE", "general")}</li>
+            <li>${t("VERIFY_CODE_REQ_LOWERCASE", "general")}</li>
+            <li>${t("VERIFY_CODE_REQ_NUMBER", "general")}</li>
           </ul>
         `,
         icon: "warning",
         confirmButtonColor: "#3085d6",
       })
-      setError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número")
+      setError(t("REGISTER_ERROR_PASSWORD_FORMAT", "general"))
       return false
     }
 
@@ -72,8 +74,8 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
     }
 
     window.Swal.fire({
-      title: "Procesando...",
-      text: "Verificando código y restableciendo contraseña",
+      title: t("VERIFY_CODE_PROCESSING", "general"),
+      text: t("VERIFY_CODE_PROCESSING", "general"),
       allowOutsideClick: false,
       showConfirmButton: false,
       willOpen: () => {
@@ -101,14 +103,14 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
       const data = await response.json()
 
       if (response.ok) {
-        setSuccess("Contraseña restablecida correctamente")
+        setSuccess(t("VERIFY_CODE_SUCCESS", "general"))
         window.Swal.close()
 
         window.Swal.fire({
-          title: "¡Éxito!",
-          text: "Contraseña restablecida correctamente. Has iniciado sesión automáticamente.",
+          title: t("VERIFY_CODE_SUCCESS", "general"),
+          text: t("VERIFY_CODE_SUCCESS_MESSAGE", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
         }).then(() => {
           window.dispatchEvent(new Event("auth-changed"))
@@ -120,22 +122,22 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
         
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al verificar el código",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
-        setError(data.message || "Error al verificar el código")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
       }
     } catch (error) {
       window.Swal.close()
       
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error al verificar código:", error)
     } finally {
       setLoading(false)
@@ -148,10 +150,10 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
     <div className="vcm-modal" style={{ display: "block" }}>
       <div className="vcm-modal-content">
         <span className="vcm-close" onClick={onClose}>&times;</span>
-        <h2 className="vcm-title">Verificar Código de Recuperación</h2>
+        <h2 className="vcm-title">{t("VERIFY_CODE_TITLE", "general")}</h2>
         <form className="vcm-form" onSubmit={handleSubmit}>
           <div className="vcm-form-group">
-            <label htmlFor="vcm-email">Correo Electrónico:</label>
+            <label htmlFor="vcm-email">{t("VERIFY_CODE_EMAIL", "general")}</label>
             <input
               type="email"
               id="vcm-email"
@@ -163,7 +165,7 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
           </div>
 
           <div className="vcm-form-group">
-            <label htmlFor="vcm-recovery-code">Código de Recuperación:</label>
+            <label htmlFor="vcm-recovery-code">{t("VERIFY_CODE_CODE", "general")}</label>
             <input 
               type="text" 
               id="vcm-recovery-code" 
@@ -175,7 +177,7 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
           </div>
 
           <div className="vcm-form-group">
-            <label htmlFor="vcm-new-password">Nueva Contraseña:</label>
+            <label htmlFor="vcm-new-password">{t("VERIFY_CODE_NEW_PASSWORD", "general")}</label>
             <input
               type="password"
               id="vcm-new-password"
@@ -187,7 +189,7 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
           </div>
 
           <div className="vcm-form-group">
-            <label htmlFor="vcm-confirm-password">Confirmar Nueva Contraseña:</label>
+            <label htmlFor="vcm-confirm-password">{t("VERIFY_CODE_CONFIRM_PASSWORD", "general")}</label>
             <input
               type="password"
               id="vcm-confirm-password"
@@ -199,17 +201,17 @@ const VerifyCodeModal = ({ isOpen, onClose, email }) => {
           </div>
 
           <div className="vcm-password-requirements">
-            <p>La contraseña debe contener:</p>
+            <p>{t("VERIFY_CODE_PASSWORD_REQUIREMENTS", "general")}</p>
             <ul>
-              <li>Al menos 8 caracteres</li>
-              <li>Una letra mayúscula</li>
-              <li>Una letra minúscula</li>
-              <li>Un número</li>
+              <li>{t("VERIFY_CODE_REQ_LENGTH", "general")}</li>
+              <li>{t("VERIFY_CODE_REQ_UPPERCASE", "general")}</li>
+              <li>{t("VERIFY_CODE_REQ_LOWERCASE", "general")}</li>
+              <li>{t("VERIFY_CODE_REQ_NUMBER", "general")}</li>
             </ul>
           </div>
 
           <button className="vcm-button" type="submit" disabled={loading}>
-            {loading ? "Procesando..." : "Restablecer Contraseña"}
+            {loading ? t("VERIFY_CODE_PROCESSING", "general") : t("VERIFY_CODE_BUTTON", "general")}
           </button>
         </form>
       </div>

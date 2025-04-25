@@ -3,8 +3,11 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
 import styles from "@/styles/components/auth/RegisterModal.module.css"
+import "@/styles/components/auth/google-social-buttons.css"
+import { useLanguage } from "@/contexts/language-context"
 
 const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     nombre: "",
     codigo_postal: "",
@@ -24,15 +27,32 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
   const dateInputRef = useRef(null)
 
   // Definir el callback de Google
+  // En RegisterModal.jsx
   useEffect(() => {
-    window.handleCredentialResponse = (response) => {
+    // Definir el callback de Google globalmente con un nombre único para registro
+    window.handleCredentialResponseRegister = (response) => {
       handleGoogleRegister(response.credential)
     }
     
-    return () => {
-      delete window.handleCredentialResponse
+    // Renderizar el botón de Google solo cuando el modal esté abierto
+    if (isOpen && window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id: "385524721924-ufgkod1roqrgi6iaflumbo6dmictc7mm.apps.googleusercontent.com",
+        callback: window.handleCredentialResponseRegister,
+        auto_select: false,
+      })
+      
+      window.google.accounts.id.renderButton(
+        document.getElementById("google-signin-button-register"),
+        { theme: "outline", size: "large", width: "100%" }
+      )
     }
-  }, [])
+    
+    return () => {
+      // Limpiar el callback cuando el componente se desmonte
+      delete window.handleCredentialResponseRegister
+    }
+  }, [isOpen]) // Re-ejecutar cuando isOpen cambie
 
   // Limpiar flatpickr al desmontar
   useEffect(() => {
@@ -78,27 +98,27 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
   const validateForm = () => {
     // Validar contraseñas
     if (formData.contrasena !== formData.confirmar_contrasena) {
-      setError("Las contraseñas no coinciden")
+      setError(t("REGISTER_ERROR_PASSWORD_MATCH", "general"))
       return false
     }
 
     // Validar correo electrónico
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.correo_electronico)) {
-      setError("Formato de correo electrónico inválido")
+      setError(t("REGISTER_ERROR_EMAIL_FORMAT", "general"))
       return false
     }
 
     // Validar contraseña
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
     if (!passwordRegex.test(formData.contrasena)) {
-      setError("La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número")
+      setError(t("REGISTER_ERROR_PASSWORD_FORMAT", "general"))
       return false
     }
 
     // Validar fecha de nacimiento
     if (!formData.fecha_nacimiento) {
-      setError("La fecha de nacimiento es requerida")
+      setError(t("REGISTER_ERROR_BIRTH_DATE", "general"))
       return false
     }
 
@@ -130,10 +150,10 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
         onClose()
 
         window.Swal.fire({
-          title: "¡Bienvenido!",
-          text: "Te has registrado correctamente en Montañita Adopta.",
+          title: t("REGISTER_WELCOME", "general"),
+          text: t("REGISTER_SUCCESS", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 2000,
           timerProgressBar: true,
@@ -142,22 +162,22 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
           router.refresh()
         })
       } else {
-        setError(data.message || "Error al registrarse")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
 
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al registrarse",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error de registro:", error)
 
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -184,10 +204,10 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
       if (response.ok) {
         onClose()
         window.Swal.fire({
-          title: "¡Bienvenido!",
-          text: "Te has registrado correctamente con Google.",
+          title: t("REGISTER_WELCOME", "general"),
+          text: t("REGISTER_SUCCESS_GOOGLE", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 2000,
           timerProgressBar: true,
@@ -196,22 +216,22 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
           router.refresh()
         })
       } else {
-        setError(data.message || "Error al registrarse con Google")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
 
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al registrarse con Google",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error de registro con Google:", error)
 
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -227,11 +247,11 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
           const accessToken = response.authResponse.accessToken
           handleFacebookRegisterServer(accessToken)
         } else {
-          setError("Registro con Facebook cancelado")
+          setError(t("REGISTER_CANCELED_FACEBOOK", "general"))
 
           window.Swal.fire({
             title: "Cancelado",
-            text: "Registro con Facebook cancelado",
+            text: t("REGISTER_CANCELED_FACEBOOK", "general"),
             icon: "info",
             confirmButtonColor: "#3085d6",
           })
@@ -259,10 +279,10 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
       if (response.ok) {
         onClose()
         window.Swal.fire({
-          title: "¡Bienvenido!",
-          text: "Te has registrado correctamente con Facebook.",
+          title: t("REGISTER_WELCOME", "general"),
+          text: t("REGISTER_SUCCESS_FACEBOOK", "general"),
           icon: "success",
-          confirmButtonText: "Continuar",
+          confirmButtonText: t("SESSION_CONTINUE", "general"),
           confirmButtonColor: "#27b80b",
           timer: 2000,
           timerProgressBar: true,
@@ -271,22 +291,22 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
           router.refresh()
         })
       } else {
-        setError(data.message || "Error al registrarse con Facebook")
+        setError(data.message || t("REGISTER_ERROR_SERVER", "general"))
 
         window.Swal.fire({
           title: "Error",
-          text: data.message || "Error al registrarse con Facebook",
+          text: data.message || t("REGISTER_ERROR_SERVER", "general"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
       }
     } catch (error) {
-      setError("Error al conectar con el servidor")
+      setError(t("REGISTER_ERROR_SERVER", "general"))
       console.error("Error de registro con Facebook:", error)
 
       window.Swal.fire({
         title: "Error",
-        text: "Error al conectar con el servidor. Por favor, intenta más tarde.",
+        text: t("REGISTER_ERROR_SERVER", "general"),
         icon: "error",
         confirmButtonColor: "#d33",
       })
@@ -303,12 +323,12 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
         <div className={styles.modalContent}>
           <div className={styles.close} onClick={onClose}>&times;</div>
           <div className={styles.registroContainer}>
-            <h2 className={styles.title}>Registrarse</h2>
+            <h2 className={styles.title}>{t("REGISTER_TITLE", "general")}</h2>
             <form id="register-form" onSubmit={handleSubmit}>
               <div className={styles.formRow}>
                 <div className={styles.formCol}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="nombre">Nombre:</label>
+                    <label htmlFor="nombre">{t("REGISTER_NAME", "general")}</label>
                     <input
                       type="text"
                       id="register-nombres"
@@ -321,7 +341,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="codigo-postal">Código Postal:</label>
+                    <label htmlFor="codigo-postal">{t("REGISTER_POSTAL_CODE", "general")}</label>
                     <input
                       type="text"
                       id="register-codigo-postal"
@@ -334,7 +354,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="prefijo">Prefijo:</label>
+                    <label htmlFor="prefijo">{t("REGISTER_PREFIX", "general")}</label>
                     <input
                       type="text"
                       id="register-prefijo"
@@ -347,7 +367,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={`${styles.formGroup} ${styles.flatpickrContainer}`}>
-                    <label htmlFor="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <label htmlFor="fecha_nacimiento">{t("REGISTER_BIRTH_DATE", "general")}</label>
                     <input
                       type="text"
                       id="register-fecha-nacimiento"
@@ -361,7 +381,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="password">Contraseña:</label>
+                    <label htmlFor="password">{t("REGISTER_PASSWORD", "general")}</label>
                     <input
                       type="password"
                       id="register-password"
@@ -376,7 +396,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                 </div>
                 <div className={styles.formCol}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="email">Correo Electrónico:</label>
+                    <label htmlFor="email">{t("REGISTER_EMAIL", "general")}</label>
                     <input
                       type="email"
                       id="register-email"
@@ -389,7 +409,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="direccion">Dirección:</label>
+                    <label htmlFor="direccion">{t("REGISTER_ADDRESS", "general")}</label>
                     <input
                       type="text"
                       id="register-direccion"
@@ -402,7 +422,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="telefono">Teléfono:</label>
+                    <label htmlFor="telefono">{t("REGISTER_PHONE", "general")}</label>
                     <input
                       type="text"
                       id="register-telefono"
@@ -415,7 +435,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="pais">País:</label>
+                    <label htmlFor="pais">{t("REGISTER_COUNTRY", "general")}</label>
                     <input
                       type="text"
                       id="register-pais"
@@ -428,7 +448,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="confirm-password">Confirmar Contraseña:</label>
+                    <label htmlFor="confirm-password">{t("REGISTER_CONFIRM_PASSWORD", "general")}</label>
                     <input
                       type="password"
                       id="register-confirm-password"
@@ -444,7 +464,7 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
               </div>
               <div className={styles.botonesContainer}>
                 <button type="submit" disabled={loading} className={styles.submitButton}>
-                  {loading ? "Procesando..." : "Registrarse"}
+                  {loading ? t("REGISTER_PROCESSING", "general") : t("REGISTER_BUTTON", "general")}
                 </button>
                 
                 <div
@@ -454,21 +474,21 @@ const RegisterModal = ({ isOpen, onClose, openLoginModal }) => {
                   data-ux_mode="popup"
                   data-callback="handleCredentialResponse"
                   data-auto_prompt="false"
-                  className={styles.googleContainer}
+                  className="google-signin-container"
                 ></div>
 
-                <div className={`${styles.gidSignin} g_id_signin`} data-type="standard"></div>
+                <div id="google-signin-button-register" className="google-signin-button"></div>
                 
                 <button 
                   type="button" 
-                  className={`${styles.socialLogin} ${styles.facebook}`} 
+                  className="social-login-button facebook" 
                   onClick={handleFacebookRegister}
                 >
-                  Registrarse con Facebook
+                  {t("REGISTER_WITH_FACEBOOK", "general")}
                 </button>
               </div>
 
-              {error && <div className={styles.errorMessage}>{error}</div>}
+              {error && <div className="auth-error-message">{error}</div>}
             </form>
           </div>
         </div>

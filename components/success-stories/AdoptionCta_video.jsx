@@ -1,8 +1,10 @@
 "use client"
 import { useState, useRef } from "react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
 const SuccessSections = () => {
+  const { t } = useLanguage()
   const [activeVideo, setActiveVideo] = useState("motivacional1.mp4")
   const videoRef = useRef(null)
 
@@ -20,30 +22,30 @@ const SuccessSections = () => {
     <div className="success-sections-container">
       {/* Sección de Video */}
       <div className="media-section">
-        <h3>Videos Motivacionales</h3>
+        <h3>{t("STORIES_VIDEO_TITLE", "historias")}</h3>
         <div className="video-gallery">
           <video ref={videoRef} controls poster="/static/images/video-thumbnail1.webp">
             <source src={`imagenes/videos/${activeVideo}`} type="video/mp4" />
-            Tu navegador no soporta videos HTML5.
+            {t("STORIES_VIDEO_UNSUPPORTED", "historias")}
           </video>
           <div className="video-selector">
             <button
               className={`video-btn ${activeVideo === "motivacional1.mp4" ? "active" : ""}`}
               onClick={() => handleVideoChange("motivacional1.mp4")}
             >
-              Historia 1
+              {t("STORIES_VIDEO_HISTORY1", "historias")}
             </button>
             <button
               className={`video-btn ${activeVideo === "motivacional2.mp4" ? "active" : ""}`}
               onClick={() => handleVideoChange("motivacional2.mp4")}
             >
-              Historia 2
+              {t("STORIES_VIDEO_HISTORY2", "historias")}
             </button>
             <button
               className={`video-btn ${activeVideo === "motivacional3.mp4" ? "active" : ""}`}
               onClick={() => handleVideoChange("motivacional3.mp4")}
             >
-              Historia 3
+              {t("STORIES_VIDEO_HISTORY3", "historias")}
             </button>
           </div>
         </div>
@@ -51,16 +53,16 @@ const SuccessSections = () => {
 
       {/* Sección CTA de Adopción */}
       <div className="historia-cta">
-        <h3>¿Quieres crear tu propia historia?</h3>
+        <h3>{t("STORIES_CTA_TITLE", "historias")}</h3>
         <p className="historia-text">
-          Miles de mascotas están esperando un hogar. Tu próxima historia de éxito podría comenzar con una adopción.
+          {t("STORIES_CTA_TEXT", "historias")}
         </p>
         <div className="historia-buttons">
           <Link href="/adopcion" className="btn-historia">
-            Conoce a tus futuros amigos
+            {t("STORIES_CTA_BUTTON1", "historias")}
           </Link>
           <Link href="/#adoptar" className="btn-historia secondary">
-            Información sobre adopción
+            {t("STORIES_CTA_BUTTON2", "historias")}
           </Link>
         </div>
       </div>

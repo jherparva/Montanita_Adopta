@@ -1,8 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
 import VolunteerForm from "./VolunteerForm"
+import { useLanguage } from "@/contexts/language-context"
 
 const VolunteerSection = () => {
+  const { t } = useLanguage()
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -42,31 +44,25 @@ const VolunteerSection = () => {
   return (
     <div id="voluntariado" className="voluntariado-container">
       <div className="voluntariado-text">
-        <h2>Voluntariado</h2>
+        <h2>{t("VOLUNTEER_SECTION_TITLE", "voluntario")}</h2>
         <div className="paw-divider">
           <i className="fas fa-paw"></i>
           <i className="fas fa-paw"></i>
           <i className="fas fa-paw"></i>
         </div>
+        <p dangerouslySetInnerHTML={{ __html: t("VOLUNTEER_SECTION_INTRO", "voluntario") }} />
+        <p>{t("VOLUNTEER_SECTION_ACTIVITIES", "voluntario")}</p>
         <p>
-          En <strong>Montañita Adopta</strong>, los voluntarios son el corazón de nuestra organización. Gracias a
-          personas como tú, podemos seguir rescatando y cuidando a animales necesitados.
+          <strong>{t("VOLUNTEER_SECTION_REQUIREMENTS_TITLE", "voluntario")}</strong>{" "}
+          {t("VOLUNTEER_SECTION_REQUIREMENTS", "voluntario")}
         </p>
         <p>
-          Nuestros voluntarios participan en diversas actividades como cuidado de animales, paseos, limpieza, eventos de
-          adopción, difusión en redes sociales, transporte, fotografía y mucho más.
-        </p>
-        <p>
-          <strong>¿Qué necesitamos?</strong> Personas comprometidas, responsables y con amor por los animales. No
-          importa tu experiencia previa, lo importante es tu disposición para ayudar.
-        </p>
-        <p>
-          <strong>¿Cuánto tiempo?</strong> Tú decides. Puedes colaborar unas horas a la semana o participar en eventos
-          específicos. Toda ayuda es valiosa.
+          <strong>{t("VOLUNTEER_SECTION_TIME_TITLE", "voluntario")}</strong>{" "}
+          {t("VOLUNTEER_SECTION_TIME", "voluntario")}
         </p>
 
         <button className="cta-button" onClick={handleOpenModal}>
-          Postúlate como Voluntario
+          {t("VOLUNTEER_SECTION_CTA", "voluntario")}
         </button>
       </div>
 

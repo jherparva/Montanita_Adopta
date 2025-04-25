@@ -1,9 +1,11 @@
 "use client"
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 const AdoptionForm = ({ animal, isAuthenticated }) => {
   const router = useRouter()
+  const { t } = useLanguage()
   const [userData, setUserData] = useState(null)
   const [formData, setFormData] = useState({
     mascota_id: animal?.id || animal?._id || "",
@@ -73,11 +75,13 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
     // Verificar autenticación
     if (!isAuthenticated) {
       window.Swal.fire({
-        title: "Autenticación Requerida",
-        text: "Debes iniciar sesión para enviar una solicitud de adopción",
+        title: t("ADOPTION_LOGIN_REQUIRED_TITLE", "form_adopcion"),
+        text: t("ADOPTION_LOGIN_REQUIRED_TEXT", "form_adopcion"),
         icon: "warning",
         confirmButtonColor: "#4caf50",
-        confirmButtonText: "Iniciar Sesión",
+        confirmButtonText: t("ADOPTION_LOGIN_CONFIRM", "form_adopcion"),
+        cancelButtonText: t("ADOPTION_LOGIN_CANCEL", "form_adopcion"),
+        showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
           router.push("/auth/login?redirect=/formulario-adopcion")
@@ -133,11 +137,11 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
         })
 
         window.Swal.fire({
-          title: "¡Solicitud Enviada!",
-          text: "Gracias por tu solicitud. Nos pondremos en contacto contigo pronto.",
+          title: t("ADOPTION_SUCCESS_TITLE", "form_adopcion"),
+          text: t("ADOPTION_SUCCESS_TEXT", "form_adopcion"),
           icon: "success",
           confirmButtonColor: "#4caf50",
-          confirmButtonText: "Aceptar",
+          confirmButtonText: t("ADOPTION_SUCCESS_BUTTON", "form_adopcion"),
         }).then((result) => {
           if (result.isConfirmed) {
             router.push("/adopcion?success=true")
@@ -145,26 +149,26 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
         })
       } else {
         console.error("Error al enviar la solicitud:", result.message)
-        setSubmitError(result.message || "Error al enviar la solicitud")
+        setSubmitError(result.message || t("ADOPTION_ERROR_TEXT", "form_adopcion"))
         
         window.Swal.fire({
-          title: "Error",
-          text: result.message || "Error al enviar la solicitud. Por favor intenta nuevamente.",
+          title: t("ADOPTION_ERROR_TITLE", "form_adopcion"),
+          text: result.message || t("ADOPTION_ERROR_TEXT", "form_adopcion"),
           icon: "error",
           confirmButtonColor: "#f44336",
-          confirmButtonText: "Aceptar",
+          confirmButtonText: t("ADOPTION_SUCCESS_BUTTON", "form_adopcion"),
         })
       }
     } catch (error) {
       console.error("Error en la solicitud:", error)
-      setSubmitError("Error de conexión. Por favor intenta nuevamente.")
+      setSubmitError(t("ADOPTION_ERROR_CONNECTION", "form_adopcion"))
       
       window.Swal.fire({
-        title: "Error de Conexión",
-        text: "No pudimos procesar tu solicitud. Por favor intenta nuevamente.",
+        title: t("ADOPTION_ERROR_TITLE", "form_adopcion"),
+        text: t("ADOPTION_ERROR_CONNECTION", "form_adopcion"),
         icon: "error",
         confirmButtonColor: "#f44336",
-        confirmButtonText: "Aceptar",
+        confirmButtonText: t("ADOPTION_SUCCESS_BUTTON", "form_adopcion"),
       })
     } finally {
       setIsSubmitting(false)
@@ -175,20 +179,20 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
   if (!isAuthenticated) {
     return (
       <div className="auth-required-container">
-        <h3>Autenticación Requerida</h3>
-        <p>Debes iniciar sesión para enviar una solicitud de adopción.</p>
+        <h3>{t("ADOPTION_LOGIN_REQUIRED_TITLE", "form_adopcion")}</h3>
+        <p>{t("ADOPTION_AUTH_NEEDED", "form_adopcion")}</p>
         <button 
           className="login-button" 
           onClick={() => {
             window.Swal.fire({
-              title: "Iniciar Sesión",
-              text: "Necesitas una cuenta para adoptar. ¿Deseas iniciar sesión ahora?",
+              title: t("ADOPTION_LOGIN_BUTTON", "form_adopcion"),
+              text: t("ADOPTION_LOGIN_REQUIRED_TEXT", "form_adopcion"),
               icon: "question",
               showCancelButton: true,
               confirmButtonColor: "#4caf50",
               cancelButtonColor: "#f44336",
-              confirmButtonText: "Sí, iniciar sesión",
-              cancelButtonText: "No, más tarde"
+              confirmButtonText: t("ADOPTION_LOGIN_CONFIRM", "form_adopcion"),
+              cancelButtonText: t("ADOPTION_LOGIN_CANCEL", "form_adopcion")
             }).then((result) => {
               if (result.isConfirmed) {
                 router.push("/auth/login?redirect=/formulario-adopcion")
@@ -196,7 +200,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
             })
           }}
         >
-          Iniciar Sesión
+          {t("ADOPTION_LOGIN_BUTTON", "form_adopcion")}
         </button>
       </div>
     )
@@ -206,19 +210,19 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
     const sexValue = animal?.sex || animal?.sexo || '';
     const normalizedSex = typeof sexValue === 'string' ? sexValue.toLowerCase() : '';
     
-    if (['male', 'macho'].includes(normalizedSex)) return "Macho";
-    if (['female', 'hembra'].includes(normalizedSex)) return "Hembra";
-    return "No especificado";
+    if (['male', 'macho'].includes(normalizedSex)) return t("ADOPTION_SEX_MALE", "form_adopcion");
+    if (['female', 'hembra'].includes(normalizedSex)) return t("ADOPTION_SEX_FEMALE", "form_adopcion");
+    return t("ADOPTION_SEX_UNSPECIFIED", "form_adopcion");
   }
 
   const getAgeDisplayText = (animal) => {
     const ageValue = animal?.age || '';
     const normalizedAge = typeof ageValue === 'string' ? ageValue.toLowerCase() : '';
     
-    if (['puppy', 'cachorro'].includes(normalizedAge)) return "Cachorro";
-    if (['kitten', 'gatito'].includes(normalizedAge)) return "Gatito";
-    if (['adult', 'adulto'].includes(normalizedAge)) return "Adulto";
-    return "Senior";
+    if (['puppy', 'cachorro'].includes(normalizedAge)) return t("ADOPTION_AGE_PUPPY", "form_adopcion");
+    if (['kitten', 'gatito'].includes(normalizedAge)) return t("ADOPTION_AGE_KITTEN", "form_adopcion");
+    if (['adult', 'adulto'].includes(normalizedAge)) return t("ADOPTION_AGE_ADULT", "form_adopcion");
+    return t("ADOPTION_AGE_SENIOR", "form_adopcion");
   }
   
   return (
@@ -235,15 +239,15 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
         <div className="mascota-details">
           <h3>{animal?.name}</h3>
           <p>
-            <i className="fas fa-birthday-cake"></i> Edad: {getAgeDisplayText(animal)}
+            <i className="fas fa-birthday-cake"></i> {t("ADOPTION_PET_AGE", "form_adopcion")}: {getAgeDisplayText(animal)}
           </p>
           <p>
-            <i className="fas fa-paw"></i> Raza: {animal?.breed || animal?.raza || "No especificada"}
+            <i className="fas fa-paw"></i> {t("ADOPTION_PET_BREED", "form_adopcion")}: {animal?.breed || animal?.raza || t("ADOPTION_SEX_UNSPECIFIED", "form_adopcion")}
           </p>
           <p>
-            <i className="fas fa-venus-mars"></i> Sexo: {getSexDisplayText(animal)}
+            <i className="fas fa-venus-mars"></i> {t("ADOPTION_PET_SEX", "form_adopcion")}: {getSexDisplayText(animal)}
           </p>
-          <div className="mascota-tag">Esperando un hogar</div>
+          <div className="mascota-tag">{t("ADOPTION_PET_STATUS", "form_adopcion")}</div>
         </div>
       </div>
 
@@ -251,7 +255,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
 
       {submitSuccess && (
         <div className="success-message">
-          ¡Tu solicitud ha sido enviada con éxito! Nos pondremos en contacto contigo pronto.
+          {t("ADOPTION_SUCCESS_TEXT", "form_adopcion")}
         </div>
       )}
 
@@ -267,10 +271,10 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               <div className="card-icon">
                 <i className="fas fa-user-circle"></i>
               </div>
-              <h3 className="card-title">Información Personal</h3>
+              <h3 className="card-title">{t("ADOPTION_PERSONAL_INFO", "form_adopcion")}</h3>
 
               <div className="form-group">
-                <label htmlFor="nombre-completo">Nombre Completo:</label>
+                <label htmlFor="nombre-completo">{t("ADOPTION_FORM_FULLNAME", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="nombre-completo"
@@ -282,7 +286,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="estado-civil">Estado Civil:</label>
+                <label htmlFor="estado-civil">{t("ADOPTION_FORM_MARITAL_STATUS", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="estado-civil"
@@ -294,7 +298,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="documento-identificacion">Documento de Identificación:</label>
+                <label htmlFor="documento-identificacion">{t("ADOPTION_FORM_ID_DOCUMENT", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="documento-identificacion"
@@ -306,7 +310,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="celular">Celular:</label>
+                <label htmlFor="celular">{t("ADOPTION_FORM_PHONE", "form_adopcion")}:</label>
                 <input
                   type="tel"
                   id="celular"
@@ -325,10 +329,10 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               <div className="card-icon">
                 <i className="fas fa-home"></i>
               </div>
-              <h3 className="card-title">Domicilio</h3>
+              <h3 className="card-title">{t("ADOPTION_HOME_INFO", "form_adopcion")}</h3>
 
               <div className="form-group">
-                <label htmlFor="direccion">Dirección:</label>
+                <label htmlFor="direccion">{t("ADOPTION_FORM_ADDRESS", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="direccion"
@@ -340,7 +344,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="departamento">Departamento:</label>
+                <label htmlFor="departamento">{t("ADOPTION_FORM_DEPARTMENT", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="departamento"
@@ -352,7 +356,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="municipio">Municipio:</label>
+                <label htmlFor="municipio">{t("ADOPTION_FORM_MUNICIPALITY", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="municipio"
@@ -364,7 +368,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="nombre-companero">Nombre del Compañero que Desea Adoptar:</label>
+                <label htmlFor="nombre-companero">{t("ADOPTION_FORM_PET_NAME", "form_adopcion")}:</label>
                 <input
                   type="text"
                   id="nombre-companero"
@@ -383,34 +387,34 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               <div className="card-icon">
                 <i className="fas fa-users"></i>
               </div>
-              <h3 className="card-title">Entorno Familiar</h3>
+              <h3 className="card-title">{t("ADOPTION_FAMILY_INFO", "form_adopcion")}</h3>
 
               <div className="form-group">
-                <label htmlFor="hay-ninos">¿Hay niños en la casa?</label>
+                <label htmlFor="hay-ninos">{t("ADOPTION_FORM_KIDS", "form_adopcion")}</label>
                 <select id="hay-ninos" name="hay_ninos" value={formData.hay_ninos} onChange={handleChange} required>
                   <option value="" disabled>
-                    Seleccione una opción
+                    {t("ADOPTION_SELECT_OPTION", "form_adopcion")}
                   </option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
+                  <option value="si">{t("ADOPTION_OPTION_YES", "form_adopcion")}</option>
+                  <option value="no">{t("ADOPTION_OPTION_NO", "form_adopcion")}</option>
                 </select>
               </div>
 
               <div className="form-group">
-                <label htmlFor="edad-ninos">¿Qué edad tienen los niños?</label>
+                <label htmlFor="edad-ninos">{t("ADOPTION_FORM_KIDS_AGE", "form_adopcion")}</label>
                 <input
                   type="text"
                   id="edad-ninos"
                   name="edad_ninos"
                   value={formData.edad_ninos}
                   onChange={handleChange}
-                  placeholder="Si no hay niños, escriba 'No aplica'"
+                  placeholder={t("ADOPTION_FORM_KIDS_AGE_PLACEHOLDER", "form_adopcion")}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="hay-alergicos">¿Hay personas alérgicas en la casa?</label>
+                <label htmlFor="hay-alergicos">{t("ADOPTION_FORM_ALLERGIES", "form_adopcion")}</label>
                 <select
                   id="hay-alergicos"
                   name="hay_alergicos"
@@ -419,10 +423,10 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
                   required
                 >
                   <option value="" disabled>
-                    Seleccione una opción
+                    {t("ADOPTION_SELECT_OPTION", "form_adopcion")}
                   </option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
+                  <option value="si">{t("ADOPTION_OPTION_YES", "form_adopcion")}</option>
+                  <option value="no">{t("ADOPTION_OPTION_NO", "form_adopcion")}</option>
                 </select>
               </div>
             </div>
@@ -434,10 +438,10 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               <div className="card-icon">
                 <i className="fas fa-paw"></i>
               </div>
-              <h3 className="card-title">Experiencia con Mascotas</h3>
+              <h3 className="card-title">{t("ADOPTION_EXPERIENCE_INFO", "form_adopcion")}</h3>
 
               <div className="form-group">
-                <label htmlFor="ha-tenido-mascotas">¿Ha tenido mascotas antes?</label>
+                <label htmlFor="ha-tenido-mascotas">{t("ADOPTION_FORM_HAD_PETS", "form_adopcion")}</label>
                 <select
                   id="ha-tenido-mascotas"
                   name="ha_tenido_mascotas"
@@ -446,15 +450,15 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
                   required
                 >
                   <option value="" disabled>
-                    Seleccione una opción
+                    {t("ADOPTION_SELECT_OPTION", "form_adopcion")}
                   </option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
+                  <option value="si">{t("ADOPTION_OPTION_YES", "form_adopcion")}</option>
+                  <option value="no">{t("ADOPTION_OPTION_NO", "form_adopcion")}</option>
                 </select>
               </div>
 
               <div className="form-group">
-                <label htmlFor="motivo-adopcion">Motivo por el cual desea adoptar:</label>
+                <label htmlFor="motivo-adopcion">{t("ADOPTION_FORM_ADOPTION_REASON", "form_adopcion")}:</label>
                 <textarea
                   id="motivo-adopcion"
                   name="motivo_adopcion"
@@ -473,13 +477,11 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
               <div className="card-icon large-icon">
                 <i className="fas fa-handshake"></i>
               </div>
-              <h3 className="card-title">Compromiso</h3>
+              <h3 className="card-title">{t("ADOPTION_COMMITMENT_INFO", "form_adopcion")}</h3>
 
               <div className="commitment-text">
                 <p>
-                  ¿Se compromete a llevar la mascota a un centro veterinario posterior a la entrega para hacer revisión
-                  veterinaria, esquema de vacunación si no lo tiene o si desea iniciarlo de nuevo, exámenes de sangre o
-                  coprológicos según recomendación veterinaria? ¿ESTÁ DE ACUERDO CON ESTO?
+                  {t("ADOPTION_FORM_COMMITMENT_TEXT", "form_adopcion")}
                 </p>
               </div>
 
@@ -494,7 +496,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
                     required
                   />
                   <span className="checkmark"></span>
-                  Sí, me comprometo
+                  {t("ADOPTION_FORM_COMMITMENT_YES", "form_adopcion")}
                 </label>
                 <label className="radio-container">
                   <input
@@ -506,7 +508,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
                     required
                   />
                   <span className="checkmark"></span>
-                  No, no puedo comprometerme
+                  {t("ADOPTION_FORM_COMMITMENT_NO", "form_adopcion")}
                 </label>
               </div>
             </div>
@@ -514,7 +516,7 @@ const AdoptionForm = ({ animal, isAuthenticated }) => {
         </div>
 
         <button type="submit" className="submit-btn" disabled={isSubmitting}>
-          <span>{isSubmitting ? "Enviando..." : "Enviar Solicitud"}</span>
+          <span>{isSubmitting ? t("ADOPTION_SUBMITTING", "form_adopcion") : t("ADOPTION_SUBMIT_BUTTON", "form_adopcion")}</span>
           <i className="fas fa-paw"></i>
         </button>
       </form>

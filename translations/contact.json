@@ -1,0 +1,167 @@
+{
+    "es": {
+      "CONTACT_TITLE": "Contáctanos",
+      "CONTACT_LOADING": "Cargando...",
+      "CONTACT_AUTH_NEEDED": "Debes iniciar sesión para enviar mensajes de contacto.",
+      "CONTACT_LOGIN_BUTTON": "Iniciar Sesión",
+      
+      "CONTACT_CTA_TITLE": "¿Tienes preguntas sobre adopción?",
+      "CONTACT_CTA_TEXT": "Completa este formulario y te responderemos lo antes posible. ¡Juntos podemos darle un hogar a todos los peluditos!",
+      
+      "CONTACT_FORM_NAME": "Nombre Completo",
+      "CONTACT_FORM_NAME_PLACEHOLDER": "Tu nombre completo",
+      "CONTACT_FORM_EMAIL": "Correo Electrónico",
+      "CONTACT_FORM_EMAIL_PLACEHOLDER": "tucorreo@ejemplo.com",
+      "CONTACT_FORM_SUBJECT": "Asunto",
+      "CONTACT_FORM_SUBJECT_PLACEHOLDER": "Asunto de tu mensaje",
+      "CONTACT_FORM_MESSAGE": "Mensaje",
+      "CONTACT_FORM_MESSAGE_PLACEHOLDER": "Escribe tu mensaje aquí",
+      
+      "CONTACT_PRIVACY_CHECKBOX": "He leído y acepto la",
+      "CONTACT_PRIVACY_LINK": "política de privacidad",
+      
+      "CONTACT_SUBMIT_BUTTON": "Enviar",
+      "CONTACT_SUBMITTING": "Enviando...",
+      
+      "CONTACT_ACCESS_REQUIRED": "Acceso Requerido",
+      "CONTACT_LOGIN_REQUIRED": "Debes iniciar sesión para enviar mensajes",
+      "CONTACT_LOGIN_CONFIRM": "Iniciar Sesión",
+      
+      "CONTACT_SUCCESS_TITLE": "¡Mensaje Enviado!",
+      "CONTACT_SUCCESS_TEXT": "Hemos recibido tu mensaje. Te responderemos lo antes posible.",
+      
+      "CONTACT_ERROR_TITLE": "Error",
+      "CONTACT_ERROR_CONNECTION": "Error de conexión. Por favor intenta nuevamente.",
+      
+      "CONTACT_PRIVACY_POLICY_TITLE": "Política de Privacidad",
+      "CONTACT_PRIVACY_ACCEPT": "Aceptar",
+      "CONTACT_PRIVACY_CLOSE": "Cerrar",
+      
+      "CONTACT_PRIVACY_CONTENT_TITLE": "Política de Privacidad",
+      "CONTACT_PRIVACY_INTRO": "En Montañita Adopta, respetamos tu privacidad y estamos comprometidos con la protección de tus datos personales.",
+      "CONTACT_PRIVACY_INFO_TITLE": "1. Información que recopilamos",
+      "CONTACT_PRIVACY_INFO_TEXT": "Recopilamos la siguiente información cuando nos contactas:",
+      "CONTACT_PRIVACY_INFO_ITEM1": "Nombre completo",
+      "CONTACT_PRIVACY_INFO_ITEM2": "Correo electrónico",
+      "CONTACT_PRIVACY_INFO_ITEM3": "Mensaje y asunto",
+      "CONTACT_PRIVACY_USE_TITLE": "2. Uso de la información",
+      "CONTACT_PRIVACY_USE_TEXT": "La información proporcionada será utilizada exclusivamente para:",
+      "CONTACT_PRIVACY_USE_ITEM1": "Responder a tus consultas",
+      "CONTACT_PRIVACY_USE_ITEM2": "Procesar solicitudes de adopción o voluntariado",
+      "CONTACT_PRIVACY_USE_ITEM3": "Mejorar nuestros servicios",
+      "CONTACT_PRIVACY_SECURITY_TITLE": "3. Seguridad de datos",
+      "CONTACT_PRIVACY_SECURITY_TEXT": "Implementamos medidas de seguridad para proteger tu información personal y prevenir accesos no autorizados.",
+      "CONTACT_PRIVACY_DISCLOSURE_TITLE": "4. Divulgación a terceros",
+      "CONTACT_PRIVACY_DISCLOSURE_TEXT": "No compartimos tu información con terceros sin tu consentimiento, excepto cuando sea requerido por ley."
+    },
+    "en": {
+      "CONTACT_TITLE": "Contact Us",
+      "CONTACT_LOADING": "Loading...",
+      "CONTACT_AUTH_NEEDED": "You must be logged in to send contact messages.",
+      "CONTACT_LOGIN_BUTTON": "Log In",
+      
+      "CONTACT_CTA_TITLE": "Do you have questions about adoption?",
+      "CONTACT_CTA_TEXT": "Fill out this form and we will respond as soon as possible. Together we can find a home for all pets!",
+      
+      "CONTACT_FORM_NAME": "Full Name",
+      "CONTACT_FORM_NAME_PLACEHOLDER": "Your full name",
+      "CONTACT_FORM_EMAIL": "Email",
+      "CONTACT_FORM_EMAIL_PLACEHOLDER": "your-email@example.com",
+      "CONTACT_FORM_SUBJECT": "Subject",
+      "CONTACT_FORM_SUBJECT_PLACEHOLDER": "Subject of your message",
+      "CONTACT_FORM_MESSAGE": "Message",
+      "CONTACT_FORM_MESSAGE_PLACEHOLDER": "Write your message here",
+      
+      "CONTACT_PRIVACY_CHECKBOX": "I have read and accept the",
+      "CONTACT_PRIVACY_LINK": "privacy policy",
+      
+      "CONTACT_SUBMIT_BUTTON": "Send",
+      "CONTACT_SUBMITTING": "Sending...",
+      
+      "CONTACT_ACCESS_REQUIRED": "Access Required",
+      "CONTACT_LOGIN_REQUIRED": "You must log in to send messages",
+      "CONTACT_LOGIN_CONFIRM": "Log In",
+      
+      "CONTACT_SUCCESS_TITLE": "Message Sent!",
+      "CONTACT_SUCCESS_TEXT": "We have received your message. We will respond as soon as possible.",
+      
+      "CONTACT_ERROR_TITLE": "Error",
+      "CONTACT_ERROR_CONNECTION": "Connection error. Please try again.",
+      
+      "CONTACT_PRIVACY_POLICY_TITLE": "Privacy Policy",
+      "CONTACT_PRIVACY_ACCEPT": "Accept",
+      "CONTACT_PRIVACY_CLOSE": "Close",
+      
+      "CONTACT_PRIVACY_CONTENT_TITLE": "Privacy Policy",
+      "CONTACT_PRIVACY_INTRO": "At Montañita Adopta, we respect your privacy and are committed to protecting your personal data.",
+      "CONTACT_PRIVACY_INFO_TITLE": "1. Information we collect",
+      "CONTACT_PRIVACY_INFO_TEXT": "We collect the following information when you contact us:",
+      "CONTACT_PRIVACY_INFO_ITEM1": "Full name",
+      "CONTACT_PRIVACY_INFO_ITEM2": "Email",
+      "CONTACT_PRIVACY_INFO_ITEM3": "Message and subject",
+      "CONTACT_PRIVACY_USE_TITLE": "2. Use of information",
+      "CONTACT_PRIVACY_USE_TEXT": "The information provided will be used exclusively for:",
+      "CONTACT_PRIVACY_USE_ITEM1": "Responding to your inquiries",
+      "CONTACT_PRIVACY_USE_ITEM2": "Processing adoption or volunteer requests",
+      "CONTACT_PRIVACY_USE_ITEM3": "Improving our services",
+      "CONTACT_PRIVACY_SECURITY_TITLE": "3. Data security",
+      "CONTACT_PRIVACY_SECURITY_TEXT": "We implement security measures to protect your personal information and prevent unauthorized access.",
+      "CONTACT_PRIVACY_DISCLOSURE_TITLE": "4. Disclosure to third parties",
+      "CONTACT_PRIVACY_DISCLOSURE_TEXT": "We do not share your information with third parties without your consent, except when required by law."
+    },
+    "fr": {
+      "CONTACT_TITLE": "Contactez-nous",
+      "CONTACT_LOADING": "Chargement...",
+      "CONTACT_AUTH_NEEDED": "Vous devez être connecté pour envoyer des messages de contact.",
+      "CONTACT_LOGIN_BUTTON": "Se Connecter",
+      
+      "CONTACT_CTA_TITLE": "Vous avez des questions sur l'adoption?",
+      "CONTACT_CTA_TEXT": "Remplissez ce formulaire et nous vous répondrons dès que possible. Ensemble, nous pouvons trouver un foyer pour tous les animaux!",
+      
+      "CONTACT_FORM_NAME": "Nom Complet",
+      "CONTACT_FORM_NAME_PLACEHOLDER": "Votre nom complet",
+      "CONTACT_FORM_EMAIL": "Email",
+      "CONTACT_FORM_EMAIL_PLACEHOLDER": "votre-email@exemple.com",
+      "CONTACT_FORM_SUBJECT": "Sujet",
+      "CONTACT_FORM_SUBJECT_PLACEHOLDER": "Sujet de votre message",
+      "CONTACT_FORM_MESSAGE": "Message",
+      "CONTACT_FORM_MESSAGE_PLACEHOLDER": "Écrivez votre message ici",
+      
+      "CONTACT_PRIVACY_CHECKBOX": "J'ai lu et j'accepte la",
+      "CONTACT_PRIVACY_LINK": "politique de confidentialité",
+      
+      "CONTACT_SUBMIT_BUTTON": "Envoyer",
+      "CONTACT_SUBMITTING": "Envoi en cours...",
+      
+      "CONTACT_ACCESS_REQUIRED": "Accès Requis",
+      "CONTACT_LOGIN_REQUIRED": "Vous devez vous connecter pour envoyer des messages",
+      "CONTACT_LOGIN_CONFIRM": "Se Connecter",
+      
+      "CONTACT_SUCCESS_TITLE": "Message Envoyé!",
+      "CONTACT_SUCCESS_TEXT": "Nous avons reçu votre message. Nous vous répondrons dès que possible.",
+      
+      "CONTACT_ERROR_TITLE": "Erreur",
+      "CONTACT_ERROR_CONNECTION": "Erreur de connexion. Veuillez réessayer.",
+      
+      "CONTACT_PRIVACY_POLICY_TITLE": "Politique de Confidentialité",
+      "CONTACT_PRIVACY_ACCEPT": "Accepter",
+      "CONTACT_PRIVACY_CLOSE": "Fermer",
+      
+      "CONTACT_PRIVACY_CONTENT_TITLE": "Politique de Confidentialité",
+      "CONTACT_PRIVACY_INTRO": "Chez Montañita Adopta, nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles.",
+      "CONTACT_PRIVACY_INFO_TITLE": "1. Informations que nous collectons",
+      "CONTACT_PRIVACY_INFO_TEXT": "Nous collectons les informations suivantes lorsque vous nous contactez:",
+      "CONTACT_PRIVACY_INFO_ITEM1": "Nom complet",
+      "CONTACT_PRIVACY_INFO_ITEM2": "Email",
+      "CONTACT_PRIVACY_INFO_ITEM3": "Message et sujet",
+      "CONTACT_PRIVACY_USE_TITLE": "2. Utilisation des informations",
+      "CONTACT_PRIVACY_USE_TEXT": "Les informations fournies seront utilisées exclusivement pour:",
+      "CONTACT_PRIVACY_USE_ITEM1": "Répondre à vos demandes",
+      "CONTACT_PRIVACY_USE_ITEM2": "Traiter les demandes d'adoption ou de bénévolat",
+      "CONTACT_PRIVACY_USE_ITEM3": "Améliorer nos services",
+      "CONTACT_PRIVACY_SECURITY_TITLE": "3. Sécurité des données",
+      "CONTACT_PRIVACY_SECURITY_TEXT": "Nous mettons en œuvre des mesures de sécurité pour protéger vos informations personnelles et prévenir les accès non autorisés.",
+      "CONTACT_PRIVACY_DISCLOSURE_TITLE": "4. Divulgation à des tiers",
+      "CONTACT_PRIVACY_DISCLOSURE_TEXT": "Nous ne partageons pas vos informations avec des tiers sans votre consentement, sauf lorsque la loi l'exige."
+    }
+  }

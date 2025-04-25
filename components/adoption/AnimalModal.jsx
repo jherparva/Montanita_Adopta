@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState, useCallback, memo } from "react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 const AnimalTag = memo(({ children }) => (
   <span className="tag">{children}</span>
@@ -10,6 +11,7 @@ AnimalTag.displayName = 'AnimalTag'
 
 const AnimalModal = ({ animal, onClose }) => {
   const router = useRouter()
+  const { t } = useLanguage()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
@@ -33,38 +35,38 @@ const AnimalModal = ({ animal, onClose }) => {
 
   const handleFavorite = useCallback(() => {
     if (!isAuthenticated) {
-      alert("Debes iniciar sesión para guardar favoritos.")
+      alert(t("ANIMAL_MODAL_LOGIN_REQUIRED", "adopcion"))
       return
     }
 
     // Aquí puedes hacer una solicitud a tu API para guardar como favorito
-    alert(`${animal.name} ha sido añadido a tus favoritos.`)
-  }, [isAuthenticated, animal.name])
+    alert(`${animal.name} ${t("ANIMAL_MODAL_ADDED_FAVORITE", "adopcion")}`)
+  }, [isAuthenticated, animal.name, t])
 
   const getAgeText = (age) => {
     switch (age) {
-      case "puppy": return "Cachorro"
-      case "kitten": return "Gatito"
-      case "adult": return "Adulto"
-      case "senior": return "Senior"
+      case "puppy": return t("ANIMAL_MODAL_PUPPY", "adopcion")
+      case "kitten": return t("ANIMAL_MODAL_KITTEN", "adopcion")
+      case "adult": return t("ANIMAL_MODAL_ADULT", "adopcion")
+      case "senior": return t("ANIMAL_MODAL_SENIOR", "adopcion")
       default: return age
     }
   }
 
   const getSizeText = (size) => {
     switch (size) {
-      case "small": return "Pequeño"
-      case "medium": return "Mediano"
-      case "large": return "Grande"
+      case "small": return t("ANIMAL_MODAL_SMALL", "adopcion")
+      case "medium": return t("ANIMAL_MODAL_MEDIUM", "adopcion")
+      case "large": return t("ANIMAL_MODAL_LARGE", "adopcion")
       default: return size
     }
   }
 
   const getStatusText = (status) => {
     switch (status) {
-      case "available": return "Disponible"
-      case "pending": return "En proceso"
-      default: return "Otro"
+      case "available": return t("ANIMAL_MODAL_AVAILABLE", "adopcion")
+      case "pending": return t("ANIMAL_MODAL_PENDING", "adopcion")
+      default: return t("ANIMAL_MODAL_OTHER", "adopcion")
     }
   }
 
@@ -112,26 +114,26 @@ const AnimalModal = ({ animal, onClose }) => {
           <div className="animal-info-container">
             <h2 id="modal-animal-name">{animal.name}</h2>
             <div className="animal-tags">
-              <AnimalTag>{animal.species === "dog" ? "Perro" : "Gato"}</AnimalTag>
+              <AnimalTag>{animal.species === "dog" ? t("ANIMAL_MODAL_DOG", "adopcion") : t("ANIMAL_MODAL_CAT", "adopcion")}</AnimalTag>
               <AnimalTag>{getAgeText(animal.age)}</AnimalTag>
               <AnimalTag>{getSizeText(animal.size)}</AnimalTag>
-              <AnimalTag>{animal.sex === "male" ? "Macho" : "Hembra"}</AnimalTag>
-              <AnimalTag>Raza: {animal.breed}</AnimalTag>
-              <AnimalTag>Estado: {getStatusText(animal.status)}</AnimalTag>
+              <AnimalTag>{animal.sex === "male" ? t("ANIMAL_MODAL_MALE", "adopcion") : t("ANIMAL_MODAL_FEMALE", "adopcion")}</AnimalTag>
+              <AnimalTag>{t("ANIMAL_MODAL_BREED", "adopcion")} {animal.breed}</AnimalTag>
+              <AnimalTag>{t("ANIMAL_MODAL_STATUS", "adopcion")} {getStatusText(animal.status)}</AnimalTag>
             </div>
             <p id="modal-animal-description">{animal.description}</p>
             <div className="animal-actions">
               <button id="adopt-button" className="primary-btn" onClick={handleAdopt}>
-                <i className="fas fa-paw"></i> Adoptar
+                <i className="fas fa-paw"></i> {t("ANIMAL_MODAL_ADOPT", "adopcion")}
               </button>
               <button id="favorite-button" className="secondary-btn" onClick={handleFavorite}>
-                <i className="far fa-heart"></i> Guardar como favorito
+                <i className="far fa-heart"></i> {t("ANIMAL_MODAL_FAVORITE", "adopcion")}
               </button>
             </div>
             
             {/* Sección de compartir en redes sociales - usando tus clases CSS existentes */}
             <div className="social-share-container">
-              <p className="share-title">Ayuda a {animal.name} compartiendo su perfil:</p>
+              <p className="share-title">{t("ANIMAL_MODAL_SHARE_TEXT", "adopcion")} {animal.name} {t("ANIMAL_MODAL_SHARE_PROFILE", "adopcion")}</p>
               <div className="social-buttons">
                 <button 
                   className="social-btn facebook" 

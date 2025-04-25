@@ -1,7 +1,9 @@
 "use client"
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const VolunteerGallery = () => {
+  const { t } = useLanguage()
   const [testimonials, setTestimonials] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -17,23 +19,23 @@ const VolunteerGallery = () => {
         if (data.success) {
           setTestimonials(data.testimonials)
         } else {
-          setError("Error al cargar testimonios")
+          setError(t("VOLUNTEER_TESTIMONIALS_ERROR", "voluntario"))
         }
       } catch (err) {
         console.error("Error fetching testimonials:", err)
-        setError("Error al cargar testimonios")
+        setError(t("VOLUNTEER_TESTIMONIALS_ERROR", "voluntario"))
       } finally {
         setLoading(false)
       }
     }
 
     fetchTestimonials()
-  }, [])
+  }, [t])
 
   return (
     <section className="voluntarios-galeria">
       <div className="container">
-        <h2>Nuestros Voluntarios en Acción</h2>
+        <h2>{t("VOLUNTEER_GALLERY_TITLE", "voluntario")}</h2>
 
         <div className="paw-divider">
           <i className="fas fa-paw"></i>
@@ -43,42 +45,39 @@ const VolunteerGallery = () => {
 
         <div className="voluntarios-grid">
           <div className="voluntario-card">
-            <img src="/imagenes/voluntario1.webp" alt="Voluntario cuidando animales" />
+            <img src="/imagenes/voluntario1.webp" alt={t("VOLUNTEER_GALLERY_CARD1_TITLE", "voluntario")} />
             <div className="voluntario-info">
-              <h3>Cuidado en el Refugio</h3>
-              <p>Nuestros voluntarios dedican tiempo para cuidar y jugar con los perritos en el refugio.</p>
+              <h3>{t("VOLUNTEER_GALLERY_CARD1_TITLE", "voluntario")}</h3>
+              <p>{t("VOLUNTEER_GALLERY_CARD1", "voluntario")}</p>
             </div>
           </div>
 
           <div className="voluntario-card">
-            <img src="/imagenes/voluntario2.webp" alt="Jornada de adopción" />
+            <img src="/imagenes/voluntario2.webp" alt={t("VOLUNTEER_GALLERY_CARD2_TITLE", "voluntario")} />
             <div className="voluntario-info">
-              <h3>Jornadas de Adopción</h3>
-              <p>Voluntarios apoyando en nuestras jornadas de adopción mensuales en diferentes puntos de la ciudad.</p>
+              <h3>{t("VOLUNTEER_GALLERY_CARD2_TITLE", "voluntario")}</h3>
+              <p>{t("VOLUNTEER_GALLERY_CARD2", "voluntario")}</p>
             </div>
           </div>
 
           <div className="voluntario-card">
-            <img src="/imagenes/voluntario3.webp" alt="Promoción en redes sociales" />
+            <img src="/imagenes/voluntario3.webp" alt={t("VOLUNTEER_GALLERY_CARD3_TITLE", "voluntario")} />
             <div className="voluntario-info">
-              <h3>Promoción en Redes</h3>
-              <p>
-                Voluntarios ayudando a difundir nuestra labor en redes sociales y creando contenido para nuestras
-                campañas.
-              </p>
+              <h3>{t("VOLUNTEER_GALLERY_CARD3_TITLE", "voluntario")}</h3>
+              <p>{t("VOLUNTEER_GALLERY_CARD3", "voluntario")}</p>
             </div>
           </div>
         </div>
 
         <div className="testimonios-voluntarios">
-          <h3>Testimonios de Voluntarios</h3>
+          <h3>{t("VOLUNTEER_TESTIMONIALS_TITLE", "voluntario")}</h3>
 
           {loading ? (
-            <div className="loading-testimonios">Cargando testimonios...</div>
+            <div className="loading-testimonios">{t("VOLUNTEER_TESTIMONIALS_LOADING", "voluntario")}</div>
           ) : error ? (
             <div className="error-testimonios">{error}</div>
           ) : testimonials.length === 0 ? (
-            <div className="no-testimonios">No hay testimonios disponibles en este momento.</div>
+            <div className="no-testimonios">{t("VOLUNTEER_TESTIMONIALS_EMPTY", "voluntario")}</div>
           ) : (
             <div className="testimonios-container">
               {testimonials.map((testimonio) => (
@@ -93,7 +92,9 @@ const VolunteerGallery = () => {
                     />
                     <div>
                       <h4>{testimonio.nombre}</h4>
-                      <p>{testimonio.rol || "Voluntario"}{testimonio.anioInicio ? ` desde ${testimonio.anioInicio}` : ""}</p>
+                      <p>{testimonio.rol || t("VOLUNTEER_TESTIMONIALS_ROLE", "voluntario")}
+                        {testimonio.anioInicio ? ` ${t("VOLUNTEER_TESTIMONIALS_SINCE", "voluntario")} ${testimonio.anioInicio}` : ""}
+                      </p>
                     </div>
                   </div>
                 </div>

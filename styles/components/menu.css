@@ -107,13 +107,19 @@ nav {
 
 .main-menu li {
     display: inline-block;
-    line-height: 50px;
-    margin: 0 15px; 
+    line-height: 10px;
+    margin: 0 10px; 
     position: relative;
 }
 
 .main-menu li:last-child {
     margin-right: 30px;
+}
+
+.menu-link-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;            /* Espacio entre foto y texto */
 }
 
 .menu-link {
@@ -157,7 +163,7 @@ nav {
 .submenu {
     background: rgba(11, 197, 27, 0.5);
     border-radius: 8px;
-    padding: 3px 0;
+    padding: 10px 0;
     position: absolute;
     top: 100%;
     left: 50%; 
@@ -166,7 +172,7 @@ nav {
     visibility: hidden;
     list-style: none;
     z-index: 10;
-    min-width: 160px;
+    min-width: 180px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     overflow: hidden;
@@ -265,16 +271,21 @@ nav {
 .user-profile-link {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    padding: 5px;       
 }
 
 .profile-photo-container {
-    width: 35px;
-    height: 35px;
+    width: 60px;         /* Reducido de 60px para mejor adaptación en el menú */
+    height: 60px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;      /* Evita que el contenedor se encoja */
+    display: flex;       /* Asegura que la imagen llene bien el contenedor */
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-photo-container img {
@@ -288,6 +299,10 @@ nav {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1; /* Importante: reduce el espacio entre líneas */
+    display: flex;
+    align-items: center; /* Centra el texto verticalmente */
+    height: 40px; /* Altura fija que coincida con el contenedor de la foto */
 }
 
 .language-menu .submenu {

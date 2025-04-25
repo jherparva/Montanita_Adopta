@@ -3,8 +3,10 @@ import { useState, useEffect } from "react"
 import SuccessStoryCard from "./SuccessStoryCard"
 import SuccessStoryForm from "./SuccessStoryForm"
 import AdoptionCta from "./AdoptionCta_video"
+import { useLanguage } from "@/contexts/language-context"
 
 const SuccessStoriesSection = () => {
+  const { t } = useLanguage()
   const [stories, setStories] = useState([])
   const [featuredStories, setFeaturedStories] = useState([])
   const [testimonials, setTestimonials] = useState([])
@@ -24,7 +26,7 @@ const SuccessStoriesSection = () => {
         await fetchTestimonials()
       } catch (err) {
         console.error("Error cargando datos:", err)
-        setError("Error al cargar historias. Por favor, intenta más tarde.")
+        setError(t("STORIES_ERROR", "historias"))
       } finally {
         setLoading(false)
       }
@@ -48,14 +50,14 @@ const SuccessStoriesSection = () => {
   const fetchStories = async () => {
     const response = await fetch("/api/success-stories?approved=true")
     if (!response.ok) {
-      throw new Error("Error al cargar las historias")
+      throw new Error(t("STORIES_ERROR", "historias"))
     }
 
     const data = await response.json()
     if (data.success) {
       setStories(data.stories || [])
     } else {
-      throw new Error(data.message || "Error al cargar las historias")
+      throw new Error(data.message || t("STORIES_ERROR", "historias"))
     }
   }
 
@@ -67,7 +69,7 @@ const SuccessStoriesSection = () => {
         const fallbackResponse = await fetch("/api/success-stories?approved=true&featured=true")
         
         if (!fallbackResponse.ok) {
-          throw new Error("No se pudieron cargar las historias destacadas")
+          throw new Error(t("STORIES_ERROR", "historias"))
         }
         
         const data = await fallbackResponse.json()
@@ -82,7 +84,7 @@ const SuccessStoriesSection = () => {
       if (data.success) {
         setFeaturedStories(data.stories || [])
       } else {
-        throw new Error(data.message || "Error al cargar las historias destacadas")
+        throw new Error(data.message || t("STORIES_ERROR", "historias"))
       }
     } catch (error) {
       console.error("Error en fetchFeaturedStories:", error)
@@ -98,7 +100,7 @@ const SuccessStoriesSection = () => {
         const fallbackResponse = await fetch("/api/success-stories?approved=true&testimony=true")
         
         if (!fallbackResponse.ok) {
-          throw new Error("No se pudieron cargar los testimonios")
+          throw new Error(t("STORIES_ERROR", "historias"))
         }
         
         const data = await fallbackResponse.json()
@@ -113,7 +115,7 @@ const SuccessStoriesSection = () => {
       if (data.success) {
         setTestimonials(data.stories || [])
       } else {
-        throw new Error(data.message || "Error al cargar los testimonios")
+        throw new Error(data.message || t("STORIES_ERROR", "historias"))
       }
     } catch (error) {
       console.error("Error en fetchTestimonials:", error)
@@ -136,8 +138,8 @@ const SuccessStoriesSection = () => {
       if (response.ok) {
         if (window.Swal) {
           window.Swal.fire({
-            title: "¡Historia enviada!",
-            text: "Gracias por compartir tu historia. Será revisada por nuestro equipo antes de ser publicada.",
+            title: t("STORIES_SUCCESS_TITLE", "historias"),
+            text: t("STORIES_SUCCESS_TEXT", "historias"),
             icon: "success",
             confirmButtonText: "Continuar",
             confirmButtonColor: "#27b80b",
@@ -146,15 +148,15 @@ const SuccessStoriesSection = () => {
 
         setShowForm(false)
       } else {
-        throw new Error(data.message || "Error al enviar la historia")
+        throw new Error(data.message || t("STORIES_ERROR_TEXT", "historias"))
       }
     } catch (error) {
       console.error("Error al enviar historia:", error)
 
       if (window.Swal) {
         window.Swal.fire({
-          title: "Error",
-          text: error.message || "Error al enviar la historia. Por favor, intenta más tarde.",
+          title: t("STORIES_ERROR_TITLE", "historias"),
+          text: error.message || t("STORIES_ERROR_TEXT", "historias"),
           icon: "error",
           confirmButtonColor: "#d33",
         })
@@ -176,21 +178,21 @@ const SuccessStoriesSection = () => {
     if (!isAuthenticated) {
       if (window.Swal) {
         window.Swal.fire({
-          title: "Inicia sesión",
-          text: "Debes iniciar sesión para compartir tu historia",
+          title: t("STORIES_LOGIN_BUTTON", "historias"),
+          text: t("STORIES_AUTH_NEEDED", "historias"),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#e01e1e",
           cancelButtonColor: "#6c757d",
-          confirmButtonText: "Iniciar sesión",
-          cancelButtonText: "Cancelar",
+          confirmButtonText: t("STORIES_LOGIN_BUTTON", "historias"),
+          cancelButtonText: t("STORIES_CANCEL_BUTTON", "historias"),
         }).then((result) => {
           if (result.isConfirmed) {
             openLoginModal()
           }
         })
       } else {
-        alert("Debes iniciar sesión para compartir tu historia")
+        alert(t("STORIES_AUTH_NEEDED", "historias"))
         openLoginModal()
       }
       return
@@ -220,7 +222,7 @@ const SuccessStoriesSection = () => {
         <div className="spinner">
           <i className="fas fa-paw fa-spin"></i>
         </div>
-        <p>Cargando historias...</p>
+        <p>{t("STORIES_LOADING", "historias")}</p>
       </div>
     )
   }
@@ -229,7 +231,9 @@ const SuccessStoriesSection = () => {
     return (
       <div className="error-container">
         <p>Error: {error}</p>
-        <button onClick={() => window.location.reload()}>Intentar de nuevo</button>
+        <button onClick={() => window.location.reload()}>
+          {t("STORIES_RETRY", "historias")}
+        </button>
       </div>
     )
   }
@@ -248,9 +252,9 @@ const SuccessStoriesSection = () => {
     <>
       <div className="success-stories-container">
         <div className="stories-header">
-          <h3>Historias de adopciones exitosas</h3>
+          <h3>{t("STORIES_TITLE", "historias")}</h3>
           <button className="share-story-btn" onClick={toggleForm}>
-            {showForm ? "Cancelar" : "Compartir mi historia"}
+            {showForm ? t("STORIES_CANCEL_BUTTON", "historias") : t("STORIES_SHARE_BUTTON", "historias")}
           </button>
         </div>
 
@@ -268,14 +272,14 @@ const SuccessStoriesSection = () => {
           </div>
         ) : (
           <div className="no-stories">
-            <p>Aún no hay historias publicadas. ¡Sé el primero en compartir tu experiencia!</p>
+            <p>{t("STORIES_NO_STORIES", "historias")}</p>
           </div>
         )}
       </div>
 
       {/* Sección de historias destacadas */}
       <div id="featured-stories-section" className="featured-stories">
-        <h3>Historias Destacadas</h3>
+        <h3>{t("STORIES_FEATURED_TITLE", "historias")}</h3>
         <div className={`stories-container ${isCollapsed ? "collapsed" : ""}`}>
           {featuredStories.slice(0, visibleFeatured).map((story) => (
             <SuccessStoryCard key={story._id} story={story} />
@@ -285,13 +289,13 @@ const SuccessStoriesSection = () => {
         <div className="load-more-container">
           {isCollapsed && visibleFeatured < featuredStories.length && (
             <button className="load-more" onClick={loadMoreStories}>
-              Ver más historias
+              {t("STORIES_VIEW_MORE", "historias")}
             </button>
           )}
 
           {!isCollapsed && visibleFeatured > 3 && (
             <button className="load-less" onClick={loadLessStories}>
-              Ver menos historias
+              {t("STORIES_VIEW_LESS", "historias")}
             </button>
           )}
         </div>
@@ -299,7 +303,7 @@ const SuccessStoriesSection = () => {
 
       {/* Sección de testimonios */}
       <div className="testimonials">
-        <h3>Testimonios Destacados</h3>
+        <h3>{t("STORIES_TESTIMONIALS_TITLE", "historias")}</h3>
         <div className="testimonial-carousel">
           {testimonials.map(renderTestimonialItem)}
         </div>
